@@ -19,7 +19,7 @@
  preloader -->
 
         <div id="pre-loader">
-            <img src="assets/images/pre-loader/loader-01.svg" alt="">
+            <img src="{{url(asset('build/assets/images/pre-loader/loader-01.svg'))}}" alt="">
         </div>
 
         <!--=================================
@@ -36,7 +36,7 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-sm-6">
-                        <h4 class="mb-0"> Dashboard</h4>
+                        <h4 class="mb-0"> {{trans('main_trans.dashboard')}}</h4>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right">

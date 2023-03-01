@@ -26,6 +26,30 @@
     </ul>
     <!-- top bar right -->
     <ul class="nav navbar-nav ml-auto">
+
+
+        <div class="btn-group mb-1">
+            <button type="button" class="btn btn-light btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @if (App::getLocale() == 'ar')
+            {{ LaravelLocalization::getCurrentLocaleName() }}
+            <img src="{{ URL::asset('build/assets/images/flags/YE.png') }}" alt="">
+            @else
+            {{ LaravelLocalization::getCurrentLocaleName() }}
+            <img src="{{ URL::asset('build/assets/images/flags/US.png') }}" alt="">
+            @endif
+            </button>
+            <div class="dropdown-menu">
+                @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                        <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}" href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                            {{ $properties['native'] }}
+                        </a>
+                @endforeach
+            </div>
+    </div>
+
+
+
+
         <li class="nav-item fullscreen">
             <a id="btnFullscreen" href="#" class="nav-link"><i class="ti-fullscreen"></i></a>
         </li>
@@ -94,16 +118,15 @@
                     </div>
                 </div>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="text-secondary ti-reload"></i>Activity</a>
-                <a class="dropdown-item" href="#"><i class="text-success ti-email"></i>Messages</a>
-                <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>Profile</a>
-                <a class="dropdown-item" href="#"><i class="text-dark ti-layers-alt"></i>Projects <span
-                        class="badge badge-info">6</span> </a>
+                <a class="dropdown-item" href="#"><i class="text-secondary ti-reload"></i>{{trans('main_trans.activity')}}</a>
+                <a class="dropdown-item" href="#"><i class="text-success ti-email"></i>{{trans('main_trans.messages')}}</a>
+                <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>{{trans('main_trans.profile')}}</a>
+                
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>Settings</a>
+                <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>{{trans('main_trans.settings')}}</a>
                 <a class="dropdown-item" href="{{url('logout')}}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"><i
-                        class="text-danger ti-unlock"></i>Logout</a>
+                        class="text-danger ti-unlock"></i>{{trans('main_trans.logout')}}</a>
                 <form id="logout-form" action="{{url('logout')}}" method="POST" class="d-none">
                     @csrf
 
