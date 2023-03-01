@@ -15,6 +15,15 @@
             font-family: cairo;
             src: url('{{url(asset('build/assets/fonts/cairo.ttf'))}}');
         }
+        @font-face{
+            font-family: tajawal;
+            src: url('{{url(asset('build/assets/fonts/tajawal.ttf'))}}');
+        }
+        @font-face{
+            font-family: changa;
+            src: url('{{url(asset('build/assets/fonts/changa.ttf'))}}');
+
+        }
 
         *,
         span,
@@ -28,7 +37,7 @@
         a,
         p,
         li {
-            font-family: cairo;
+            font-family: changa;
         }
     </style>
 </head>
