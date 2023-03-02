@@ -48,7 +48,7 @@ empty
                             </tr>
                         </thead>
                         <tbody>
-                            {{$i = 1}}
+                            @php $i = 1 @endphp
                             @foreach ($data as $key )
                             <th>{{$i++}}</th>
                             <th>{{ $key->name }}</th>

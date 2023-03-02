@@ -11,22 +11,44 @@
 
                     <!-- menu title -->
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.website_manage')}} </li>
-                    <!-- menu item Elements-->
-
-
                     <li>
-                        <a href="todo-list.html"><i class="ti-menu-alt"></i><span class="right-nav-text">Todo
-                                list</span> </a>
+                        <a href="todo-list.html"><i class="ti-bag"></i><span class="right-nav-text">{{trans('main_trans.services')}}</span> </a>
                     </li>
 
+                    <li>
+                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu">
+                            <div class="pull-left"><i class="ti-shopping-cart"></i><span
+                                    class="right-nav-text">{{ trans('main_trans.product_mange') }}</span></div>
+                            <div class="pull-right"><i class="ti-plus"></i></div>
+                            <div class="clearfix"></div>
+                        </a>
+                        <ul id="calendar-menu" class="collapse" data-parent="#sidebarnav">
+
+                            <li> <a href="">{{trans('main_trans.section')}} </a> </li>
+                            <li> <a href="">{{trans('main_trans.product')}} </a> </li>
+                            
+
+                           
+                           
+
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="todo-list.html"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.blog')}}</span> </a>
+                        <a href="todo-list.html"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.subscriptions')}}</span> </a>
+                    </li>
 
 
                     <!-- menu title -->
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.settings')}} </li>
                     <!-- menu item Widgets-->
                     <li>
-                        <a href="widgets.html"><i class="ti-blackboard"></i><span class="right-nav-text">Widgets</span>
-                            <span class="badge badge-pill badge-danger float-right mt-1">59</span> </a>
+                        <a href="widgets.html"><i class="ti-info-alt"></i><span class="right-nav-text">{{trans('main_trans.company_details')}}</span></a>
+                        <a href="widgets.html"><i class="ti-twitter"></i><span class="right-nav-text">{{trans('main_trans.social')}}</span></a>
+                        <a href="widgets.html"><i class="ti-mobile"></i><span class="right-nav-text">{{trans('main_trans.phone_email')}}</span></a>
+                        <a href="widgets.html"><i class="ti-desktop"></i><span class="right-nav-text">{{trans('main_trans.display')}}</span></a>
+                        <a href="widgets.html"><i class="ti-cog"></i><span class="right-nav-text">{{trans('main_trans.main_sitting')}}</span></a>
                     </li>
 
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.user_manage')}}</li>
