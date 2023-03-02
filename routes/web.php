@@ -38,6 +38,7 @@ Route::group(
         Route::group(['prefix' => 'admin'],function(){
             Route::get('/users',[UsersController::class,'index']);
             Route::get('/users/state',[UsersController::class,'change_state']);
+            Route::post('/users/create',[UsersController::class,'store']);
         });
     }
 );

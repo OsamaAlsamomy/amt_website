@@ -72,7 +72,8 @@ empty
                             </th>
                             <th>
                                 <label class="switch">
-                                    <input type="checkbox" id="state_check" name="state_check" value="{{$key->id}}" @if($key->state == 1)
+                                    <input type="checkbox" id="state_check" name="state_check" value="{{$key->id}}"
+                                        @if($key->state == 1)
 
                                     checked
                                     @endif
@@ -80,7 +81,6 @@ empty
                                     >
                                     <span class="slider round"></span>
                                 </label>
-                                <input type="text" id="uID" value="{{$key->id}}">
 
 
                             </th>
@@ -103,24 +103,27 @@ empty
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
                     {{ trans('users_trans.add_user') }}
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <!-- add_form -->
-                <form action="#" method="POST">
+                <form action="{{url(App::getLocale().'/admin/users/create')}}" method="POST" id="form_add">
                     @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <label for="name" class="mr-sm-2">{{ trans('users_trans.user_name') }}
                                 :</label>
                             <input id="name" type="text" name="name" class="form-control">
+                            <span class="name-error text-danger"></span>
                         </div>
                         <div class="col-md-6">
                             <label for="email" class="mr-sm-2">{{ trans('main_trans.email') }}
                                 :</label>
-                            <input type="text" class="form-control" name="emil" id="email">
+                            <input type="text" class="form-control" name="email" id="email">
+                            <span class="email-error text-danger"></span>
+
                         </div>
                     </div>
 
@@ -129,11 +132,16 @@ empty
                             <label for="password" class="mr-sm-2">{{ trans('users_trans.password') }}
                                 :</label>
                             <input id="password" type="text" name="password" class="form-control">
+                            <span class="password-error text-danger"></span>
+
                         </div>
                         <div class="col-md-6">
-                            <label for="re_password" class="mr-sm-2">{{ trans('users_trans.re_password') }}
+                            <label for="password_confirmation" class="mr-sm-2">{{ trans('users_trans.re_password') }}
                                 :</label>
-                            <input type="text" class="form-control" name="re_password" id="re_password">
+                            <input type="text" class="form-control" name="password_confirmation"
+                                id="password_confirmation">
+                            <span class="password_confirmation-error text-danger"></span>
+
                         </div>
                     </div>
 
@@ -146,6 +154,8 @@ empty
                                 <option value="A">{{ trans('users_trans.admin') }}</option>
                                 <option value="U">{{ trans('users_trans.user') }}</option>
                             </select>
+                            <span class="roll-error text-danger"></span>
+
                         </div>
 
                     </div>
@@ -169,7 +179,7 @@ empty
 @endsection
 @section('js')
 <script>
-$(document).ready(function(){
+    $(document).ready(function(){
 
 
 $('#state_check').on('change', function(event){
@@ -190,10 +200,113 @@ $('#state_check').on('change', function(event){
             alert(response.success)
         },
         error: function(response) {
+            alert(response.error)
+
         }
     });
 });
 
+
+
 });
 </script>
+
+<script>
+    // $("#form_add").on('submit', function (e) {
+
+//     e.preventDefault();
+
+//     $.ajax({
+//         url:$(this).attr('action'),
+//         method: $(this).attr('method'),
+//         data: new FormData(this),
+//         dataType: 'JSON',
+//         contentType: 'application/json',
+//         cache: false,
+//         processData: false,
+//         success:function(response)
+//         {
+//             alert(response.success)
+//         },
+//         error: function(response) {
+
+//         }
+//     });
+// });
+
+
+
+var i =0;
+$("#form_add").on('submit', function (e) {
+    e.preventDefault();
+    i++;
+    $.ajax({
+        url: $(this).attr('action'),
+        method: $(this).attr('method'),
+        data: new FormData(this),
+        processData: false,
+        dataType: 'json',
+        contentType: false,
+        success: function (data) {
+            if (data.status == 0) {
+
+                $('span.name-error').text('');
+                $('span.email-error').text('');
+                $('span.password-error').text('');
+                $('span.password_confirmation-error').text('');
+                $('span.rool-error').text('');
+
+
+                $.each(data.error, function (prefix, val) {
+                    $('span.' + prefix+'-error').text('');
+                    $('span.' + prefix+'-error').text(val[0]);
+                });
+            }
+            else if (data.status == 1) {
+
+                alert (i);
+                // setTimeout(function () {
+
+                //     location.reload(true);
+                //   }, 2000);
+                // console.log(data.data);
+
+                // Swal.fire({
+                //     position: 'center',
+                //     icon: 'success',
+                //     title: 'عملية ناجحة',
+                //     text: data.msg,
+                //     showConfirmButton: false,
+                //     timer: 3000
+                // })
+
+                // $('.swal2-container').css('z-index', '10000')
+            } else if (data.status == 2) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'عملية فاشلة',
+                    text: data.msg,
+
+                })
+                $('.swal2-container').css('z-index', '10000')
+
+            }
+        }
+
+    })
+});
+
+$('#btn_close').on('click',function(){
+    if(i != 0){
+        i=0;
+        setTimeout(function () {
+
+        location.reload(true);
+        }, 300);
+
+    }
+});
+</script>
+
+</html>
 @endsection
