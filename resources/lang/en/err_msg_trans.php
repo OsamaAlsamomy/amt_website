@@ -13,7 +13,15 @@ return [
     'password_min' => 'The password must be at least 6 characters long',
     'passwordconf_req' => 'Password confirmation field is required',
     'roll_req' => 'The Roll field is required',
-    'roll_uq' => 'The Roll format is incorrect'
+    'roll_uq' => 'The Roll format is incorrect',
+
+    'id_req' => 'The row whose data you want to modify is not recognized',
+    'desc_req' => 'Description field is required',
+    'img_req' => 'Image field is required',
+    'img_img' => 'The entered image format is incorrect',
+    'global_error' => 'An error occurred and the requested operation failed',
+    'global_success' => 'The requested operation was completed successfully',
+
 
 
 

@@ -11,15 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('services', function (Blueprint $table) {
+        Schema::create('slides', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title')->unique();
             $table->string('img');
-            $table->text('desc');
-            $table->boolean('state')->default(1);
-            $table->integer('views');
-            $table->unsignedBigInteger('created_by');
-            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
+            $table->string('content');
+            $table->string('url');
+            $table->boolean('state');
             $table->unsignedBigInteger('updated_by');
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('services');
+        Schema::dropIfExists('slides');
     }
 };

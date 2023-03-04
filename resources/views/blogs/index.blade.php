@@ -10,13 +10,13 @@ empty
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{ trans('main_trans.users') }}</h4>
+            <h4 class="mb-0"> {{ trans('main_trans.blog') }}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{ trans('main_trans.user_manage') }}</a>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{ trans('main_trans.website_manage') }}</a>
                 </li>
-                <li class="breadcrumb-item active">{{ trans('main_trans.users') }}</li>
+                <li class="breadcrumb-item active">{{ trans('main_trans.blog') }}</li>
             </ol>
         </div>
     </div>
@@ -30,7 +30,7 @@ empty
         <div class="card card-statistics h-100">
             <div class="card-body">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    {{ trans('users_trans.add_user') }}
+                    {{ trans('blogs_trans.add_blog') }}
                 </button>
                 <br><br>
                 <div class="table-responsive">
@@ -40,8 +40,6 @@ empty
                             <tr>
                                 <th>#</th>
                                 <th>{{ trans('main_trans.name') }}</th>
-                                <th>{{ trans('main_trans.email') }}</th>
-                                <th>{{ trans('main_trans.roll') }}</th>
                                 <th>{{ trans('main_trans.state') }}</th>
                                 <th>{{ trans('main_trans.created_at') }}</th>
                                 <th>{{ trans('main_trans.add_by') }}</th>
@@ -55,25 +53,8 @@ empty
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $key->name }}</td>
-                                <td>{{ $key->email }}</td>
-                                <td>
-                                    @switch($key->type)
-                                    @case('S')
-                                    {{ trans('users_trans.s_admin') }}
-                                    @break
 
-                                    @case('A')
-                                    {{ trans('users_trans.admin') }}
-                                    @break
 
-                                    @case('U')
-                                    {{ trans('users_trans.user') }}
-                                    @break
-
-                                    @default
-                                    @endswitch()
-
-                                </td>
                                 <td>
                                     <label class="switch">
                                         <input type="checkbox" id="state_check" name="state_check"
@@ -102,7 +83,7 @@ empty
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
-                    {{ trans('users_trans.add_user') }}
+                    {{ trans('blogs_trans.add_blog') }}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close">
                     <span aria-hidden="true">&times;</span>
@@ -120,7 +101,7 @@ empty
                     </div>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="name" class="mr-sm-2">{{ trans('users_trans.user_name') }}
+                            <label for="name" class="mr-sm-2">{{ trans('blogs_trans.blog_title') }}
                                 :</label>
                             <input id="name" type="text" name="name" class="form-control">
                             <span class="name-error text-danger"></span>
