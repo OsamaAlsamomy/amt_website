@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
@@ -11,13 +14,22 @@ class UsersController extends Controller
     public function index(Request $req)
     {
         $data = User::all();
+        foreach($data as $key){
+            if($key->created_by != null){
+                $user = User::select('name')->find($key->created_by);
+                $key->created =  $user->name;
+            }else{
+                $key->created = '';
+            }
+          
+        }
         return view('users/index', compact('data'));
     }
 
     public function change_state(Request $req)
     {
-
-        return response()->json(['success' => $req->id]);
+        echo $req->id;
+        ///return response()->json(['success' => $req->id]);
     }
 
 
@@ -29,7 +41,7 @@ class UsersController extends Controller
             'password' => 'required|confirmed|min:6',
             'password_confirmation' => 'required',
             'roll' => 'required|min:1|max:1'
-        ],[
+        ], [
             'name.required' => trans('err_msg_trans.name_req'),
 
             'email.required' => trans('err_msg_trans.email_req'),
@@ -51,11 +63,22 @@ class UsersController extends Controller
             return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         }
 
-        // Post::create([
-        //     'title' => $request->title,
-        //     'body' => $request->body,
-        // ]);
-
-        return response()->json(['status' => 1,'success' => 'Post created successfully.']);
+        try {
+            $done = User::create([
+                'name' => $req->name,
+                'email' => $req->email,
+                'password' => Hash::make($req->password),
+                'type' => $req->roll,
+                'created_by' => Auth::user()->id,
+                'updated_by' =>Auth::user()->id
+            ]);
+            if($done){
+                return response()->json(['status' => 1, 'success' => 'Post created successfully.']);
+            }else{
+                return response()->json(['status' => 2, 'success' => 'Post created successfully.']);
+            }
+        } catch (Exception $ex) {
+            return response()->json(['status' => 2, 'success' => $ex->getMessage()]);
+        }
     }
 }

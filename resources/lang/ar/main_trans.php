@@ -34,7 +34,10 @@ return [
     'created_at' =>  'تأريخ الاضافة',
     'operations' => 'العمليات',
     'save' => 'حفظ',
-    'cancel' => 'الغاء'
+    'cancel' => 'الغاء',
+
+    'add_by' => 'أضيف بواسطة'
+
 
 
 

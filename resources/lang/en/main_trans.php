@@ -33,7 +33,9 @@ return [
     'created_at' =>  'Added Date',
     'operations' => 'Operations',
     'save' => 'Save',
-    'cancel' => 'Cansel'
+    'cancel' => 'Cansel',
+
+    'add_by' => 'Add By'
 
 
 

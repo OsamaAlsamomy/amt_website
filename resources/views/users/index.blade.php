@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-empty
+    empty
 @stop
 @endsection
 @section('page-header')
@@ -10,13 +10,14 @@ empty
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{trans('main_trans.users')}}</h4>
+            <h4 class="mb-0"> {{ trans('main_trans.users') }}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{trans('main_trans.user_manage')}}</a>
+                <li class="breadcrumb-item"><a href="#"
+                        class="default-color">{{ trans('main_trans.user_manage') }}</a>
                 </li>
-                <li class="breadcrumb-item active">{{trans('main_trans.users')}}</li>
+                <li class="breadcrumb-item active">{{ trans('main_trans.users') }}</li>
             </ol>
         </div>
     </div>
@@ -44,48 +45,50 @@ empty
                                 <th>{{ trans('main_trans.roll') }}</th>
                                 <th>{{ trans('main_trans.state') }}</th>
                                 <th>{{ trans('main_trans.created_at') }}</th>
+                                <th>{{ trans('main_trans.add_by') }}</th>
                                 <th>{{ trans('main_trans.operations') }}</th>
                             </tr>
                         </thead>
                         <tbody>
+
                             @php $i = 1 @endphp
-                            @foreach ($data as $key )
-                            <th>{{$i++}}</th>
-                            <th>{{ $key->name }}</th>
-                            <th>{{ $key->email }}</th>
-                            <th>
-                                @switch($key->type)
-                                @case('S')
-                                {{ trans('users_trans.s_admin') }}
-                                @break
-                                @case('A')
-                                {{ trans('users_trans.admin') }}
-                                @break
-                                @case('U')
-                                {{ trans('users_trans.user') }}
-                                @break
+                            @foreach ($data as $key)
+                                <tr>
+                                    <th>{{ $i++ }}</th>
+                                    <th>{{ $key->name }}</th>
+                                    <th>{{ $key->email }}</th>
+                                    <th>
+                                        @switch($key->type)
+                                            @case('S')
+                                                {{ trans('users_trans.s_admin') }}
+                                            @break
 
-                                @default
+                                            @case('A')
+                                                {{ trans('users_trans.admin') }}
+                                            @break
 
-                                @endswitch()
+                                            @case('U')
+                                                {{ trans('users_trans.user') }}
+                                            @break
 
-                            </th>
-                            <th>
-                                <label class="switch">
-                                    <input type="checkbox" id="state_check" name="state_check" value="{{$key->id}}"
-                                        @if($key->state == 1)
+                                            @default
+                                        @endswitch()
 
-                                    checked
-                                    @endif
-
-                                    >
-                                    <span class="slider round"></span>
-                                </label>
+                                    </th>
+                                    <th>
+                                        <label class="switch">
+                                            <input type="checkbox" id="state_check" name="state_check"
+                                                value="{{ $key->id }}"
+                                                @if ($key->state == 1) checked @endif>
+                                            <span class="slider round"></span>
+                                        </label>
 
 
-                            </th>
-                            <th>{{ $key->created_at }}</th>
-                            <th>{{ $key->created_by }}</th>
+                                    </th>
+                                    <th>{{ $key->created_at }}</th>
+                                    <th>{{ $key->created }}</th>
+                                    <th></th>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -109,8 +112,14 @@ empty
             </div>
             <div class="modal-body">
                 <!-- add_form -->
-                <form action="{{url(App::getLocale().'/admin/users/create')}}" method="POST" id="form_add">
+                <form action="{{ url(App::getLocale() . '/admin/users/create') }}" method="POST" id="form_add">
                     @csrf
+                    <div class="alert alret-sucsses">
+                        <p id="alert_sucsses"></p>
+                    </div>
+                    <div class="alert alret-danger">
+                        <p id="alert_error"></p>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <label for="name" class="mr-sm-2">{{ trans('users_trans.user_name') }}
@@ -164,8 +173,8 @@ empty
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('main_trans.cancel')
-                    }}</button>
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">{{ trans('main_trans.cancel') }}</button>
                 <button type="submit" class="btn btn-success">{{ trans('main_trans.save') }}</button>
             </div>
             </form>
@@ -179,133 +188,148 @@ empty
 @endsection
 @section('js')
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
 
 
-$('#state_check').on('change', function(event){
-    var Uid = $(this).val();
-    alert(Uid)
+        $('#state_check').on('change', function(event) {
+            var Uid = $(this).val();
+            alert(Uid)
 
-    $.ajax({
-        url: '{{url(App::getLocale().'/admin/users/state')}}',
-        method: 'GET',
-        data: JSON.stringify({ id: Uid}),
-        dataType: 'JSON',
-        contentType: 'application/json',
-        cache: false,
-        processData: false,
-        success:function(response)
-        {
+            $.ajax({
+                url: '{{ url(App::getLocale() . '/admin/users/state') }}',
+                method: 'GET',
+                data: JSON.stringify({
+                    id: Uid
+                }),
+                dataType: 'JSON',
+                contentType: 'application/json',
+                cache: false,
+                processData: false,
+                success: function(response) {
 
-            alert(response.success)
-        },
-        error: function(response) {
-            alert(response.error)
+                    alert(response.success)
+                },
+                error: function(response) {
+                    alert(response.error)
 
-        }
+                }
+            });
+        });
+
+
+
     });
-});
-
-
-
-});
 </script>
 
 <script>
     // $("#form_add").on('submit', function (e) {
 
-//     e.preventDefault();
+    //     e.preventDefault();
 
-//     $.ajax({
-//         url:$(this).attr('action'),
-//         method: $(this).attr('method'),
-//         data: new FormData(this),
-//         dataType: 'JSON',
-//         contentType: 'application/json',
-//         cache: false,
-//         processData: false,
-//         success:function(response)
-//         {
-//             alert(response.success)
-//         },
-//         error: function(response) {
+    //     $.ajax({
+    //         url:$(this).attr('action'),
+    //         method: $(this).attr('method'),
+    //         data: new FormData(this),
+    //         dataType: 'JSON',
+    //         contentType: 'application/json',
+    //         cache: false,
+    //         processData: false,
+    //         success:function(response)
+    //         {
+    //             alert(response.success)
+    //         },
+    //         error: function(response) {
 
-//         }
-//     });
-// });
-
-
-
-var i =0;
-$("#form_add").on('submit', function (e) {
-    e.preventDefault();
-    i++;
-    $.ajax({
-        url: $(this).attr('action'),
-        method: $(this).attr('method'),
-        data: new FormData(this),
-        processData: false,
-        dataType: 'json',
-        contentType: false,
-        success: function (data) {
-            if (data.status == 0) {
-
-                $('span.name-error').text('');
-                $('span.email-error').text('');
-                $('span.password-error').text('');
-                $('span.password_confirmation-error').text('');
-                $('span.rool-error').text('');
+    //         }
+    //     });
+    // });
 
 
-                $.each(data.error, function (prefix, val) {
-                    $('span.' + prefix+'-error').text('');
-                    $('span.' + prefix+'-error').text(val[0]);
-                });
+
+    var i = 0;
+    $("#form_add").on('submit', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: new FormData(this),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function(data) {
+                if (data.status == 0) {
+
+                    $('span.name-error').text('');
+                    $('span.email-error').text('');
+                    $('span.password-error').text('');
+                    $('span.password_confirmation-error').text('');
+                    $('span.rool-error').text('');
+
+
+                    $.each(data.error, function(prefix, val) {
+                        $('span.' + prefix + '-error').text('');
+                        $('span.' + prefix + '-error').text(val[0]);
+                    });
+                } else if (data.status == 1) {
+
+                    $('#alert_sucsses').text(data.success);
+                    i++;
+                    $('span.name-error').text('');
+                    $('span.email-error').text('');
+                    $('span.password-error').text('');
+                    $('span.password_confirmation-error').text('');
+                    $('span.rool-error').text('');
+                    // setTimeout(function () {
+
+                    //     location.reload(true);
+                    //   }, 2000);
+                    // console.log(data.data);
+
+                    // Swal.fire({
+                    //     position: 'center',
+                    //     icon: 'success',
+                    //     title: 'عملية ناجحة',
+                    //     text: data.msg,
+                    //     showConfirmButton: false,
+                    //     timer: 3000
+                    // })
+
+                    // $('.swal2-container').css('z-index', '10000')
+                } else if (data.status == 2) {
+                    $('span.name-error').text('');
+                    $('span.email-error').text('');
+                    $('span.password-error').text('');
+                    $('span.password_confirmation-error').text('');
+                    $('span.rool-error').text('');
+
+                    $('#alert_error').text(data.success);
+
+
+                    // Swal.fire({
+                    //     icon: 'error',
+                    //     title: 'عملية فاشلة',
+                    //     text: data.msg,
+
+                    // })
+                    // $('.swal2-container').css('z-index', '10000')
+
+                }
             }
-            else if (data.status == 1) {
 
-                alert (i);
-                // setTimeout(function () {
+        })
+    });
 
-                //     location.reload(true);
-                //   }, 2000);
-                // console.log(data.data);
+    $('#btn_close').on('click', function() {
+        if (i != 0) {
+            i = 0;
+            setTimeout(function() {
 
-                // Swal.fire({
-                //     position: 'center',
-                //     icon: 'success',
-                //     title: 'عملية ناجحة',
-                //     text: data.msg,
-                //     showConfirmButton: false,
-                //     timer: 3000
-                // })
+                location.reload(true);
+            }, 300);
 
-                // $('.swal2-container').css('z-index', '10000')
-            } else if (data.status == 2) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'عملية فاشلة',
-                    text: data.msg,
-
-                })
-                $('.swal2-container').css('z-index', '10000')
-
-            }
         }
-
-    })
-});
-
-$('#btn_close').on('click',function(){
-    if(i != 0){
-        i=0;
-        setTimeout(function () {
-
-        location.reload(true);
-        }, 300);
-
-    }
-});
+    });
 </script>
 
 </html>
