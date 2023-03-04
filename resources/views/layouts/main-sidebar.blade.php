@@ -12,7 +12,7 @@
                     <!-- menu title -->
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.website_manage')}} </li>
                     <li>
-                        <a href="todo-list.html"><i class="ti-bag"></i><span class="right-nav-text">{{trans('main_trans.services')}}</span> </a>
+                        <a href="{{url(App::getLocale().'/admin/services')}}"><i class="ti-bag"></i><span class="right-nav-text">{{trans('main_trans.services')}}</span> </a>
                     </li>
 
                     <li>
@@ -24,18 +24,18 @@
                         </a>
                         <ul id="calendar-menu" class="collapse" data-parent="#sidebarnav">
 
-                            <li> <a href="">{{trans('main_trans.section')}} </a> </li>
+                            <li> <a href="{{url(App::getLocale().'/admin/sections')}}">{{trans('main_trans.section')}} </a> </li>
                             <li> <a href="">{{trans('main_trans.product')}} </a> </li>
-                            
 
-                           
-                           
+
+
+
 
                         </ul>
                     </li>
 
                     <li>
-                        <a href="todo-list.html"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.blog')}}</span> </a>
+                        <a href="{{url(App::getLocale().'/admin/blogs')}}"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.blog')}}</span> </a>
                         <a href="todo-list.html"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.subscriptions')}}</span> </a>
                     </li>
 

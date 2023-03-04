@@ -4,31 +4,30 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\User;
+use App\Models\Section;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class UsersController extends Controller
+class SectionsController extends Controller
 {
-    // show all users
-    public function index(Request $req)
+    public function index()
     {
-        $data = User::all();
-        foreach($data as $key){
-            if($key->created_by != null){
+        $data = Section::all();
+        foreach ($data as $key) {
+            if ($key->created_by != null) {
                 $user = User::select('name')->find($key->created_by);
                 $key->created =  $user->name;
-            }else{
+            } else {
                 $key->created = '';
             }
-
         }
-        return view('users.index', compact('data'));
+
+        return view('sections.index', compact('data'));
     }
 
 
-    // Change user state
+    // Change section state
     public function change_state(Request $req)
     {
         $validator = Validator::make($req->all(), [
@@ -43,56 +42,44 @@ class UsersController extends Controller
         }
 
         try {
-            $exist = User::find($req->id);
-            if($exist){
-                if($exist->state == 1){
+            $exist = Section::find($req->id);
+            if ($exist) {
+                if ($exist->state == 1) {
                     $state = 0;
-                }else{
+                } else {
                     $state = 1;
                 }
-                $done = User::find($req->id)->update([
+                $done = Section::find($req->id)->update([
                     'state' => $state
                 ]);
-                if($done){
+                if ($done) {
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
-                }else{
+                } else {
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
                 }
-            }else{
+            } else {
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
             }
-
         } catch (Exception $ex) {
             return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
         }
     }
 
 
-    // Create new user
+    // create new section
     public function store(Request $req)
     {
         $validator = Validator::make($req->all(), [
             'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|min:6',
-            'password_confirmation' => 'required',
-            'roll' => 'required|min:1|max:1'
+            'image' => 'required|image',
+            'desc' => 'required',
+
         ], [
             'name.required' => trans('err_msg_trans.name_req'),
+            'image.required' => trans('err_msg_trans.img_req'),
+            'image.image' => trans('err_msg_trans.img_img'),
+            'desc.required' => trans('err_msg_trans.desc_req'),
 
-            'email.required' => trans('err_msg_trans.email_req'),
-            'email.email' => trans('err_msg_trans.email_email'),
-            'email.unique' => trans('err_msg_trans.email_uq'),
-
-            'password.required' => trans('err_msg_trans.password_req'),
-            'password.confirmed' => trans('err_msg_trans.password_conf'),
-            'password.min' => trans('err_msg_trans.password_min'),
-
-            'password_confirmation.required' => trans('err_msg_trans.passwordconf_req'),
-
-            'roll.required' => trans('err_msg_trans.roll_req'),
-            'roll.min' => trans('err_msg_trans.roll_uq'),
-            'roll.max' => trans('err_msg_trans.roll_uq'),
         ]);
 
         if ($validator->fails()) {
@@ -100,17 +87,18 @@ class UsersController extends Controller
         }
 
         try {
-            $done = User::create([
+            $result = $req->file('image')->store('sections', 'public');
+            $path = 'storage/' . $result;
+            $done = Section::create([
                 'name' => $req->name,
-                'email' => $req->email,
-                'password' => Hash::make($req->password),
-                'type' => $req->roll,
+                'img' => $path,
+                'desc' => $req->desc,
                 'created_by' => Auth::user()->id,
-                'updated_by' =>Auth::user()->id
+                'updated_by' => Auth::user()->id
             ]);
-            if($done){
+            if ($done) {
                 return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
-            }else{
+            } else {
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
             }
         } catch (Exception $ex) {
@@ -119,35 +107,25 @@ class UsersController extends Controller
     }
 
 
-    // Edite user data
+    // edit section
     public function update(Request $req)
     {
         $validator = Validator::make($req->all(), [
             'id' => 'required|integer',
             'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'confirmed|min:6',
-            'roll' => 'required|min:1|max:1'
+            'image' => 'image',
+            'desc' => 'required',
+
         ], [
             'id.required' => trans('err_msg_trans.id_req'),
             'id.integer' => trans('err_msg_trans.id_req'),
 
-
             'name.required' => trans('err_msg_trans.name_req'),
 
-            'email.required' => trans('err_msg_trans.email_req'),
-            'email.email' => trans('err_msg_trans.email_email'),
-            'email.unique' => trans('err_msg_trans.email_uq'),
+            'image.image' => trans('err_msg_trans.img_img'),
+            'desc.required' => trans('err_msg_trans.desc_req'),
 
 
-            'password.confirmed' => trans('err_msg_trans.password_conf'),
-            'password.min' => trans('err_msg_trans.password_min'),
-
-
-
-            'roll.required' => trans('err_msg_trans.roll_req'),
-            'roll.min' => trans('err_msg_trans.roll_uq'),
-            'roll.max' => trans('err_msg_trans.roll_uq'),
         ]);
 
         if ($validator->fails()) {
@@ -155,29 +133,29 @@ class UsersController extends Controller
         }
 
         try {
-            $exist = User::find($req->id);
-            if($exist){
-                if($req->password == null){
-                    $pass = $exist->password;
-                }else{
-                    $pass = Hash::make($req->password);
+            $exist = Section::find($req->id);
+            if ($exist) {
+                if ($req->hasFile('image')) {
+                    $result = $req->file('image')->store('sections', 'public');
+                    $path = 'storage/' . $result;
+                } else {
+                    $path = $exist->img;
                 }
-                $done = User::find($req->id)->update([
+                $done = Section::find($req->id)->update([
                     'name' => $req->name,
-                    'email' => $req->email,
-                    'password' => $pass,
-                    'type' => $req->roll,
-                    'updated_by' =>Auth::user()->id
+                    'img' => $path,
+                    'desc' => $req->desc,
+                    'updated_by' => Auth::user()->id
                 ]);
-                if($done){
+                if ($done) {
+                    unlink($exist->img);
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
-                }else{
+                } else {
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
                 }
-            }else{
+            } else {
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
             }
-
         } catch (Exception $ex) {
             return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
         }
@@ -185,7 +163,8 @@ class UsersController extends Controller
     }
 
 
-    // Delete user
+
+    // Delete section
     public function destroy(Request $req)
     {
         $validator = Validator::make($req->all(), [
@@ -200,10 +179,11 @@ class UsersController extends Controller
         }
 
         try {
-            $exist = User::find($req->id);
+            $exist = Section::find($req->id);
             if($exist){
-                $done = User::find($req->id)->delete();
+                $done = Section::find($req->id)->delete();
                 if($done){
+                    unlink($exist->img);
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
                 }else{
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
@@ -217,4 +197,3 @@ class UsersController extends Controller
         }
     }
 }
-

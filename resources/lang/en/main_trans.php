@@ -23,9 +23,8 @@ return [
     'phone_email' => 'phones & Emails',
     'display' => 'Display Interfaces',
     'main_sitting' => 'Main Sitting',
-    
-
     'users' => 'Users',
+    
     'name' => 'Name',
     'email' => 'Email',
     'roll' => 'Roll',
