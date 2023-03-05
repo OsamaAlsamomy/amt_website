@@ -2,7 +2,7 @@
 @section('css')
 
 @section('title')
-empty
+    empty
 @stop
 @endsection
 @section('page-header')
@@ -14,7 +14,8 @@ empty
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#" class="default-color">{{ trans('main_trans.user_manage') }}</a>
+                <li class="breadcrumb-item"><a href="#"
+                        class="default-color">{{ trans('main_trans.user_manage') }}</a>
                 </li>
                 <li class="breadcrumb-item active">{{ trans('main_trans.users') }}</li>
             </ol>
@@ -52,41 +53,43 @@ empty
 
                             @php $i = 1 @endphp
                             @foreach ($data as $key)
-                            <tr>
-                                <td>{{ $i++ }}</td>
-                                <td>{{ $key->name }}</td>
-                                <td>{{ $key->email }}</td>
-                                <td>
-                                    @switch($key->type)
-                                    @case('S')
-                                    {{ trans('users_trans.s_admin') }}
-                                    @break
+                                <tr>
+                                    <td>{{ $i++ }}</td>
+                                    <td>{{ $key->name }}</td>
+                                    <td>{{ $key->email }}</td>
+                                    <td>
+                                        @switch($key->type)
+                                            @case('S')
+                                                {{ trans('users_trans.s_admin') }}
+                                            @break
 
-                                    @case('A')
-                                    {{ trans('users_trans.admin') }}
-                                    @break
+                                            @case('A')
+                                                {{ trans('users_trans.admin') }}
+                                            @break
 
-                                    @case('U')
-                                    {{ trans('users_trans.user') }}
-                                    @break
+                                            @case('U')
+                                                {{ trans('users_trans.user') }}
+                                            @break
 
-                                    @default
-                                    @endswitch()
+                                            @default
+                                        @endswitch()
 
-                                </td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox" id="state_check" name="state_check"
-                                            value="{{ $key->id }}" @if ($key->state == 1) checked @endif>
-                                        <span class="slider round"></span>
-                                    </label>
+                                    </td>
+                                    <td>
+                                        <label class="switch">
+                                            <input type="checkbox" id="state_check" name="state_check"
+                                                value="{{ $key->id }}"
+                                                @if ($key->state == 1) checked @endif>
+                                            <span class="slider round"></span>
+                                        </label>
 
 
-                                </td>
-                                <td>{{ $key->created_at }}</td>
-                                <td>{{ $key->created }}</td>
-                                <td></th>
-                            </tr>
+                                    </td>
+                                    <td>{{ $key->created_at }}</td>
+                                    <td>{{ $key->created }}</td>
+                                    <td>
+                                        </th>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -171,8 +174,8 @@ empty
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('main_trans.cancel')
-                    }}</button>
+                <button type="button" class="btn btn-secondary"
+                    data-dismiss="modal">{{ trans('main_trans.cancel') }}</button>
                 <button type="submit" class="btn btn-success">{{ trans('main_trans.save') }}</button>
             </div>
             </form>
@@ -220,29 +223,45 @@ empty
 </script>
 
 <script>
-    // $("#form_add").on('submit', function (e) {
+    function fetchRecords(data) {
+        for (var i = 0; i < data.length; i++) {
+            var id = data[i].id;
+            var name = data[i].name;
+            var email = data[i].emil;
+            var roll = 'USER';
+            if (data[i].type == 'S') {
+                roll = 'Suppor Admin';
+            }
+            if (data[i].type == 'A') {
+                roll = 'Admin';
+            }
+            var state = data[i].state;
+            var check = "";
+            if (state == 1) {
+                check = "checked";
+            }
+            var created_at = data[i].created_at;
+            var created = data[i].created;
 
-    //     e.preventDefault();
+            var tr_str = "<tr>" +
+                "<td>" + (i + 1) + "</td>" +
+                "<td>" + name + "</td>" +
+                "<td>" + email + "</td>" +
+                "<td>" + roll + "</td>" +
+                "<td>" +
+                " <label class='switch'>" +
+                " <input type='checkbox' id='state_check' name='state_check'  value=' " +
+                state +
+                " ' " + check + "><span class='slider round'></span>" +
+                "</td>" +
+                "<td>" + created_at + "</td>" +
+                "<td>" + created + "</td>" +
+                "<td>" + "</td>" +
+                "</tr>";
 
-    //     $.ajax({
-    //         url:$(this).attr('action'),
-    //         method: $(this).attr('method'),
-    //         data: new FormData(this),
-    //         dataType: 'JSON',
-    //         contentType: 'application/json',
-    //         cache: false,
-    //         processData: false,
-    //         success:function(response)
-    //         {
-    //             alert(response.success)
-    //         },
-    //         error: function(response) {
-
-    //         }
-    //     });
-    // });
-
-
+            $("#user_body").append(tr_str);
+        }
+    }
 
     var i = 0;
     $("#form_add").on('submit', function(e) {
@@ -278,7 +297,46 @@ empty
                     $('span.password-error').text('');
                     $('span.password_confirmation-error').text('');
                     $('span.rool-error').text('');
-                    fetchRecords ()
+
+
+
+                    for (var i = 0; i < data.data.length; i++) {
+                        var id = data.data[i].id;
+                        var name = data.data[i].name;
+                        var email = data.data[i].emil;
+                        var roll = 'USER';
+                        if (data.data[i].type == 'S') {
+                            roll = 'Suppor Admin';
+                        }
+                        if (data.data[i].type == 'A') {
+                            roll = 'Admin';
+                        }
+                        var state = data.data[i].state;
+                        var check = "";
+                        if (state == 1) {
+                            check = "checked";
+                        }
+                        var created_at = data.data[i].created_at;
+                        var created = data.data[i].created;
+
+                        var tr_str = "<tr>" +
+                            "<td>" + (i + 1) + "</td>" +
+                            "<td>" + name + "</td>" +
+                            "<td>" + email + "</td>" +
+                            "<td>" + roll + "</td>" +
+                            "<td>" +
+                            " <label class='switch'>" +
+                            " <input type='checkbox' id='state_check' name='state_check'  value=' " +
+                            state +
+                            " ' " + check + "><span class='slider round'></span>" +
+                            "</td>" +
+                            "<td>" + created_at + "</td>" +
+                            "<td>" + created + "</td>" +
+                            "<td>" + "</td>" +
+                            "</tr>";
+
+                        $("#user_body").append(tr_str);
+                    }
 
                 } else if (data.status == 2) {
                     $('span.name-error').text('');
@@ -306,47 +364,6 @@ empty
 
         }
     });
-
-    function fetchRecords(var data){
-        for(var i=0; i< data.length; i++){
-                 var id = data[i].id;
-                 var name = data[i].name;
-                 var email = data[i].emil;
-                 var roll = 'USER';
-                 if(data[i].type == 'S'){
-                    roll = 'Suppor Admin';
-                 }
-                 if(data[i].type == 'A'){
-                    roll = 'Admin';
-                 }
-                 var state = data[i].state;
-                 var check ="";
-                 if(state == 1){
-                    check ="checked";
-                 }
-                 var created_at = data[i].created_at;
-                 var created = data[i].created;
-
-                 var tr_str = "<tr>" +
-                   "<td>" + (i+1) + "</td>" +
-                   "<td>" + name + "</td>" +
-                   "<td>" + email + "</td>" +
-                   "<td>" + roll + "</td>" +
-                   "<td>" +
-                    " <label class='switch'>"+
-                        " <input type='checkbox' id='state_check' name='state_check'  value=' "+
-                         state +
-                         " ' "+ check + "><span class='slider round'></span>" +
-                         "</td>" +
-                    "<td>" + created_at + "</td>" +
-                    "<td>" + created + "</td>" +
-                    "<td>" + "</td>" +
-                 "</tr>";
-
-                 $("#user_body").append(tr_str);
-              }
-    }
-
 </script>
 
 
