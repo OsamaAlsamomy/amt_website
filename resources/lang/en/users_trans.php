@@ -10,7 +10,11 @@ return [
     're_password' => 'Re Password',
     's_admin' => 'Super  Admin',
     'admin' => 'Admin',
-    'user' => 'User'
+    'user' => 'User',
+
+    'edit_use' => 'Edit user Data : ',
+    'delete_user' => 'Delete User'
+
 
 
 

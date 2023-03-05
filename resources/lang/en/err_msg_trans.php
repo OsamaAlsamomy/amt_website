@@ -22,6 +22,8 @@ return [
     'global_error' => 'An error occurred and the requested operation failed',
     'global_success' => 'The requested operation was completed successfully',
 
+    'refresh_update' => 'To update the data, close the form'
+
 
 
 

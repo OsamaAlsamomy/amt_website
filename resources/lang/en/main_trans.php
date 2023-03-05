@@ -24,7 +24,7 @@ return [
     'display' => 'Display Interfaces',
     'main_sitting' => 'Main Sitting',
     'users' => 'Users',
-    
+
     'name' => 'Name',
     'email' => 'Email',
     'roll' => 'Roll',
@@ -34,7 +34,10 @@ return [
     'save' => 'Save',
     'cancel' => 'Cansel',
 
-    'add_by' => 'Add By'
+    'add_by' => 'Add By',
+
+    'edit' => 'Edit',
+    'delete' => 'Delete'
 
 
 

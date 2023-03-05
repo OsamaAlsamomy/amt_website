@@ -41,28 +41,30 @@ Route::group(
         Route::group(['prefix' => 'admin'],function(){
 
             Route::get('/users',[UsersController::class,'index']);
-            Route::get('/users/state',[UsersController::class,'change_state']);
+            Route::get('/users/state/{id}',[UsersController::class,'change_state']);
             Route::post('/users/create',[UsersController::class,'store']);
             Route::post('/users/edit',[UsersController::class,'update']);
             Route::post('/users/delete',[UsersController::class,'destroy']);
 
             Route::get('/services',[ServicesController::class,'index']);
-            Route::get('/services/state',[ServicesController::class,'change_state']);
+            Route::post('/services/state',[ServicesController::class,'change_state']);
             Route::post('/services/create',[ServicesController::class,'store']);
             Route::post('/services/edit',[ServicesController::class,'update']);
             Route::post('/services/delete',[ServicesController::class,'destroy']);
 
             Route::get('/sections',[SectionsController::class,'index']);
-            Route::get('/sections/state',[SectionsController::class,'change_state']);
+            Route::post('/sections/state',[SectionsController::class,'change_state']);
             Route::post('/sections/create',[SectionsController::class,'store']);
             Route::post('/sections/edit',[SectionsController::class,'update']);
             Route::post('/sections/delete',[SectionsController::class,'destroy']);
 
             Route::get('/blogs',[BlogsController::class,'index']);
-            Route::get('/blogs/state',[BlogsController::class,'change_state']);
+            Route::post('/blogs/state',[BlogsController::class,'change_state']);
             Route::post('/blogs/create',[BlogsController::class,'store']);
             Route::post('/blogs/edit',[BlogsController::class,'update']);
             Route::post('/blogs/delete',[BlogsController::class,'destroy']);
+
+
         });
     }
 );

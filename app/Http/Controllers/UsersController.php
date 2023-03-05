@@ -31,17 +31,6 @@ class UsersController extends Controller
     // Change user state
     public function change_state(Request $req)
     {
-        $validator = Validator::make($req->all(), [
-            'id' => 'required|integer',
-        ], [
-            'id.required' => trans('err_msg_trans.id_req'),
-            'id.integer' => trans('err_msg_trans.id_req'),
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
-        }
-
         try {
             $exist = User::find($req->id);
             if($exist){
@@ -109,7 +98,7 @@ class UsersController extends Controller
                 'updated_by' =>Auth::user()->id
             ]);
             if($done){
-                return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
+                return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success'),'text' => trans('err_msg_trans.refresh_update')]);
             }else{
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
             }
@@ -125,8 +114,8 @@ class UsersController extends Controller
         $validator = Validator::make($req->all(), [
             'id' => 'required|integer',
             'name' => 'required',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'confirmed|min:6',
+            'email' => 'required|email|unique:users,email,'.$req->id,
+            'password' => 'confirmed',
             'roll' => 'required|min:1|max:1'
         ], [
             'id.required' => trans('err_msg_trans.id_req'),
@@ -141,8 +130,6 @@ class UsersController extends Controller
 
 
             'password.confirmed' => trans('err_msg_trans.password_conf'),
-            'password.min' => trans('err_msg_trans.password_min'),
-
 
 
             'roll.required' => trans('err_msg_trans.roll_req'),

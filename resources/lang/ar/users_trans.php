@@ -10,7 +10,11 @@ return [
     're_password' => 'أعد كلمة المرور',
     's_admin' => 'Super Admin',
     'admin' => 'Admin',
-    'user' => 'User'
+    'user' => 'User',
+
+    'edit_use' => 'تعديل بيانات المستخدم :',
+    'delete_user' => 'حذف المستخدم'
+
 
 
 
