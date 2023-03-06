@@ -29,36 +29,26 @@ class BlogsController extends Controller
     // Change blog state
     public function change_state(Request $req)
     {
-        $validator = Validator::make($req->all(), [
-            'id' => 'required|integer',
-        ], [
-            'id.required' => trans('err_msg_trans.id_req'),
-            'id.integer' => trans('err_msg_trans.id_req'),
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
-        }
-
         try {
             $exist = Blog::find($req->id);
-            if ($exist) {
-                if ($exist->state == 1) {
+            if($exist){
+                if($exist->state == 1){
                     $state = 0;
-                } else {
+                }else{
                     $state = 1;
                 }
                 $done = Blog::find($req->id)->update([
                     'state' => $state
                 ]);
-                if ($done) {
+                if($done){
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
-                } else {
+                }else{
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
                 }
-            } else {
+            }else{
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
             }
+
         } catch (Exception $ex) {
             return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
         }
@@ -71,7 +61,7 @@ class BlogsController extends Controller
         $validator = Validator::make($req->all(), [
             'name' => 'required',
             'image' => 'required|image',
-            'desc' => 'required',
+            'desc' => 'required'
 
         ], [
             'name.required' => trans('err_msg_trans.name_req'),

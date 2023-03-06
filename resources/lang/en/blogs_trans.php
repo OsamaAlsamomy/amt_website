@@ -10,7 +10,12 @@ return [
 
     'blog_title' => 'Article title',
     'blog_img' => 'Image for the article',
-    'blog_desc' => 'The text of the article'
+    'blog_desc' => 'The text of the article',
+
+    'delete_blog' => 'Delate The Article :',
+
+    'edit_blog' => 'Edit Article  : ',
+
 
 
 

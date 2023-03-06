@@ -59,7 +59,7 @@ Route::group(
             Route::post('/sections/delete',[SectionsController::class,'destroy']);
 
             Route::get('/blogs',[BlogsController::class,'index']);
-            Route::post('/blogs/state',[BlogsController::class,'change_state']);
+            Route::get('/blogs/state/{id}',[BlogsController::class,'change_state']);
             Route::post('/blogs/create',[BlogsController::class,'store']);
             Route::post('/blogs/edit',[BlogsController::class,'update']);
             Route::post('/blogs/delete',[BlogsController::class,'destroy']);
