@@ -6,7 +6,7 @@
 {{ trans('main_trans.section') }}
 @stop
 @endsection
-@section('section')
+@section('product')
 bg-success
 @endsection
 @section('page-header')

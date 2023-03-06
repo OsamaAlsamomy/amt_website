@@ -12,33 +12,23 @@
                     <!-- menu title -->
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.website_manage')}} </li>
                     <li>
-                        <a href="{{url(App::getLocale().'/admin/services')}}"><i class="ti-bag"></i><span class="right-nav-text">{{trans('main_trans.services')}}</span> </a>
+                        <a class="@yield('service')" href="{{url(App::getLocale().'/admin/services')}}"><i class="ti-bag"></i><span class="right-nav-text">{{trans('main_trans.services')}}</span> </a>
                     </li>
 
                     <li>
-                        <a href="javascript:void(0);" data-toggle="collapse" data-target="#calendar-menu">
-                            <div class="pull-left"><i class="ti-shopping-cart"></i><span
-                                    class="right-nav-text">{{ trans('main_trans.product_mange') }}</span></div>
-                            <div class="pull-right"><i class="ti-plus"></i></div>
-                            <div class="clearfix"></div>
-                        </a>
-                        <ul id="calendar-menu" class="collapse" data-parent="#sidebarnav">
+                        
+                        <a class="@yield('section')" href="{{url(App::getLocale().'/admin/sections')}}"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.section')}}</span> </a>
+                        <a class="@yield('product')" href="{{url(App::getLocale().'/admin/products')}}"><i class="ti-shopping-cart"></i><span class="right-nav-text">{{trans('main_trans.product')}}</span> </a>
 
-                            <li> <a href="{{url(App::getLocale().'/admin/sections')}}">{{trans('main_trans.section')}} </a> </li>
-                            <li> <a href="">{{trans('main_trans.product')}} </a> </li>
-
-
-
-
-
-                        </ul>
+                      
+                      
                     </li>
 
-                    <li>
-                        <a href="{{url(App::getLocale().'/admin/blogs')}}"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.blog')}}</span> </a>
-                        <a href="todo-list.html"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.subscriptions')}}</span> </a>
+                    <li >
+                        <a class="@yield('blog')" href="{{url(App::getLocale().'/admin/blogs')}}"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.blog')}}</span> </a>
+                        <a class="@yield('subscription')" href="{{url(App::getLocale().'/admin/subscriptions')}}"><i class="ti-menu-alt"></i><span class="right-nav-text">{{trans('main_trans.subscriptions')}}</span> </a>
                     </li>
-
+                    
 
                     <!-- menu title -->
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.settings')}} </li>
@@ -53,7 +43,7 @@
 
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.user_manage')}}</li>
                     <li>
-                        <a href="{{url(App::getLocale().'/admin/users')}}"><i class="ti-user"></i><span class="right-nav-text">{{trans('main_trans.users')}}</span> </a>
+                        <a class="@yield('user')" href="{{url(App::getLocale().'/admin/users')}}"><i class="ti-user"></i><span class="right-nav-text">{{trans('main_trans.users')}}</span> </a>
                     </li>
 
                 </ul>
