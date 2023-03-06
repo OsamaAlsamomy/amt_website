@@ -29,6 +29,7 @@ return [
     'email' => 'Email',
     'roll' => 'Roll',
     'state' => 'Status',
+    'views' => 'Views',
     'created_at' =>  'Added Date',
     'operations' => 'Operations',
     'save' => 'Save',
@@ -37,7 +38,7 @@ return [
     'add_by' => 'Add By',
 
     'edit' => 'Edit',
-    'delete' => 'Delete'
+    'delete' => 'Delete',
 
 
 

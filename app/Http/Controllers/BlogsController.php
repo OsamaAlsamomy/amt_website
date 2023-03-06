@@ -125,8 +125,12 @@ class BlogsController extends Controller
             $exist = Blog::find($req->id);
             if ($exist) {
                 if ($req->hasFile('image')) {
+
                     $result = $req->file('image')->store('blogs', 'public');
                     $path = 'storage/' . $result;
+                    if($result){
+                        unlink($exist->img);
+                    }
                 } else {
                     $path = $exist->img;
                 }
@@ -137,7 +141,6 @@ class BlogsController extends Controller
                     'updated_by' => Auth::user()->id
                 ]);
                 if ($done) {
-                    unlink($exist->img);
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
                 } else {
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);

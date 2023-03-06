@@ -47,13 +47,13 @@ Route::group(
             Route::post('/users/delete',[UsersController::class,'destroy']);
 
             Route::get('/services',[ServicesController::class,'index']);
-            Route::post('/services/state',[ServicesController::class,'change_state']);
+            Route::get('/services/state/{id}',[ServicesController::class,'change_state']);
             Route::post('/services/create',[ServicesController::class,'store']);
             Route::post('/services/edit',[ServicesController::class,'update']);
             Route::post('/services/delete',[ServicesController::class,'destroy']);
 
             Route::get('/sections',[SectionsController::class,'index']);
-            Route::post('/sections/state',[SectionsController::class,'change_state']);
+            Route::get('/sections/state/{id}',[SectionsController::class,'change_state']);
             Route::post('/sections/create',[SectionsController::class,'store']);
             Route::post('/sections/edit',[SectionsController::class,'update']);
             Route::post('/sections/delete',[SectionsController::class,'destroy']);

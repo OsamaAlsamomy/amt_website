@@ -27,39 +27,29 @@ class SectionsController extends Controller
     }
 
 
-    // Change section state
+    // Change blog state
     public function change_state(Request $req)
     {
-        $validator = Validator::make($req->all(), [
-            'id' => 'required|integer',
-        ], [
-            'id.required' => trans('err_msg_trans.id_req'),
-            'id.integer' => trans('err_msg_trans.id_req'),
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
-        }
-
         try {
             $exist = Section::find($req->id);
-            if ($exist) {
-                if ($exist->state == 1) {
+            if($exist){
+                if($exist->state == 1){
                     $state = 0;
-                } else {
+                }else{
                     $state = 1;
                 }
                 $done = Section::find($req->id)->update([
                     'state' => $state
                 ]);
-                if ($done) {
+                if($done){
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
-                } else {
+                }else{
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
                 }
-            } else {
+            }else{
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
             }
+
         } catch (Exception $ex) {
             return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
         }
@@ -136,6 +126,7 @@ class SectionsController extends Controller
             $exist = Section::find($req->id);
             if ($exist) {
                 if ($req->hasFile('image')) {
+                    unlink($exist->img);
                     $result = $req->file('image')->store('sections', 'public');
                     $path = 'storage/' . $result;
                 } else {
@@ -148,7 +139,6 @@ class SectionsController extends Controller
                     'updated_by' => Auth::user()->id
                 ]);
                 if ($done) {
-                    unlink($exist->img);
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
                 } else {
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);

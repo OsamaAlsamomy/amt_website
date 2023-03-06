@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->text('desc');
             $table->boolean('state')->default(1);
-            $table->integer('views');
+
+            $table->boolean('views')->default(0);
             $table->unsignedBigInteger('sec_id');
             $table->foreign('sec_id')->references('id')->on('sections')->onDelete('cascade');
             $table->unsignedBigInteger('created_by');

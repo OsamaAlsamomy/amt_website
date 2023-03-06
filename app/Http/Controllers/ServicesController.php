@@ -26,43 +26,33 @@ class ServicesController extends Controller
         return view('services.index', compact('data'));
     }
 
-    // Change srvice state
-    public function change_state(Request $req)
-    {
-        $validator = Validator::make($req->all(), [
-            'id' => 'required|integer',
-        ], [
-            'id.required' => trans('err_msg_trans.id_req'),
-            'id.integer' => trans('err_msg_trans.id_req'),
-        ]);
+     // Change blog state
+     public function change_state(Request $req)
+     {
+         try {
+             $exist = Service::find($req->id);
+             if($exist){
+                 if($exist->state == 1){
+                     $state = 0;
+                 }else{
+                     $state = 1;
+                 }
+                 $done = Service::find($req->id)->update([
+                     'state' => $state
+                 ]);
+                 if($done){
+                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
+                 }else{
+                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
+                 }
+             }else{
+                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
+             }
 
-        if ($validator->fails()) {
-            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
-        }
-
-        try {
-            $exist = Service::find($req->id);
-            if ($exist) {
-                if ($exist->state == 1) {
-                    $state = 0;
-                } else {
-                    $state = 1;
-                }
-                $done = Service::find($req->id)->update([
-                    'state' => $state
-                ]);
-                if ($done) {
-                    return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
-                } else {
-                    return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
-                }
-            } else {
-                return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
-            }
-        } catch (Exception $ex) {
-            return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
-        }
-    }
+         } catch (Exception $ex) {
+             return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
+         }
+     }
 
 
     // Create new service
@@ -135,6 +125,7 @@ class ServicesController extends Controller
             $exist = Service::find($req->id);
             if ($exist) {
                 if ($req->hasFile('image')) {
+                    unlink($exist->img);
                     $result = $req->file('image')->store('services', 'public');
                     $path = 'storage/' . $result;
                 } else {
@@ -147,7 +138,6 @@ class ServicesController extends Controller
                     'updated_by' => Auth::user()->id
                 ]);
                 if ($done) {
-                    unlink($exist->img);
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
                 } else {
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);

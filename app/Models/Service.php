@@ -16,6 +16,6 @@ class Service extends Model
         'state',
         'views',
         'created_by',
-        'updated_by '
+        'updated_by'
     ];
 }

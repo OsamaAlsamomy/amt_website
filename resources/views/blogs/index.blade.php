@@ -43,6 +43,7 @@
                                 <th>#</th>
                                 <th>{{ trans('main_trans.name') }}</th>
                                 <th>{{ trans('main_trans.state') }}</th>
+                                <th>{{ trans('main_trans.views') }}</th>
                                 <th>{{ trans('main_trans.created_at') }}</th>
                                 <th>{{ trans('main_trans.add_by') }}</th>
                                 <th>{{ trans('main_trans.operations') }}</th>
@@ -67,6 +68,7 @@
                                         </label>
 
                                     </td>
+                                    <td></td>
                                     <td>{{ $key->created_at }}</td>
                                     <td>{{ $key->created }}</td>
                                     <td>
@@ -80,10 +82,10 @@
                                             title="{{ trans('main_trans.edit') }}" data-toggle="modal"
                                             data-target="#edit_modal" data-id="{{ $key->id }}"
                                             data-name="{{ $key->name }}" data-desc="{{ $key->desc }}"
-                                            data-image="{{ url(asset( $key->image)) }}">
+                                            data-image="{{ url(asset( $key->img)) }}">
                                             <i class="ti-pencil-alt"></i>
                                         </button>
-                                    </td>KH770097006
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -103,7 +105,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
-                    {{ trans('users_trans.add_user') }}
+                    {{ trans('blogs_trans.add_blog') }}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close">
                     <span aria-hidden="true">&times;</span>
@@ -125,10 +127,10 @@
                         </div>
 
                     </div>
-
+                    <br>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="password" class="mr-sm-2">{{ trans('blogs_trans.blog_title') }}
+                            <label for="password" class="mr-sm-2">{{ trans('blogs_trans.blog_img') }}
                                 :</label>
                             <input id="image" type="file" name="image" class="form-control input_img">
                             <span class="image-error text-danger"></span>
@@ -139,10 +141,10 @@
 
                         </div>
                     </div>
-
+<br>
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="desc" class="mr-sm-2">{{ trans('blogs_trans.blog_title') }}
+                            <label for="desc" class="mr-sm-2">{{ trans('blogs_trans.blog_desc') }}
                                 :</label>
                             <textarea name="desc" id="ck-blog_content" cols="30" rows="10" class=" form-control">
 
@@ -182,10 +184,11 @@
                 </button>
             </div>
 
-            <form action="{{ url(App::getLocale() . '/admin/users/edit') }}" method="POST" id="form_edit">
+            <form action="{{ url(App::getLocale() . '/admin/blogs/edit') }}" method="POST" id="form_edit">
                 <div class="modal-body">
 
                     @csrf
+                    <input type="hidden" name="id" id="ed_id">
 
                     <div class="row">
                         <div class="col-md-12">
@@ -196,24 +199,24 @@
                         </div>
 
                     </div>
-
+                    <br>
                     <div class="row">
                         <div class="col-md-6">
-                            <label for="image" class="mr-sm-2">{{ trans('blogs_trans.blog_title') }}
+                            <label for="image" class="mr-sm-2">{{ trans('blogs_trans.blog_img') }}
                                 :</label>
-                            <input id="image" type="file" name="image" class="form-control input_img">
+                            <input id="ed_image" type="file" name="image" class="form-control ed_input_img">
                             <span class="image-error text-danger"></span>
 
                         </div>
                         <div class="col-md-6">
-                            <img src="" alt="" class="blog_image img-fluid" id="image_photo">
+                            <img src="" alt="" class="ed_blog_image img-fluid" id="image_photo">
 
                         </div>
                     </div>
-
+                    <br>
                     <div class="row">
                         <div class="col-md-12">
-                            <label for="desc" class="mr-sm-2">{{ trans('blogs_trans.blog_title') }}
+                            <label for="desc" class="mr-sm-2">{{ trans('blogs_trans.blog_desc') }}
                                 :</label>
                             <textarea name="desc" id="ed_desc" cols="30" rows="10" class=" form-control">
 
@@ -280,20 +283,6 @@
 <script src="{{ URL::asset('build/assets/ckeditor/ckeditor.js') }}"></script>
 <script src="{{ URL::asset('build/assets/js/page/blogs.js') }}"></script>
 
-<script>
-    const image_input = document.querySelector(".input_img");
-    image_input.addEventListener("change", function() {
-        const reader = new FileReader();
-        reader.addEventListener("load", () => {
-            const uploaded_image = reader.result;
-            document.querySelector(".blog_image").src = uploaded_image;
-        });
-        reader.readAsDataURL(this.files[0]);
-    });
-
-    CKEDITOR.replace("ck-blog_content");
-    
-</script>
 
 
 
