@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('img');
             $table->text('desc');
             $table->boolean('state')->default(1);
-            $table->integer('views');
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('updated_by');

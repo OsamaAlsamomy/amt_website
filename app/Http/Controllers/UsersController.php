@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class UsersController extends Controller
 {
     // show all users
-    public function index(Request $req)
+    public function index()
     {
         $data = User::all();
         foreach($data as $key){
@@ -26,6 +26,23 @@ class UsersController extends Controller
         }
         return view('users.index', compact('data'));
     }
+
+    public function show()
+    {
+        $data = User::all();
+        foreach($data as $key){
+            if($key->created_by != null){
+                $user = User::select('name')->find($key->created_by);
+                $key->created =  $user->name;
+            }else{
+                $key->created = '';
+            }
+
+        }
+        return $data;
+    }
+
+    
 
 
     // Change user state
@@ -43,7 +60,8 @@ class UsersController extends Controller
                     'state' => $state
                 ]);
                 if($done){
-                    return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
+                    $data = $this->show();
+                    return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success'),'data' => $data]);
                 }else{
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
                 }
