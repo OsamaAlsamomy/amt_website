@@ -19,6 +19,12 @@ return [
     'desc_req' => 'Description field is required',
     'img_req' => 'Image field is required',
     'img_img' => 'The entered image format is incorrect',
+
+    'num_num' => 'The entered number format is incorrect',
+    'long_req' => 'Longitude field is required',
+    'lat_req' => 'Latitude field is required',
+    'about_req' => 'About Company field is required',
+
     'global_error' => 'An error occurred and the requested operation failed',
     'global_success' => 'The requested operation was completed successfully',
 

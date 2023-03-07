@@ -44,9 +44,9 @@ bg-success
                     {{ trans('main_trans.cancel') }}
                 </button>
 
-                <form action="{{ url(App::getLocale() . '/admin/company/create') }}" method="POST" id="form_add"
+                <form action="{{ url(App::getLocale() . '/admin/company/edit') }}" method="POST" id="form_add"
                     enctype="multipart/form-data">
-
+                @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
