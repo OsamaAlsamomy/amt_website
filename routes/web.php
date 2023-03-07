@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
@@ -77,6 +78,10 @@ Route::group(
             Route::get('/subscriptions',[SubscriptionsController::class,'index']);
             Route::get('/subscriptions/state/{id}',[SubscriptionsController::class,'change_state']);
             Route::post('/subscriptions/delete',[SubscriptionsController::class,'destroy']);
+
+
+            Route::get('/company',[CompanyController::class,'index']);
+            Route::post('/company/edit',[CompanyController::class,'index']);
 
 
         });

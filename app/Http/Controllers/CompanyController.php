@@ -12,16 +12,11 @@ class CompanyController extends Controller
     {
         $data = Company::first();
 
-        if ($data->updated_by != null) {
-            $user = User::select('name')->find($data->updated_by);
-            $data->updated =  $user->name;
-        } else {
-            $data->updated = '';
-        }
+
 
 
         return view('company.index', compact('data'));
     }
 
-    
+
 }

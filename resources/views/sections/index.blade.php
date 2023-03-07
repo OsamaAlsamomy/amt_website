@@ -126,9 +126,7 @@ bg-success
                                 :</label>
                             <input id="name" type="text" name="name" class="form-control">
                             <span class="name-error text-danger"></span>
-                        </div>
 
-                        <div class="col-md-6">
                             <label for="desc" class="mr-sm-2">{{ trans('sections_trans.sec_desc') }}
                                 :</label>
                             <textarea name="desc" id="ck-blog_content" cols="30" rows="2" class=" form-control">
@@ -138,26 +136,15 @@ bg-success
 
                         </div>
 
-                    </div>
-                    <br>
-                    <div class="row">
                         <div class="col-md-6">
                             <label for="password" class="mr-sm-2">{{ trans('sections_trans.sec_img') }}
                                 :</label>
                             <input id="image" type="file" name="image" class="form-control input_img">
                             <span class="image-error text-danger"></span>
-
-                        </div>
-                        <div class="col-md-6">
                             <img src="" alt="" class="blog_image img-fluid">
-
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
 
-
-                    </div>
 
 
 
@@ -200,9 +187,7 @@ bg-success
                                 :</label>
                             <input id="ed_name" type="text" name="name" class="form-control">
                             <span class="name-error text-danger"></span>
-                        </div>
 
-                        <div class="col-md-6">
                             <label for="desc" class="mr-sm-2">{{ trans('sections_trans.sec_desc') }}
                                 :</label>
                             <textarea name="desc" id="ed_desc" cols="30" rows="2" class=" form-control">
@@ -210,29 +195,20 @@ bg-success
                            </textarea>
                             <span class="desc-error text-danger"></span>
 
+
+
                         </div>
 
-                    </div>
-                    <br>
-                    <div class="row">
                         <div class="col-md-6">
                             <label for="image" class="mr-sm-2">{{ trans('sections_trans.sec_img') }}
                                 :</label>
                             <input id="ed_image" type="file" name="image" class="form-control ed_input_img">
                             <span class="image-error text-danger"></span>
-
-                        </div>
-                        <div class="col-md-6">
                             <img src="" alt="" class="ed_blog_image img-fluid" id="image_photo">
 
                         </div>
-                    </div>
-                    <br>
-                    <div class="row">
-
 
                     </div>
-
 
 
                 </div>

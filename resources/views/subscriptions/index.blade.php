@@ -14,14 +14,14 @@ bg-success
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{ trans('main_trans.services') }}</h4>
+            <h4 class="mb-0"> {{ trans('main_trans.subscriptions') }}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
                 <li class="breadcrumb-item"><a href="#"
                         class="default-color">{{ trans('main_trans.website_manage') }}</a>
                 </li>
-                <li class="breadcrumb-item active">{{ trans('main_trans.services') }}</li>
+                <li class="breadcrumb-item active">{{ trans('main_trans.subscriptions') }}</li>
             </ol>
         </div>
     </div>
@@ -34,9 +34,7 @@ bg-success
     <div class="col-md-12 mb-30">
         <div class="card card-statistics h-100">
             <div class="card-body">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">
-                    {{ trans('service_trans.add_serv') }}
-                </button>
+
                 <br><br>
                 <div class="table-responsive">
                     <table id="datatable" class="table  table-hover  p-0" data-page-length="50"
@@ -44,11 +42,11 @@ bg-success
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>{{ trans('main_trans.name') }}</th>
+                                <th>{{ trans('main_trans.email') }}</th>
                                 <th>{{ trans('main_trans.state') }}</th>
-                                <th>{{ trans('main_trans.views') }}</th>
+
                                 <th>{{ trans('main_trans.created_at') }}</th>
-                                <th>{{ trans('main_trans.add_by') }}</th>
+
                                 <th>{{ trans('main_trans.operations') }}</th>
                             </tr>
                         </thead>
@@ -58,7 +56,7 @@ bg-success
                             @foreach ($data as $key)
                                 <tr>
                                     <td>{{ $i++ }}</td>
-                                    <td>{{ $key->name }}</td>
+                                    <td>{{ $key->email }}</td>
 
 
                                     <td>
@@ -66,22 +64,22 @@ bg-success
                                             <input type="checkbox" id="state_check" name="state_check"
                                                 value="{{ $key->id }}"
                                                 @if ($key->state == 1) checked @endif
-                                                onclick="change_state('{{ url(App::getLocale() . '/admin/services/state/' . $key->id) }}' , {{ $key->id }})">
+                                                onclick="change_state('{{ url(App::getLocale() . '/admin/subscriptions/state/' . $key->id) }}' , {{ $key->id }})">
                                             <span class="slider round"></span>
                                         </label>
 
                                     </td>
-                                    <td>{{ $key->views }}</td>
+
                                     <td>{{ $key->created_at }}</td>
-                                    <td>{{ $key->created }}</td>
+
                                     <td>
                                         <button class="btn btn-danger btn-sm pt-2 bx-1"
                                             title="{{ trans('main_trans.delete') }}" data-toggle="modal"
                                             data-target="#delete_modal" data-id="{{ $key->id }}"
-                                            data-name="{{ $key->name }}">
+                                            data-name="{{ $key->email }}">
                                             <i class="ti-trash"></i>
                                         </button>
-                                       
+
                                     </td>
                                 </tr>
                             @endforeach
@@ -104,7 +102,7 @@ bg-success
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
-                    {{ trans('service_trans.delete_serv') }}
+                    {{ trans('sub_trans.delete_sub') }}
 
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close">
@@ -113,7 +111,7 @@ bg-success
             </div>
             <div class="modal-body">
                 <!-- add_form -->
-                <form action="{{ url(App::getLocale() . '/admin/services/delete') }}" method="POST"
+                <form action="{{ url(App::getLocale() . '/admin/subscriptions/delete') }}" method="POST"
                     id="form_delete">
                     @csrf
                     <input type="hidden" name="id" id="de_id">

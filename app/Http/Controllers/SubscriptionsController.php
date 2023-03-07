@@ -63,7 +63,6 @@ class SubscriptionsController extends Controller
             if($exist){
                 $done = Subscription::find($req->id)->delete();
                 if($done){
-                    
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
                 }else{
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);

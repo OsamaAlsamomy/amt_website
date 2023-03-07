@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
-            $table->boolean('state');
+            $table->boolean('state')->default(1);
             $table->timestamps();
         });
     }
