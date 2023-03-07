@@ -6,6 +6,9 @@
     empty
 @stop
 @endsection
+@section('blog')
+bg-success
+@endsection
 @section('page-header')
 <!-- breadcrumb -->
 <div class="page-title">

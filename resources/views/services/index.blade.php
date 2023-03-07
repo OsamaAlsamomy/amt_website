@@ -6,6 +6,9 @@
 {{ trans('main_trans.services') }}
 @stop
 @endsection
+@section('service')
+bg-success
+@endsection
 @section('page-header')
 <!-- breadcrumb -->
 <div class="page-title">

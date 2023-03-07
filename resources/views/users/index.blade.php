@@ -3,8 +3,11 @@
 <link rel="stylesheet" href="{{URL(asset('build/assets/sweetalert2/sweetalert2.min.css'))}}" />
 
 @section('title')
-empty
+المستخدمين
 @stop
+@endsection
+@section('user')
+bg-success
 @endsection
 @section('page-header')
 <!-- breadcrumb -->
@@ -15,8 +18,7 @@ empty
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('main_trans.user_manage') }}</a>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{ trans('main_trans.user_manage') }}</a>
                 </li>
                 <li class="breadcrumb-item active">{{ trans('main_trans.users') }}</li>
             </ol>
@@ -59,35 +61,54 @@ empty
                                 <td>{{ $key->name }}</td>
                                 <td>{{ $key->email }}</td>
                                 <td>
+
                                     @switch($key->type)
                                     @case('S')
                                     {{ trans('users_trans.s_admin') }}
                                     @break
 
-                                            @case('A')
-                                                {{ trans('users_trans.admin') }}
-                                            @break
+                                    @case('A')
+                                    {{ trans('users_trans.admin') }}
+                                    @break
 
-                                            @case('U')
-                                                {{ trans('users_trans.user') }}
-                                            @break
+                                    @case('U')
+                                    {{ trans('users_trans.user') }}
+                                    @break
 
-                                            @default
-                                        @endswitch()
+                                    @default
+                                    @endswitch()
+
+
 
                                 </td>
                                 <td>
+                                    @if( $key->created != null)
                                     <label class="switch">
                                         <input type="checkbox" id="state_check" name="state_check"
-                                            value="{{ $key->id }}" @if ($key->state == 1) checked @endif>
+                                            value="{{ $key->id }}" @if ($key->state == 1) checked @endif onclick="change_state('{{url(App::getLocale() . '/admin/users/state/'.$key->id)}}' , {{$key->id}})">
                                         <span class="slider round"></span>
                                     </label>
-
+                                    @endif
 
                                 </td>
                                 <td>{{ $key->created_at }}</td>
                                 <td>{{ $key->created }}</td>
-                                <td></th>
+                                <td>
+                                    @if( $key->created != null)
+                                    <button class="btn btn-danger btn-sm pt-2 bx-1"
+                                        title="{{trans('main_trans.delete')}}" data-toggle="modal"
+                                        data-target="#delete_modal" data-id="{{$key->id}}" data-name="{{$key->name}}">
+                                        <i class="ti-trash"></i>
+                                    </button>
+                                    <button class="btn btn-info btn-sm pt-2 bx-1" title="{{trans('main_trans.edit')}}"
+                                        data-toggle="modal" data-target="#edit_modal" data-id="{{$key->id}}"
+                                        data-name="{{$key->name}}" data-email="{{$key->email}}"
+                                        data-roll="{{$key->type}}">
+                                        <i class="ti-pencil-alt"></i>
+                                    </button>
+                                    @endif
+
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -170,8 +191,8 @@ empty
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                    data-dismiss="modal">{{ trans('main_trans.cancel') }}</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('main_trans.cancel')
+                    }}</button>
                 <button type="submit" class="btn btn-success">{{ trans('main_trans.save') }}</button>
             </div>
             </form>
@@ -301,169 +322,9 @@ empty
 <!-- row closed -->
 @endsection
 @section('js')
-<script>
-    $(document).ready(function() {
+<script src="{{URL(asset('build/assets/sweetalert2/sweetalert2.min.js'))}}"></script>
+<script src="{{URL(asset('build/assets/js/page/users.js'))}}"></script>
 
-
-        $('#state_check').on('change', function(event) {
-            var Uid = $(this).val();
-            alert(Uid)
-
-            $.ajax({
-                url: '{{ url(App::getLocale() . '/admin/users/state') }}',
-                method: 'GET',
-                data: JSON.stringify({
-                    id: Uid
-                }),
-                dataType: 'JSON',
-                contentType: 'application/json',
-                cache: false,
-                processData: false,
-                success: function(response) {
-
-                    alert(response.success)
-                },
-                error: function(response) {
-                    alert(response.error)
-
-                }
-            });
-        });
-
-
-
-    });
-</script>
-
-<script>
-    // $("#form_add").on('submit', function (e) {
-
-    //     e.preventDefault();
-
-    //     $.ajax({
-    //         url:$(this).attr('action'),
-    //         method: $(this).attr('method'),
-    //         data: new FormData(this),
-    //         dataType: 'JSON',
-    //         contentType: 'application/json',
-    //         cache: false,
-    //         processData: false,
-    //         success:function(response)
-    //         {
-    //             alert(response.success)
-    //         },
-    //         error: function(response) {
-
-    //         }
-    //     });
-    // });
-
-
-
-    var i = 0;
-    $("#form_add").on('submit', function(e) {
-        e.preventDefault();
-
-        $.ajax({
-            url: $(this).attr('action'),
-            method: $(this).attr('method'),
-            data: new FormData(this),
-            processData: false,
-            dataType: 'json',
-            contentType: false,
-            success: function(data) {
-                if (data.status == 0) {
-
-                    $('span.name-error').text('');
-                    $('span.email-error').text('');
-                    $('span.password-error').text('');
-                    $('span.password_confirmation-error').text('');
-                    $('span.rool-error').text('');
-
-
-                    $.each(data.error, function(prefix, val) {
-                        $('span.' + prefix + '-error').text('');
-                        $('span.' + prefix + '-error').text(val[0]);
-                    });
-                } else if (data.status == 1) {
-
-                    $('#alert_sucsses').text(data.success);
-                    i++;
-                    $('span.name-error').text('');
-                    $('span.email-error').text('');
-                    $('span.password-error').text('');
-                    $('span.password_confirmation-error').text('');
-                    $('span.rool-error').text('');
-                    fetchRecords ()
-
-                } else if (data.status == 2) {
-                    $('span.name-error').text('');
-                    $('span.email-error').text('');
-                    $('span.password-error').text('');
-                    $('span.password_confirmation-error').text('');
-                    $('span.rool-error').text('');
-
-                    $('#alert_error').text(data.success);
-
-
-                }
-            }
-
-        })
-    });
-
-    $('#btn_close').on('click', function() {
-        if (i != 0) {
-            i = 0;
-            setTimeout(function() {
-
-                location.reload(true);
-            }, 300);
-
-        }
-    });
-
-    function fetchRecords(var data){
-        for(var i=0; i< data.length; i++){
-                 var id = data[i].id;
-                 var name = data[i].name;
-                 var email = data[i].emil;
-                 var roll = 'USER';
-                 if(data[i].type == 'S'){
-                    roll = 'Suppor Admin';
-                 }
-                 if(data[i].type == 'A'){
-                    roll = 'Admin';
-                 }
-                 var state = data[i].state;
-                 var check ="";
-                 if(state == 1){
-                    check ="checked";
-                 }
-                 var created_at = data[i].created_at;
-                 var created = data[i].created;
-
-                 var tr_str = "<tr>" +
-                   "<td>" + (i+1) + "</td>" +
-                   "<td>" + name + "</td>" +
-                   "<td>" + email + "</td>" +
-                   "<td>" + roll + "</td>" +
-                   "<td>" +
-                    " <label class='switch'>"+
-                        " <input type='checkbox' id='state_check' name='state_check'  value=' "+
-                         state +
-                         " ' "+ check + "><span class='slider round'></span>" +
-                         "</td>" +
-                    "<td>" + created_at + "</td>" +
-                    "<td>" + created + "</td>" +
-                    "<td>" + "</td>" +
-                 "</tr>";
-
-                 $("#user_body").append(tr_str);
-              }
-    }
-
-</script>
 
 
 </html>

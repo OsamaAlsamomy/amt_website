@@ -1,12 +1,14 @@
 <?php
 
-use App\Http\Controllers\BlogsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BlogsController;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\ServicesController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\SubscriptionsController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
@@ -64,6 +66,17 @@ Route::group(
             Route::post('/blogs/create',[BlogsController::class,'store']);
             Route::post('/blogs/edit',[BlogsController::class,'update']);
             Route::post('/blogs/delete',[BlogsController::class,'destroy']);
+
+            Route::get('/products',[ProductsController::class,'index']);
+            Route::get('/products/state/{id}',[ProductsController::class,'change_state']);
+            Route::post('/products/create',[ProductsController::class,'store']);
+            Route::post('/products/edit',[ProductsController::class,'update']);
+            Route::post('/products/delete',[ProductsController::class,'destroy']);
+
+
+            Route::get('/subscriptions',[SubscriptionsController::class,'index']);
+            Route::get('/subscriptions/state/{id}',[SubscriptionsController::class,'change_state']);
+            Route::post('/subscriptions/delete',[SubscriptionsController::class,'destroy']);
 
 
         });
