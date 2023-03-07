@@ -21,6 +21,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
+
 Route::get('/', function () {
     return view('dashboard');
 });
