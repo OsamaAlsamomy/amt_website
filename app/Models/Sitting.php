@@ -11,6 +11,7 @@ class Sitting extends Model
     protected $table = 'sittings';
     protected $fillable = [
         'site_run',
-        'comment_run'
+        'comment_run',
+        'contact_mail'
     ];
 }

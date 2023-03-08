@@ -5,10 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BlogsController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\PhnemailController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SectionsController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Controllers\SittingController;
+use App\Http\Controllers\SocialmediaController;
 use App\Http\Controllers\SubscriptionsController;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -81,7 +84,24 @@ Route::group(
 
 
             Route::get('/company',[CompanyController::class,'index']);
-            Route::post('/company/edit',[CompanyController::class,'index']);
+            Route::post('/company/edit',[CompanyController::class,'update']);
+
+            Route::get('/phonemail',[PhnemailController::class,'index']);
+            Route::post('/phonemail/edit',[PhnemailController::class,'update']);
+            Route::get('/phonemail/state/{id}',[PhnemailController::class,'change_state']);
+
+
+
+            Route::get('/socialmedia',[SocialmediaController::class,'index']);
+            Route::post('/socialmedia/edit',[SocialmediaController::class,'update']);
+            Route::get('/socialmedia/state/{id}',[SocialmediaController::class,'change_state']);
+
+
+            Route::get('/sittings',[SittingController::class,'index']);
+            Route::post('/sittings/site/{val}',[SittingController::class,'change_site']);
+            Route::get('/sittings/commint/{val}',[SittingController::class,'change_commint']);
+            Route::get('/sittings/email/{val}',[SittingController::class,'change_email']);
+
 
 
         });

@@ -23,7 +23,7 @@ class SocialmediaController extends Controller
             }
         }
 
-        return view('socialmedia.index', compact('data'));
+        return view('Socialmedia.index', compact('data'));
     }
 
     // Change phone or email state
@@ -54,13 +54,14 @@ class SocialmediaController extends Controller
         }
     }
 
-   
+
     // Edite phone or email data
     public function update(Request $req)
     {
         $validator = Validator::make($req->all(), [
             'id' => 'required|integer',
-            'url' => 'required',
+
+            'url' => 'required|url',
         ], [
             'id.required' => trans('err_msg_trans.id_req'),
             'id.integer' => trans('err_msg_trans.id_req'),
@@ -74,9 +75,9 @@ class SocialmediaController extends Controller
         try {
             $exist = Socialmedia::find($req->id);
             if ($exist) {
-                
+
                 $done = Socialmedia::find($req->id)->update([
-                    'content' => $req->content,
+                    'url' => $req->url,
                     'updated_by' => Auth::user()->id
                 ]);
                 if ($done) {

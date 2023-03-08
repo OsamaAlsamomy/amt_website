@@ -17,7 +17,7 @@ return new class extends Migration
             $table->char('type');
             $table->string('content')->nullable();
             $table->boolean('state');
-            $table->unsignedBigInteger('updated_by');
+            $table->unsignedBigInteger('updated_by')->nullable();
             $table->foreign('updated_by')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

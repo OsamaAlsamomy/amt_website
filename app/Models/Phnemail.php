@@ -12,6 +12,7 @@ class Phnemail extends Model
     protected $fillable = [
         'name',
         'content',
+        'type',
         'state',
         'updated_by'
     ];

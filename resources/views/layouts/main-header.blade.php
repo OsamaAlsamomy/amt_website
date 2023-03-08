@@ -3,10 +3,13 @@
 <nav class="admin-header navbar navbar-default col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
     <!-- logo -->
     <div class="text-left navbar-brand-wrapper">
+        @php
+        $image = DB::table('company')->select(['logo','icon','name'])->first();
+        @endphp
         <a class="navbar-brand brand-logo" href="index.html"><img
-                src="{{url(asset('build/assets/images/logo-dark.png'))}}" alt=""></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img
-                src="{{url(asset('build/assets/images/logo-icon-dark.png'))}}" alt=""></a>
+                src="{{url(asset($image->icon))}}" alt="" ></a>
+        <a class="navbar-brand brand-logo-mini px-1" href="index.html"><img
+                src="{{url(asset($image->icon))}}" alt=""></a>
     </div>
     <!-- Top bar left -->
     <ul class="nav navbar-nav mr-auto">
@@ -121,7 +124,7 @@
                 <a class="dropdown-item" href="#"><i class="text-secondary ti-reload"></i>{{trans('main_trans.activity')}}</a>
                 <a class="dropdown-item" href="#"><i class="text-success ti-email"></i>{{trans('main_trans.messages')}}</a>
                 <a class="dropdown-item" href="#"><i class="text-warning ti-user"></i>{{trans('main_trans.profile')}}</a>
-                
+
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#"><i class="text-info ti-settings"></i>{{trans('main_trans.settings')}}</a>
                 <a class="dropdown-item" href="{{url('logout')}}" onclick="event.preventDefault();

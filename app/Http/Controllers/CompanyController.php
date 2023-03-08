@@ -55,10 +55,14 @@ class CompanyController extends Controller
         try {
             $comp = Company::first();
             if ($req->hasFile('logo')) {
+                $result = $req->file('logo')->store('company', 'public');
+                $logo_path = 'storage/' . $result;
             } else {
                 $logo_path = $comp->logo;
             }
             if ($req->hasFile('icon')) {
+                $result = $req->file('icon')->store('company', 'public');
+                $icon_path = 'storage/' . $result;
             } else {
                 $icon_path = $comp->icon;
             }
@@ -74,9 +78,9 @@ class CompanyController extends Controller
                 'about' => $req->about,
                 'updated_by' => Auth::user()->id
             ]);
-            if($done){
+            if ($done) {
                 return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
-            }else{
+            } else {
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
             }
         } catch (Exception $ex) {

@@ -37,21 +37,22 @@ bg-success
                 <button type="button" class="btn btn-primary btn_add" onclick="edit_company()">
                     {{ trans('comp_trans.edit_comp') }}
                 </button>
-                <button type="button" class="btn btn-success btn_edit" onclick="edit_company()">
-                    {{ trans('main_trans.save') }}
-                </button>
-                <button type="button" class="btn btn-secondary btn_edit" onclick="refresh()">
-                    {{ trans('main_trans.cancel') }}
-                </button>
-
-                <form action="{{ url(App::getLocale() . '/admin/company/edit') }}" method="POST" id="form_add"
+                <form action="{{ url(App::getLocale() . '/admin/company/edit') }}" method="POST" id="form_edit"
                     enctype="multipart/form-data">
-                @csrf
+                    <button type="submit" class="btn btn-success btn_edit" >
+                        {{ trans('main_trans.save') }}
+                    </button>
+                    <button type="button" class="btn btn-secondary btn_edit" onclick="refresh()">
+                        {{ trans('main_trans.cancel') }}
+                    </button>
+
+                    @csrf
                     <div class="row">
                         <div class="col-md-6">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <img src="{{url(asset($data->logo))}}" alt="" class="logo_image img-fluid mb-3 mt-3 w-50">
+                                    <img src="{{url(asset($data->logo))}}" alt=""
+                                        class="logo_image img-fluid mb-3 mt-3 w-50">
 
                                     <div>
                                         <label for="logo" class="mr-sm-2">{{ trans('comp_trans.comp_logo') }}
@@ -68,7 +69,8 @@ bg-success
                             <br>
                             <div class="row">
                                 <div class="col-md-8">
-                                    <img src="{{url(asset($data->icon))}}" alt="" class="icon_image img-fluid mb-3 w-25">
+                                    <img src="{{url(asset($data->icon))}}" alt=""
+                                        class="icon_image img-fluid mb-3 w-25">
                                     <div>
                                         <label for="icon" class="mr-sm-2">{{ trans('comp_trans.comp_icon') }}
                                             :</label>
@@ -86,7 +88,8 @@ bg-success
                                 <div class="col-md-8">
                                     <label for="name" class="mr-sm-2">{{ trans('comp_trans.comp_name') }}
                                         :</label>
-                                    <input id="name" type="text" name="name" value="{{$data->name}}" class="form-control" >
+                                    <input id="name" type="text" name="name" value="{{$data->name}}"
+                                        class="form-control">
                                     <span class="name-error text-danger"></span>
                                 </div>
                             </div>
@@ -96,7 +99,8 @@ bg-success
                                 <div class="col-md-12">
                                     <label for="desc" class="mr-sm-2">{{ trans('comp_trans.comp_desc') }}
                                         :</label>
-                                    <input id="desc" type="text" name="desc" value="{{$data->desc}}" class="form-control">
+                                    <input id="desc" type="text" name="desc" value="{{$data->desc}}"
+                                        class="form-control">
                                     <span class="desc-error text-danger"></span>
                                 </div>
                             </div>
@@ -106,7 +110,8 @@ bg-success
                                 <div class="col-md-12">
                                     <label for="address" class="mr-sm-2">{{ trans('comp_trans.comp_address') }}
                                         :</label>
-                                    <input id="address" type="text" name="address" value="{{$data->address}}" class="form-control">
+                                    <input id="address" type="text" name="address" value="{{$data->address}}"
+                                        class="form-control">
                                     <span class="address-error text-danger"></span>
                                 </div>
                             </div>
@@ -118,13 +123,14 @@ bg-success
                                 <div class="col-md-4">
                                     <label for="long" class="mr-sm-2">{{ trans('comp_trans.comp_long') }}
                                         :</label>
-                                    <input id="long" type="text" name="long" value="{{$data->long}}"  class="form-control">
+                                    <input id="long" type="text" name="long" value="{{$data->long}}"
+                                        class="form-control">
                                     <span class="long-error text-danger"></span>
                                 </div>
                                 <div class="col-md-4">
                                     <label for="lat" class="mr-sm-2">{{ trans('comp_trans.comp_lat') }}
                                         :</label>
-                                    <input id="lat" type="text" name="lat" value="{{$data->lat}}"  class="form-control">
+                                    <input id="lat" type="text" name="lat" value="{{$data->lat}}" class="form-control">
                                     <span class="lat-error text-danger"></span>
                                 </div>
                             </div>
@@ -138,7 +144,7 @@ bg-success
                         <div class="col-md-6">
                             <label for="about" class="mr-sm-2">{{ trans('comp_trans.comp_about') }}
                                 :</label>
-                            <textarea name="about" id="about" cols="30" rows="10" class=" form-control">
+                            <textarea name="about" id="ck_about" cols="30" rows="10" class=" form-control">
                                 {!! $data->about !!}
                             </textarea>
 

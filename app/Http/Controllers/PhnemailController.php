@@ -23,7 +23,7 @@ class PhnemailController extends Controller
             }
         }
 
-        return view('Phonemails.index', compact('data'));
+        return view('phonemail.index', compact('data'));
     }
 
     // Change phone or email state
@@ -54,7 +54,7 @@ class PhnemailController extends Controller
         }
     }
 
-   
+
     // Edite phone or email data
     public function update(Request $req)
     {
@@ -77,7 +77,7 @@ class PhnemailController extends Controller
         try {
             $exist = Phnemail::find($req->id);
             if ($exist) {
-                
+
                 $done = Phnemail::find($req->id)->update([
                     'name' => $req->name,
                     'content' => $req->content,

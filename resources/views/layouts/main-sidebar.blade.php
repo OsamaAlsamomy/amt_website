@@ -35,10 +35,10 @@
                     <!-- menu item Widgets-->
                     <li>
                         <a class="@yield('company')" href="{{url(App::getLocale().'/admin/company')}}"><i class="ti-info-alt"></i><span class="right-nav-text">{{trans('main_trans.company_details')}}</span></a>
-                        <a href="widgets.html"><i class="ti-twitter"></i><span class="right-nav-text">{{trans('main_trans.social')}}</span></a>
-                        <a href="widgets.html"><i class="ti-mobile"></i><span class="right-nav-text">{{trans('main_trans.phone_email')}}</span></a>
+                        <a class="@yield('socialmedia')" href="{{url(App::getLocale().'/admin/socialmedia')}}"><i class="ti-twitter"></i><span class="right-nav-text">{{trans('main_trans.social')}}</span></a>
+                        <a class="@yield('phonemail')" href="{{url(App::getLocale().'/admin/phonemail')}}"><i class="ti-mobile"></i><span class="right-nav-text">{{trans('main_trans.phone_email')}}</span></a>
                         <a href="widgets.html"><i class="ti-desktop"></i><span class="right-nav-text">{{trans('main_trans.display')}}</span></a>
-                        <a href="widgets.html"><i class="ti-cog"></i><span class="right-nav-text">{{trans('main_trans.main_sitting')}}</span></a>
+                        <a class="@yield('sittings')" href="{{url(App::getLocale().'/admin/sittings')}}"><i class="ti-cog"></i><span class="right-nav-text">{{trans('main_trans.main_sitting')}}</span></a>
                     </li>
 
                     <li class="mt-10 mb-10 text-muted pl-4 font-medium menu-title">{{trans('main_trans.user_manage')}}</li>
