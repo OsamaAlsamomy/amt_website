@@ -3,10 +3,10 @@
 <link rel="stylesheet" href="{{ URL(asset('build/assets/sweetalert2/sweetalert2.min.css')) }}" />
 
 @section('title')
-empty
+{{ trans('main_trans.main_sitting') }}
 @stop
 @endsection
-@section('sittings')
+@section('sittings')`
 bg-success
 @endsection
 @section('page-header')
@@ -14,14 +14,14 @@ bg-success
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{ trans('main_trans.company_details') }}</h4>
+            <h4 class="mb-0"> {{ trans('main_trans.main_sitting') }}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
                 <li class="breadcrumb-item"><a href="#" class="default-color">{{ trans('main_trans.settings')
                         }}</a>
                 </li>
-                <li class="breadcrumb-item active">{{ trans('main_trans.company_details') }}</li>
+                <li class="breadcrumb-item active">{{ trans('main_trans.main_sitting') }}</li>
             </ol>
         </div>
     </div>
@@ -34,12 +34,12 @@ bg-success
     <div class="col-md-12 mb-30">
         <div class="card card-statistics h-100 p-3">
             <div>
-                <i class="fa   fa-phone bg-info   m-2 text-white  p-2 rounded"></i>
-                <span class="m-2">تشغيل الموقع</span>
+                <i class="fa   fa-cog bg-info   m-2 text-white  p-2 rounded"></i>
+                <span class="m-2">{{trans('main_trans.sait_run')}}</span>
                 <label class="switch m-2">
                     <input type="checkbox" id="state_check" name="state_check"
                         @if ($data->site_run == 1) checked @endif
-                    onclick="change_state('{{ url(App::getLocale() . '/admin/phonemail/state/' .
+                    onclick="change_site('{{ url(App::getLocale() . '/admin/sittings/site/' .
                     $data->site_run) }}' , {{ $data->site_run }})">
                     <span class="slider round"></span>
                 </label>
@@ -47,16 +47,40 @@ bg-success
             </div>
 
             <div>
-                <i class="fa   fa-phone bg-info   m-2 text-white  p-2 rounded"></i>
-                <span class="m-2">تشغيل الموقع</span>
+                <i class="fa   fa-cog bg-info   m-2 text-white  p-2 rounded"></i>
+                <span class="m-2">{{trans('main_trans.comment_run')}}</span>
 
                 <label class="switch m-2">
                     <input type="checkbox" id="state_check" name="state_check"
-                        @if ($data->site_run == 1) checked @endif
-                    onclick="change_state('{{ url(App::getLocale() . '/admin/phonemail/state/' .
-                    $data->site_run) }}' , {{ $data->site_run }})">
+                        @if ($data->comment_run == 1) checked @endif
+                    onclick="change_commint('{{ url(App::getLocale() . '/admin/sittings/commint/' .
+                    $data->comment_run) }}' , {{ $data->comment_run }})">
                     <span class="slider round"></span>
                 </label>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <i class="fa   fa-cog bg-info   m-2 text-white  p-2 rounded"></i>
+                    <span class="m-2">{{trans('main_trans.main_mail')}}</span>
+
+                    <input type="text" name="" id="" class="form-control">
+                    <button type="submit" class="btn btn-primary">{{trans('main_trans.save')}}</button>
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <i class="fa   fa-cog bg-info   m-2 text-white  p-2 rounded"></i>
+                    <span class="m-2">{{trans('main_trans.main_phone')}}</span>
+
+                    <input type="text" name="" id="" class="form-control">
+                    <button type="submit" class="btn btn-primary">{{trans('main_trans.save')}}</button>
+
+                </div>
 
             </div>
 
@@ -74,7 +98,7 @@ bg-success
 @section('js')
 <script src="{{ URL(asset('build/assets/sweetalert2/sweetalert2.min.js')) }}"></script>
 <script src="{{ URL::asset('build/assets/ckeditor/ckeditor.js') }}"></script>
-<script src="{{ URL::asset('build/assets/js/page/company.js') }}"></script>
+<script src="{{ URL::asset('build/assets/js/page/sittings.js') }}"></script>
 
 
 </html>

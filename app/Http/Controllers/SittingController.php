@@ -18,8 +18,13 @@ class SittingController extends Controller
     public function change_site(Request $req)
     {
         try {
+            if($req->val == 1){
+                $val = 0;
+            }else{
+                $val = 1;
+            }
             $done = Sitting::first()->update([
-                'site_run' => $req->val
+                'site_run' => $val
             ]);
             if ($done) {
                 return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
@@ -35,8 +40,13 @@ class SittingController extends Controller
     public function change_commint(Request $req)
     {
         try {
+            if($req->val == 1){
+                $val = 0;
+            }else{
+                $val = 1;
+            }
             $done = Sitting::first()->update([
-                'comment_run' => $req->val
+                'comment_run' => $val
             ]);
             if ($done) {
                 return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);

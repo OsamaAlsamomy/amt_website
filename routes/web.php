@@ -98,7 +98,7 @@ Route::group(
 
 
             Route::get('/sittings',[SittingController::class,'index']);
-            Route::post('/sittings/site/{val}',[SittingController::class,'change_site']);
+            Route::get('/sittings/site/{val}',[SittingController::class,'change_site']);
             Route::get('/sittings/commint/{val}',[SittingController::class,'change_commint']);
             Route::get('/sittings/email/{val}',[SittingController::class,'change_email']);
 

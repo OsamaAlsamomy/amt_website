@@ -41,5 +41,11 @@ return [
     'delete' => 'Delete',
 
 
+    'sait_run' => 'Run the website',
+    'comment_run' => 'Comment Active',
+    'main_mail' => 'Main Email',
+    'main_phone' => 'Main Phone Number'
+
+
 
 ];
