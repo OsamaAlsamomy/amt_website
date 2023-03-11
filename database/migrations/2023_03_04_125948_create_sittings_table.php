@@ -16,6 +16,7 @@ return new class extends Migration
             $table->boolean('site_run');
             $table->boolean('comment_run');
             $table->string('contact_mail');
+            $table->string('contact_phone');
             $table->timestamps();
         });
     }

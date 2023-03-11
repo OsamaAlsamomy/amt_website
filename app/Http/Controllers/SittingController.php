@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Sitting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class SittingController extends Controller
 {
@@ -61,9 +62,22 @@ class SittingController extends Controller
 
     public function change_email(Request $req)
     {
+        $validator = Validator::make($req->all(), [
+            'email' => 'required|email',
+
+        ], [
+            'email.required' => trans('err_msg_trans.email_req'),
+            'email.email' => trans('err_msg_trans.email_email'),
+
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        }
         try {
             $done = Sitting::first()->update([
-                'contact_mail' => $req->val
+                'contact_mail' => $req->email
             ]);
             if ($done) {
                 return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
@@ -74,6 +88,36 @@ class SittingController extends Controller
             return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
         }
     }
+
+
+    public function change_phpne(Request $req)
+    {
+        $validator = Validator::make($req->all(), [
+            'phone' => 'required',
+
+        ], [
+            'phone.required' => trans('err_msg_trans.email_req'),
+
+
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        }
+        try {
+            $done = Sitting::first()->update([
+                'contact_phone' => $req->phone
+            ]);
+            if ($done) {
+                return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
+            } else {
+                return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
+            }
+        } catch (Exception $ex) {
+            return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
+        }
+    }
+
 
 
 }

@@ -52,7 +52,7 @@ bg-success
                                 document.getElementById('inp_cont{{ $key->id }}').removeAttribute('readonly');
                                 document.getElementById('inp_name{{ $key->id }}').removeAttribute('readonly');
 
-                                " class="btn btn-success btn-sm m-1 text-white"><i class="fa fa-pen "></i></a>
+                                " class="btn btn-success btn-sm m-1 text-white"><i class="fa fa-edit "></i></a>
                                 <button id="btn_{{ $key->id }}" class="btn btn-primary btn-sm m-1"
                                     style="display: none"><i class="fa fa-save "></i></button>
 
@@ -118,7 +118,7 @@ bg-success
                                 document.getElementById('inp_cont{{ $key->id }}').removeAttribute('readonly');
                                 document.getElementById('inp_name{{ $key->id }}').removeAttribute('readonly');
 
-                                " class="btn btn-success btn-sm m-1 text-white"><i class="fa fa-pen "></i></a>
+                                " class="btn btn-success btn-sm m-1 text-white"><i class="fa fa-edit "></i></a>
                                 <button id="btn_{{ $key->id }}" class="btn btn-primary btn-sm m-1"
                                     style="display: none"><i class="fa fa-save "></i></button>
 

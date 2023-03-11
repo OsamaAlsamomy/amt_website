@@ -37,8 +37,7 @@ bg-success
                 <i class="fa   fa-cog bg-info   m-2 text-white  p-2 rounded"></i>
                 <span class="m-2">{{trans('main_trans.sait_run')}}</span>
                 <label class="switch m-2">
-                    <input type="checkbox" id="state_check" name="state_check"
-                        @if ($data->site_run == 1) checked @endif
+                    <input type="checkbox" id="state_check" name="state_check" @if ($data->site_run == 1) checked @endif
                     onclick="change_site('{{ url(App::getLocale() . '/admin/sittings/site/' .
                     $data->site_run) }}' , {{ $data->site_run }})">
                     <span class="slider round"></span>
@@ -51,8 +50,8 @@ bg-success
                 <span class="m-2">{{trans('main_trans.comment_run')}}</span>
 
                 <label class="switch m-2">
-                    <input type="checkbox" id="state_check" name="state_check"
-                        @if ($data->comment_run == 1) checked @endif
+                    <input type="checkbox" id="state_check" name="state_check" @if ($data->comment_run == 1) checked
+                    @endif
                     onclick="change_commint('{{ url(App::getLocale() . '/admin/sittings/commint/' .
                     $data->comment_run) }}' , {{ $data->comment_run }})">
                     <span class="slider round"></span>
@@ -64,9 +63,11 @@ bg-success
                 <div class="col-md-4">
                     <i class="fa   fa-cog bg-info   m-2 text-white  p-2 rounded"></i>
                     <span class="m-2">{{trans('main_trans.main_mail')}}</span>
-
-                    <input type="text" name="" id="" class="form-control">
-                    <button type="submit" class="btn btn-primary">{{trans('main_trans.save')}}</button>
+                    <form id="form_email" action="{{ url(App::getLocale() . '/admin/sittings/email/')}}" method="POST">
+                        @csrf
+                        <input type="text" name="email" id="email" class="form-control" value="{{$data->contact_mail}}">
+                        <button type="submit" class="btn btn-primary">{{trans('main_trans.save')}}</button>
+                    </form>
 
                 </div>
 
@@ -76,9 +77,11 @@ bg-success
                 <div class="col-md-4">
                     <i class="fa   fa-cog bg-info   m-2 text-white  p-2 rounded"></i>
                     <span class="m-2">{{trans('main_trans.main_phone')}}</span>
-
-                    <input type="text" name="" id="" class="form-control">
-                    <button type="submit" class="btn btn-primary">{{trans('main_trans.save')}}</button>
+                    <form id="form_phone" action="{{ url(App::getLocale() . '/admin/sittings/phone/')}}" method="POST">
+                        @csrf
+                        <input type="text" name="phone" id="phone" class="form-control" value="{{$data->contact_phone}}">
+                        <button type="submit" class="btn btn-primary">{{trans('main_trans.save')}}</button>
+                    </form>
 
                 </div>
 

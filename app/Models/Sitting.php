@@ -12,6 +12,7 @@ class Sitting extends Model
     protected $fillable = [
         'site_run',
         'comment_run',
-        'contact_mail'
+        'contact_mail',
+        'contact_phone'
     ];
 }

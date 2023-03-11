@@ -7,6 +7,8 @@ return [
     'email_req' => 'The Email field is required',
     'email_email' => 'The email format is incorrect',
     'email_uq' => 'This email has already been added',
+    'phone_req' => 'The Phone field is required',
+
 
     'password_req' => 'The password field is required',
     'password_conf' => 'Passwords do not match',
