@@ -55,12 +55,14 @@ class CompanyController extends Controller
         try {
             $comp = Company::first();
             if ($req->hasFile('logo')) {
+                unlink($comp->logo);
                 $result = $req->file('logo')->store('company', 'public');
                 $logo_path = 'storage/' . $result;
             } else {
                 $logo_path = $comp->logo;
             }
             if ($req->hasFile('icon')) {
+                unlink($comp->icon);
                 $result = $req->file('icon')->store('company', 'public');
                 $icon_path = 'storage/' . $result;
             } else {

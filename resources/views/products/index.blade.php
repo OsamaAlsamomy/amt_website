@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="{{ URL(asset('build/assets/sweetalert2/sweetalert2.min.css')) }}" />
 
 @section('title')
-{{ trans('main_trans.section') }}
+{{ trans('main_trans.product') }}
 @stop
 @endsection
 @section('product')
@@ -14,14 +14,14 @@ bg-success
 <div class="page-title">
     <div class="row">
         <div class="col-sm-6">
-            <h4 class="mb-0"> {{ trans('main_trans.section') }}</h4>
+            <h4 class="mb-0"> {{ trans('main_trans.product') }}</h4>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
                 <li class="breadcrumb-item"><a href="#" class="default-color">{{ trans('main_trans.website_manage')
                         }}</a>
                 </li>
-                <li class="breadcrumb-item active">{{ trans('main_trans.section') }}</li>
+                <li class="breadcrumb-item active">{{ trans('main_trans.product') }}</li>
             </ol>
         </div>
     </div>
@@ -35,7 +35,7 @@ bg-success
         <div class="card card-statistics h-100">
             <div class="card-body">
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add_modal">
-                    {{ trans('sections_trans.add_sec') }}
+                    {{ trans('product_trans.add_product') }}
                 </button>
                 <br><br>
                 <div class="table-responsive">
@@ -65,7 +65,7 @@ bg-success
                                     <label class="switch">
                                         <input type="checkbox" id="state_check" name="state_check"
                                             value="{{ $key->id }}" @if ($key->state == 1) checked @endif
-                                        onclick="change_state('{{ url(App::getLocale() . '/admin/sections/state/' .
+                                        onclick="change_state('{{ url(App::getLocale() . '/admin/products/state/' .
                                         $key->id) }}' , {{ $key->id }})">
                                         <span class="slider round"></span>
                                     </label>
@@ -84,7 +84,7 @@ bg-success
                                     <button class="btn btn-info btn-sm pt-2 bx-1" title="{{ trans('main_trans.edit') }}"
                                         data-toggle="modal" data-target="#edit_modal" data-id="{{ $key->id }}"
                                         data-name="{{ $key->name }}" data-desc="{{ $key->desc }}"
-                                        data-image="{{ url(asset( $key->img)) }}">
+                                        data-image="{{ url(asset( $key->img)) }}" data-section="{{ $key->sec_id }}">
                                         <i class="ti-pencil-alt"></i>
                                     </button>
                                 </td>
@@ -107,61 +107,71 @@ bg-success
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
-                    {{ trans('sections_trans.add_sec') }}
+                    {{ trans('product_trans.add_product') }}
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="{{ url(App::getLocale() . '/admin/sections/create') }}" method="POST" id="form_add"
-                enctype="multipart/form-data">
+            <form action="{{ url(App::getLocale() . '/admin/products/create') }}" method="POST" id="form_add"
+                enctype="multipart/form-data" class="dropzone">
 
                 <div class="modal-body">
 
                     @csrf
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <label for="name" class="mr-sm-2">{{ trans('sections_trans.sec_name') }}
+                        <div class="col-md-12">
+                            <label for="name" class="mr-sm-2">{{ trans('product_trans.product_name') }}
                                 :</label>
                             <input id="name" type="text" name="name" class="form-control">
                             <span class="name-error text-danger"></span>
                         </div>
-
-                        <div class="col-md-6">
-                            <label for="desc" class="mr-sm-2">{{ trans('sections_trans.sec_desc') }}
-                                :</label>
-                            <textarea name="desc" id="ck-blog_content" cols="30" rows="2" class=" form-control">
-
-                           </textarea>
-                            <span class="desc-error text-danger"></span>
-
-                        </div>
-
                     </div>
                     <br>
-                    <div class="row">
+
+                    <div class="col-md-12 row">
                         <div class="col-md-6">
-                            <label for="password" class="mr-sm-2">{{ trans('sections_trans.sec_img') }}
+                            <label for="password" class="mr-sm-2">{{ trans('product_trans.product_img') }}
                                 :</label>
                             <input id="image" type="file" name="image" class="form-control input_img">
                             <span class="image-error text-danger"></span>
-
-                        </div>
-                        <div class="col-md-6">
                             <img src="" alt="" class="blog_image img-fluid">
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="password" class="mr-sm-2">{{ trans('sections_trans.sec') }}
+                                :</label>
+                            <select name="section" id="section" class="form-control form-control-sm py-1">
+                                <option value="">-- --</option>
+                                @php
+                                $sec = DB::table('sections')->where('state',1)->get();
+                                @endphp
+                                @foreach ( $sec as $key)
+                                <option value="{{$key->id}}">{{$key->name}}</option>
+
+                                @endforeach
+                            </select>
+
+                            <span class="section-error text-danger"></span>
 
                         </div>
                     </div>
-                    <br>
-                    <div class="row">
 
+
+
+
+                    <div class="col-md-12">
+                        <label for="desc" class="mr-sm-2">{{ trans('product_trans.product_desc') }}
+                            :</label>
+                        <textarea name="desc" id="ck-product_content" cols="30" rows="2" class=" form-control">
+
+                       </textarea>
+                        <span class="desc-error text-danger"></span>
 
                     </div>
-
-
-
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('main_trans.cancel')
                         }}</button>
@@ -180,7 +190,7 @@ bg-success
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
-                    {{ trans('sections_trans.edit_sec') }}
+                    {{ trans('product_trans.edit_product') }}
                     <span id="ed_title"></span>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close">
@@ -188,22 +198,53 @@ bg-success
                 </button>
             </div>
 
-            <form action="{{ url(App::getLocale() . '/admin/sections/edit') }}" method="POST" id="form_edit">
+            <form action="{{ url(App::getLocale() . '/admin/products/edit') }}" method="POST" id="form_edit">
                 <div class="modal-body">
 
                     @csrf
                     <input type="hidden" name="id" id="ed_id">
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <label for="name" class="mr-sm-2">{{ trans('sections_trans.sec_name') }}
+                        <div class="col-md-12">
+                            <label for="name" class="mr-sm-2">{{ trans('product_trans.product_name') }}
                                 :</label>
                             <input id="ed_name" type="text" name="name" class="form-control">
                             <span class="name-error text-danger"></span>
                         </div>
+                    </div>
+                    <br>
 
+                    <div class="row">
                         <div class="col-md-6">
-                            <label for="desc" class="mr-sm-2">{{ trans('sections_trans.sec_desc') }}
+                            <label for="image" class="mr-sm-2">{{ trans('product_trans.product_img') }}
+                                :</label>
+                            <input id="ed_image" type="file" name="image" class="form-control ed_input_img">
+                            <span class="image-error text-danger"></span>
+                            <img src="" alt="" class="ed_blog_image img-fluid" id="image_photo">
+
+                        </div>
+                        <div class="col-md-6">
+
+                            <label for="password" class="mr-sm-2">{{ trans('sections_trans.sec') }}
+                                :</label>
+                            <select name="section" id="ed_section" class="form-control form-control-sm py-1">
+
+                                @php
+                                $sec = DB::table('sections')->where('state',1)->get();
+                                @endphp
+                                @foreach ( $sec as $key)
+                                <option value="{{$key->id}}">{{$key->name}}</option>
+
+                                @endforeach
+                            </select>
+
+                            <span class="section-error text-danger"></span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="desc" class="mr-sm-2">{{ trans('product_trans.product_desc') }}
                                 :</label>
                             <textarea name="desc" id="ed_desc" cols="30" rows="2" class=" form-control">
 
@@ -211,28 +252,7 @@ bg-success
                             <span class="desc-error text-danger"></span>
 
                         </div>
-
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <label for="image" class="mr-sm-2">{{ trans('sections_trans.sec_img') }}
-                                :</label>
-                            <input id="ed_image" type="file" name="image" class="form-control ed_input_img">
-                            <span class="image-error text-danger"></span>
-
-                        </div>
-                        <div class="col-md-6">
-                            <img src="" alt="" class="ed_blog_image img-fluid" id="image_photo">
-
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-
-
-                    </div>
-
 
 
                 </div>
@@ -263,7 +283,7 @@ bg-success
             </div>
             <div class="modal-body">
                 <!-- add_form -->
-                <form action="{{ url(App::getLocale() . '/admin/sections/delete') }}" method="POST" id="form_delete">
+                <form action="{{ url(App::getLocale() . '/admin/products/delete') }}" method="POST" id="form_delete">
                     @csrf
                     <input type="hidden" name="id" id="de_id">
                     <span class="de_id-error text-danger"></span>
@@ -287,9 +307,7 @@ bg-success
 @section('js')
 <script src="{{ URL(asset('build/assets/sweetalert2/sweetalert2.min.js')) }}"></script>
 <script src="{{ URL::asset('build/assets/ckeditor/ckeditor.js') }}"></script>
-<script src="{{ URL::asset('build/assets/js/page/sections.js') }}"></script>
-
-
+<script src="{{ URL::asset('build/assets/js/page/products.js') }}"></script>
 
 
 </html>

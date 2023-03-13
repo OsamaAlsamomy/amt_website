@@ -13,6 +13,8 @@ class Product extends Model
         'name',
         'desc',
         'views',
+        'state',
+        'img',
         'sec_id',
         'created_by',
         'updated_by',
