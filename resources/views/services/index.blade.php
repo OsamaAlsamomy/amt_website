@@ -110,7 +110,7 @@ bg-success
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
                     {{ trans('service_trans.add_serv') }}
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close">
+                <button type="button" class="close btn_close" data-dismiss="modal" aria-label="Close" id="btn_close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -125,7 +125,7 @@ bg-success
                         <div class="col-md-12">
                             <label for="name" class="mr-sm-2">{{ trans('service_trans.serv_title') }}
                                 :</label>
-                            <input id="name" type="text" name="name" class="form-control">
+                            <input id="name" type="text" name="name" class="form-control" required>
                             <span class="name-error text-danger"></span>
                         </div>
 
@@ -135,12 +135,12 @@ bg-success
                         <div class="col-md-6">
                             <label for="password" class="mr-sm-2">{{ trans('service_trans.serv_img') }}
                                 :</label>
-                            <input id="image" type="file" name="image" class="form-control input_img">
+                            <input id="image" type="file" name="image" class="form-control input_img" accept=".png, .jpg, .jpeg , .svg , .gif" required>
                             <span class="image-error text-danger"></span>
 
                         </div>
                         <div class="col-md-6">
-                            <img src="" alt="" class="blog_image img-fluid">
+                            <img src="" alt="" class="blog_image img-fluid img-thumbnail rounded">
 
                         </div>
                     </div>
@@ -149,7 +149,7 @@ bg-success
                         <div class="col-md-12">
                             <label for="desc" class="mr-sm-2">{{ trans('service_trans.serv_desc') }}
                                 :</label>
-                            <textarea name="desc" id="ck-blog_content" cols="30" rows="10" class=" form-control">
+                            <textarea name="desc" id="ck-blog_content" cols="30" rows="10" class=" form-control" required>
 
                            </textarea>
                             <span class="desc-error text-danger"></span>
@@ -162,7 +162,7 @@ bg-success
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
+                    <button type="button" class="btn btn-secondary btn_close"
                         data-dismiss="modal">{{ trans('main_trans.cancel') }}</button>
                     <button type="submit" class="btn btn-success">{{ trans('main_trans.save') }}</button>
                 </div>
@@ -182,7 +182,7 @@ bg-success
                     {{ trans('service_trans.edit_serv') }}
                     <span id="ed_title"></span>
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close">
+                <button type="button" class="close btn_close" data-dismiss="modal" aria-label="Close" id="btn_close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -191,13 +191,14 @@ bg-success
                 <div class="modal-body">
 
                     @csrf
-                    <input type="hidden" name="id" id="ed_id">
+                    <input type="hidden" name="id" id="ed_id" required readonly >
+                    <span class="id-error text-danger"></span>
 
                     <div class="row">
                         <div class="col-md-12">
                             <label for="name" class="mr-sm-2">{{ trans('service_trans.serv_title') }}
                                 :</label>
-                            <input id="ed_name" type="text" name="name" class="form-control">
+                            <input id="ed_name" type="text" name="name" class="form-control" required>
                             <span class="name-error text-danger"></span>
                         </div>
 
@@ -207,12 +208,12 @@ bg-success
                         <div class="col-md-6">
                             <label for="image" class="mr-sm-2">{{ trans('service_trans.serv_img') }}
                                 :</label>
-                            <input id="ed_image" type="file" name="image" class="form-control ed_input_img">
+                            <input id="ed_image" type="file" name="image" class="form-control ed_input_img" accept=".png, .jpg, .jpeg , .svg , .gif" >
                             <span class="image-error text-danger"></span>
 
                         </div>
                         <div class="col-md-6">
-                            <img src="" alt="" class="ed_blog_image img-fluid" id="image_photo">
+                            <img src="" alt="" class="ed_blog_image img-fluid img-thumbnail rounded" id="image_photo">
 
                         </div>
                     </div>
@@ -221,7 +222,7 @@ bg-success
                         <div class="col-md-12">
                             <label for="desc" class="mr-sm-2">{{ trans('service_trans.serv_desc') }}
                                 :</label>
-                            <textarea name="desc" id="ed_desc" cols="30" rows="10" class=" form-control">
+                            <textarea name="desc" id="ed_desc" cols="30" rows="10" class=" form-control" required>
 
                            </textarea>
                             <span class="desc-error text-danger"></span>
@@ -234,7 +235,7 @@ bg-success
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary"
+                    <button type="button" class="btn btn-secondary btn_close"
                         data-dismiss="modal">{{ trans('main_trans.cancel') }}</button>
                     <button type="submit" class="btn btn-success">{{ trans('main_trans.save') }}</button>
                 </div>
@@ -262,7 +263,7 @@ bg-success
                 <!-- add_form -->
                 <form action="{{ url(App::getLocale() . '/admin/services/delete') }}" method="POST" id="form_delete">
                     @csrf
-                    <input type="hidden" name="id" id="de_id">
+                    <input type="hidden" name="id" id="de_id" required readonly>
                     <span class="de_id-error text-danger"></span>
 
                     <h2 id="de_title"></h2>

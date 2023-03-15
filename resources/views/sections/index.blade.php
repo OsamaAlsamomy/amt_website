@@ -124,12 +124,12 @@ bg-success
                         <div class="col-md-6">
                             <label for="name" class="mr-sm-2">{{ trans('sections_trans.sec_name') }}
                                 :</label>
-                            <input id="name" type="text" name="name" class="form-control">
+                            <input id="name" type="text" name="name" class="form-control" required>
                             <span class="name-error text-danger"></span>
-
+                                <br>
                             <label for="desc" class="mr-sm-2">{{ trans('sections_trans.sec_desc') }}
                                 :</label>
-                            <textarea name="desc" id="ck-blog_content" cols="30" rows="2" class=" form-control">
+                            <textarea name="desc" id="ck-blog_content" cols="30" rows="2" class=" form-control" required>
 
                            </textarea>
                             <span class="desc-error text-danger"></span>
@@ -139,9 +139,9 @@ bg-success
                         <div class="col-md-6">
                             <label for="password" class="mr-sm-2">{{ trans('sections_trans.sec_img') }}
                                 :</label>
-                            <input id="image" type="file" name="image" class="form-control input_img">
+                            <input id="image" type="file" name="image" class="form-control input_img" accept=".png, .jpg, .jpeg , .svg , .gif" required>
                             <span class="image-error text-danger"></span>
-                            <img src="" alt="" class="blog_image img-fluid">
+                            <img src="" alt="" class="blog_image img-fluid img-thumbnail rounded">
                         </div>
                     </div>
 
@@ -179,21 +179,21 @@ bg-success
                 <div class="modal-body">
 
                     @csrf
-                    <input type="hidden" name="id" id="ed_id">
+                    <input type="hidden" name="id" id="ed_id" readonly required>
 
                     <div class="row">
                         <div class="col-md-6">
                             <label for="name" class="mr-sm-2">{{ trans('sections_trans.sec_name') }}
                                 :</label>
-                            <input id="ed_name" type="text" name="name" class="form-control">
-                            <span class="name-error text-danger"></span>
+                            <input id="ed_name" type="text" name="name" class="form-control" required>
+                            <span class="ed_name-error text-danger"></span>
 
                             <label for="desc" class="mr-sm-2">{{ trans('sections_trans.sec_desc') }}
                                 :</label>
-                            <textarea name="desc" id="ed_desc" cols="30" rows="2" class=" form-control">
+                            <textarea name="desc" id="ed_desc" cols="30" rows="2" class=" form-control" required>
 
                            </textarea>
-                            <span class="desc-error text-danger"></span>
+                            <span class="ed_desc-error text-danger"></span>
 
 
 
@@ -202,9 +202,9 @@ bg-success
                         <div class="col-md-6">
                             <label for="image" class="mr-sm-2">{{ trans('sections_trans.sec_img') }}
                                 :</label>
-                            <input id="ed_image" type="file" name="image" class="form-control ed_input_img">
-                            <span class="image-error text-danger"></span>
-                            <img src="" alt="" class="ed_blog_image img-fluid" id="image_photo">
+                            <input id="ed_image" type="file" name="image" class="form-control ed_input_img" accept=".png, .jpg, .jpeg , .svg , .gif">
+                            <span class="ed_image-error text-danger"></span>
+                            <img src="" alt="" class="ed_blog_image img-fluid img-thumbnail rounded" id="image_photo">
 
                         </div>
 
@@ -230,7 +230,7 @@ bg-success
         <div class="modal-content">
             <div class="modal-header">
                 <h5 style="font-family: 'Cairo', sans-serif;" class="modal-title" id="exampleModalLabel">
-                    {{ trans('service_trans.delete_serv') }}
+                    {{ trans('sections_trans.delete_sec') }}
 
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="btn_close">
@@ -241,7 +241,7 @@ bg-success
                 <!-- add_form -->
                 <form action="{{ url(App::getLocale() . '/admin/sections/delete') }}" method="POST" id="form_delete">
                     @csrf
-                    <input type="hidden" name="id" id="de_id">
+                    <input type="hidden" name="id" id="de_id" readonly required>
                     <span class="de_id-error text-danger"></span>
 
                     <h2 id="de_title"></h2>

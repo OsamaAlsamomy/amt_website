@@ -147,6 +147,9 @@ bg-success
                             <textarea name="about" id="ck_about" cols="30" rows="10" class=" form-control">
                                 {!! $data->about !!}
                             </textarea>
+                            <div class="about_view">
+                                {!! $data->about !!}
+                            </div>
 
                             <span class="about-error text-danger"></span>
                         </div>

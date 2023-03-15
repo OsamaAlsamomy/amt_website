@@ -31,6 +31,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 Route::get('/', function () {
     return view('dashboard');
 });
+Route::get('/', [App\Http\Controllers\FrontEnd\HomeController::class, 'index'])->name('home');
+Route::get('/about', [App\Http\Controllers\FrontEnd\HomeController::class, 'about_us']);
+Route::get('/contact', [App\Http\Controllers\FrontEnd\HomeController::class, 'contact_us']);
 
 Auth::routes();
 
