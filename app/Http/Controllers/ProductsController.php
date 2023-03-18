@@ -55,19 +55,51 @@ class ProductsController extends Controller
         }
     }
 
+
+    // Change Product Top
+    public function change_top(Request $req)
+    {
+        try {
+            $exist = Product::find($req->id);
+            if($exist){
+                if($exist->top == 1){
+                    $top = 0;
+                }else{
+                    $top = 1;
+                }
+                $done = Product::find($req->id)->update([
+                    'top' => $top
+                ]);
+                if($done){
+                    return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
+                }else{
+                    return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
+                }
+            }else{
+                return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
+            }
+
+        } catch (Exception $ex) {
+            return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
+        }
+    }
+
+
     public function store(Request $req)
     {
         $validator = Validator::make($req->all(), [
             'name' => 'required',
             'image' => 'required|image',
             'desc' => 'required',
-            'section' => 'required|integer'
+            'section' => 'required|integer',
+            'price' => 'required'
 
         ], [
             'name.required' => trans('err_msg_trans.name_req'),
             'image.required' => trans('err_msg_trans.img_req'),
             'image.image' => trans('err_msg_trans.img_img'),
             'desc.required' => trans('err_msg_trans.desc_req'),
+            'price.required' => trans('err_msg_trans.price_req'),
 
         ]);
 
@@ -82,6 +114,8 @@ class ProductsController extends Controller
                 'name' => $req->name,
                 'img' => $path,
                 'desc' => $req->desc,
+                'price' => $req->price,
+                'discount' => $req->discount,
                 'sec_id' => $req->section,
                 'created_by' => Auth::user()->id,
                 'updated_by' => Auth::user()->id
@@ -108,6 +142,8 @@ class ProductsController extends Controller
             'name' => 'required',
             'section' => 'required|integer',
             'desc' => 'required',
+            'price' => 'required'
+
 
         ], [
             'id.required' => trans('err_msg_trans.id_req'),
@@ -117,6 +153,8 @@ class ProductsController extends Controller
 
             'image.image' => trans('err_msg_trans.img_img'),
             'desc.required' => trans('err_msg_trans.desc_req'),
+
+            'price.required' => trans('err_msg_trans.price_req'),
 
 
         ]);
@@ -140,6 +178,8 @@ class ProductsController extends Controller
                     'img' => $path,
                     'sec_id' => $req->section,
                     'desc' => $req->desc,
+                    'price' => $req->price,
+                    'discount' => $req->discount,
                     'updated_by' => Auth::user()->id
                 ]);
                 if ($done) {

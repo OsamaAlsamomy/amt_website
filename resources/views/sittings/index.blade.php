@@ -79,10 +79,28 @@ bg-success
                     <span class="m-2">{{trans('main_trans.main_phone')}}</span>
                     <form id="form_phone" action="{{ url(App::getLocale() . '/admin/sittings/phone/')}}" method="POST">
                         @csrf
-                        <input type="text" name="phone" id="phone" class="form-control" value="{{$data->contact_phone}}">
+                        <input  type="text" name="phone" id="phone" class="form-control" value="{{$data->contact_phone}}">
                         <button type="submit" class="btn btn-primary">{{trans('main_trans.save')}}</button>
                     </form>
 
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <i class="fa   fa-cog bg-info   m-2 text-white  p-2 rounded"></i>
+                    <span class="m-2">{{trans('main_trans.view_lang')}}</span>
+                    <select name="lang" id="dispaly_lang" onchange="change_lang('{{ url(App::getLocale() . '/admin/sittings/lang/'.$data->view_lang)}}',1)" class="form-control py-2" value="{{$data->view_lang}}">
+                        @if($data->view_lang == 'ar')
+                        <option value="ar">{{trans('main_trans.lang_ar')}}</option>
+                        <option value="en">{{trans('main_trans.lang_en')}}</option>
+                        @else
+                        <option value="en">{{trans('main_trans.lang_en')}}</option>
+                        <option value="ar">{{trans('main_trans.lang_ar')}}</option>
+                        @endif
+                        
+                    </select>
                 </div>
 
             </div>

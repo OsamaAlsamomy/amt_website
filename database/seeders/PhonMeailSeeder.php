@@ -43,7 +43,7 @@ class PhonMeailSeeder extends Seeder
         ], [
             'name' => 'الإيميل الثاني',
             'content' => 'email2@mail.com',
-            'type' => 'm',
+            'type' => 'M',
             'state' => 1,
         ], [
             'name' => 'الإيميل الثالث',

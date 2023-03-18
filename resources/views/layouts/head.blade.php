@@ -17,3 +17,34 @@
 @else
     <link href="{{ URL::asset('build/assets/css/rtl.css') }}" rel="stylesheet">
 @endif
+
+<style>
+    @font-face {
+        font-family: cairo;
+        src: url('{{url(asset('build/assets/fonts/cairo.ttf'))}}');
+    }
+    @font-face{
+        font-family: tajawal;
+        src: url('{{url(asset('build/assets/fonts/tajawal.ttf'))}}');
+    }
+    @font-face{
+        font-family: changa;
+        src: url('{{url(asset('build/assets/fonts/changa.ttf'))}}');
+
+    }
+
+    *,
+    span,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    li,
+    a,
+    p,
+    li {
+        font-family: changa;
+    }
+</style>

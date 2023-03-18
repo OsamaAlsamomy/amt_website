@@ -11,18 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('customer_review', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('desc');
+            $table->string('name')->unique();
+            $table->string('Adjective')->nullable();
+            $table->text('review');
             $table->boolean('state')->default(1);
-            $table->string('img');
-            $table->float('price');
-            $table->float('discount')->default(0);
-            $table->boolean('top')->default(0);
-            $table->boolean('views')->default(0);
-            $table->unsignedBigInteger('sec_id');
-            $table->foreign('sec_id')->references('id')->on('sections')->onDelete('cascade');
             $table->unsignedBigInteger('created_by');
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('updated_by');
@@ -36,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('customer_review');
     }
 };

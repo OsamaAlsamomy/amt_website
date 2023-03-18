@@ -34,11 +34,11 @@ class SocialmediaSeeder extends Seeder
             'url' => 'amt.com',
             'state' => 1
         ], [
-            'name' => 'inestgram',
+            'name' => 'instagram',
             'url' => 'amt.com',
             'state' => 1
         ], [
-            'name' => 'youtup',
+            'name' => 'youtube',
             'url' => 'amt.com',
             'state' => 1
         ]];

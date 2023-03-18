@@ -5,15 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sitting extends Model
+class Slide extends Model
 {
     use HasFactory;
-    protected $table = 'sittings';
+    protected $table = 'slides';
     protected $fillable = [
-        'site_run',
-        'comment_run',
-        'contact_mail',
-        'contact_phone',
-        'view_lang'
+        'title',
+        'img',
+        'content',
+        'url',
+        'state',
+        'created_by',
+        'updated_by'
     ];
 }

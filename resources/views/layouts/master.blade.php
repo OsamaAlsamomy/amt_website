@@ -10,36 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     @include('layouts.head')
 
-    <style>
-        @font-face {
-            font-family: cairo;
-            src: url('{{url(asset('build/assets/fonts/cairo.ttf'))}}');
-        }
-        @font-face{
-            font-family: tajawal;
-            src: url('{{url(asset('build/assets/fonts/tajawal.ttf'))}}');
-        }
-        @font-face{
-            font-family: changa;
-            src: url('{{url(asset('build/assets/fonts/changa.ttf'))}}');
-
-        }
-
-        *,
-        span,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6,
-        li,
-        a,
-        p,
-        li {
-            font-family: changa;
-        }
-    </style>
+    
 </head>
 
 <body>
@@ -49,9 +20,9 @@
         <!--=================================
  preloader -->
 
-        <div id="pre-loader">
-            <img src="assets/images/pre-loader/loader-01.svg" alt="">
-        </div>
+ <div id="pre-loader">
+    <img src="{{url(asset('build/assets/images/pre-loader/loader-01.svg'))}}" alt="">
+</div>
 
         <!--=================================
  preloader -->

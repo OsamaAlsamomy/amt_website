@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Sitting extends Model
+class Message extends Model
 {
     use HasFactory;
-    protected $table = 'sittings';
+    protected $table = 'messages';
     protected $fillable = [
-        'site_run',
-        'comment_run',
-        'contact_mail',
-        'contact_phone',
-        'view_lang'
+        'email',
+        'name',
+        'subject',
+        'message',
+        'read'
     ];
 }

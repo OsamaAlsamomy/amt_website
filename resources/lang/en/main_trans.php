@@ -15,6 +15,9 @@ return [
     'product_mange' => 'Product Management',
     'section' => 'Section',
     'product' => 'Products',
+    'brands' => 'Brands',
+    'mail' => 'Incoming Mail',
+    'customer_o' => 'Customer reviews',
     'blog' => 'BLOG',
     'subscriptions' => 'Subscriptions',
 
@@ -33,6 +36,11 @@ return [
     'created_at' =>  'Added Date',
     'operations' => 'Operations',
     'save' => 'Save',
+
+    'price' => 'Price',
+    'discount' => 'Discount',
+    'top' => 'Top Selling',
+
     'cancel' => 'Cansel',
 
     'add_by' => 'Add By',
@@ -44,7 +52,10 @@ return [
     'sait_run' => 'Run the website',
     'comment_run' => 'Comment Active',
     'main_mail' => 'Main Email',
-    'main_phone' => 'Main Phone Number'
+    'main_phone' => 'Main Phone Number',
+    'view_lang' => 'Language',
+    'lang_ar' => 'Arabic',
+    'lang_en' => 'English',
 
 
 

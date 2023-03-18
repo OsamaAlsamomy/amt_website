@@ -19,7 +19,8 @@ class SittingSeeder extends Seeder
                 'site_run' => 1,
                 'comment_run' => 1,
                 'contact_mail' => 'exampole@mail.com' ,
-                'contact_phone' => '7777777777'
+                'contact_phone' => '7777777777',
+                'view_lang' => 'ar'
 
         ];
 
@@ -29,6 +30,7 @@ class SittingSeeder extends Seeder
             'comment_run' => $sittings ['comment_run'],
             'contact_mail' => $sittings ['contact_mail'],
             'contact_phone' => $sittings ['contact_phone'],
+            'view_lang' => $sittings ['view_lang'],
 
 
 

@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sittings', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->boolean('site_run');
-            $table->boolean('comment_run');
-            $table->string('contact_mail');
-            $table->string('contact_phone');
-            $table->string('view_lang');
-
+            $table->string('email');
+            $table->string('name');
+            $table->string('subject');
+            $table->text('message');
+            $table->boolean('read')->default(0);
             $table->timestamps();
         });
     }
@@ -28,6 +27,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('sittings');
+        Schema::dropIfExists('messages');
+        
     }
 };

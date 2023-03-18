@@ -76,6 +76,7 @@ Route::group(
 
             Route::get('/products',[ProductsController::class,'index']);
             Route::get('/products/state/{id}',[ProductsController::class,'change_state']);
+            Route::get('/products/top/{id}',[ProductsController::class,'change_top']);
             Route::post('/products/create',[ProductsController::class,'store']);
             Route::post('/products/edit',[ProductsController::class,'update']);
             Route::post('/products/delete',[ProductsController::class,'destroy']);
@@ -103,10 +104,11 @@ Route::group(
             Route::get('/sittings',[SittingController::class,'index']);
             Route::get('/sittings/site/{val}',[SittingController::class,'change_site']);
             Route::get('/sittings/commint/{val}',[SittingController::class,'change_commint']);
+            Route::get('/sittings/lang/{val}',[SittingController::class,'change_lang']);
             Route::post('/sittings/email',[SittingController::class,'change_email']);
             Route::post('/sittings/phone',[SittingController::class,'change_phpne']);
 
-
+            
 
         });
     }

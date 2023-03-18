@@ -8,6 +8,8 @@ return [
     'email_email' => 'صيغة البريد الإلكتروني غير صحيحة',
     'email_uq' => 'هذا الإيميل مضاف من قبل',
     'phone_req' => 'حقل رقم الهاتف مطلوب',
+    'price_req' => 'Price field is required',
+
 
     'password_req' => 'حقل كلمة المرور مطلوب',
     'password_conf' => 'كلمات المرور غير متتطابفة',

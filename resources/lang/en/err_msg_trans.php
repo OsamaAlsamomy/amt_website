@@ -8,6 +8,7 @@ return [
     'email_email' => 'The email format is incorrect',
     'email_uq' => 'This email has already been added',
     'phone_req' => 'The Phone field is required',
+    'price_req' => 'Price field is required',
 
 
     'password_req' => 'The password field is required',
@@ -30,7 +31,8 @@ return [
     'global_error' => 'An error occurred and the requested operation failed',
     'global_success' => 'The requested operation was completed successfully',
 
-    'refresh_update' => 'To update the data, close the form'
+    'refresh_update' => 'To update the data, close the form',
+
 
 
 

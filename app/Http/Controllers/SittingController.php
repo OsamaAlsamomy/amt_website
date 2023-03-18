@@ -120,4 +120,26 @@ class SittingController extends Controller
 
 
 
+    public function change_lang(Request $req)
+    {
+        try {
+            if($req->val == 'ar'){
+                $val = 'en';
+            }else{
+                $val = 'ar';
+            }
+            $done = Sitting::first()->update([
+                'view_lang' => $val
+            ]);
+            if ($done) {
+                return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
+            } else {
+                return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
+            }
+        } catch (Exception $ex) {
+            return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
+        }
+    }
+
+
 }
