@@ -1,3 +1,56 @@
+@php
+$company = DB::table('company')->first();
+$setting = DB::table('sittings')->first();
+
+@endphp
+
+@if($setting->view_lang == 'ar')
+
+@php
+$lang = [
+
+'newsletter' => 'تابع جديد منشوراتنا' ,
+'info' => 'معلومات تهمك',
+'info_desc' => 'يمكنك إلغاء الاشتراك في أي لحظة. لهذا الغرض ، يرجى التواصل معنا عبر وسائل المتاحة في الموقع.',
+'links' => 'الروابط الرئيسية',
+'submit' => 'اشترك الآن',
+'home' =>'الرئيسية',
+'about' => 'عن الشركة',
+'products' => 'منتجاتنا',
+'services' => 'خدماتنا',
+'blogs' => 'المدونة',
+'contact' => 'تواصل معنا',
+
+];
+@endphp
+@else
+@php
+$lang = [
+
+'newsletter' => 'Follow our new posts',
+'info' => 'Information',
+'info_desc' => 'You can unsubscribe at any moment. For this purpose, please contact us via the means available on the
+site.',
+'links' => 'Custom Links',
+'submit' => 'subscribe now',
+'home' =>'Home',
+'about' => 'ABOUT US',
+'products' => 'OUR PRODUCTS',
+'services' => 'SERVICES',
+'blogs' => 'BLOGS',
+'contact' => 'CONTACT',
+
+
+
+
+
+
+
+
+
+];
+@endphp
+@endif
 <footer class="footer style-1 position-relative overflow-hidden">
     <div class="footer-top style-1 position-relative overflow-hidden">
         <div class="container">
@@ -5,7 +58,7 @@
                 <div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-delay="200ms" data-wow-duration="800ms">
                     <div id="medimall_about-4" class="footer-widget widget_medimall_about">
                         <div class="logo logo-light"><a href="index.html"><img width="227" height="51"
-                                    src="{{url(asset($company->logo))}}" class="attachment-full size-full wp-post-image"
+                                    src="{{url(asset($company->icon))}}" class="attachment-full size-full wp-post-image"
                                     alt="" loading="lazy" /></a>
                         </div>
                         <div class="logo logo-dark"><a href="index.html"></a></div>
@@ -13,7 +66,7 @@
                         <div class="schedule-info-box">
                             <ul class="schedule-list-1">
                                 @php
-                                    $phones = DB::table('phnemail')->where('state',1)->where('type','P')->get();
+                                $phones = DB::table('phnemail')->where('state',1)->where('type','P')->get();
                                 @endphp
                                 @foreach ($phones as $key)
                                 <li>{{$key->name}} : <span> {{$key->content}}</span></li>
@@ -22,7 +75,7 @@
                             </ul>
                             <ul class="schedule-list-1">
                                 @php
-                                    $phones = DB::table('phnemail')->where('state',1)->where('type','M')->get();
+                                $phones = DB::table('phnemail')->where('state',1)->where('type','M')->get();
                                 @endphp
                                 @foreach ($phones as $key)
                                 <li>{{$key->name}} : <span> {{$key->content}}</span></li>
@@ -32,109 +85,88 @@
                         </div>
                     </div>
                 </div>
-                <div class="offset-xl-1 col-xl-2 col-md-6 wow fadeInUp d-flex justify-content-xl-center justify-content-start"
-                    data-wow-delay="400ms" data-wow-duration="800ms">
-                    <div id="nav_menu-6" class="footer-widget widget_nav_menu">
-                        <h3 class="footer-widget-title">Information</h3>
-                        <div class="menu-information-container">
-                            <ul id="menu-information" class="menu">
-                                <li id="menu-item-82"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-82">
-                                    <a href="#">Delivery</a>
-                                </li>
-                                <li id="menu-item-83"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-83">
-                                    <a href="#">About Us</a>
-                                </li>
-                                <li id="menu-item-84"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-84">
-                                    <a href="#">Secure Payment</a>
-                                </li>
-                                <li id="menu-item-85"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-85">
-                                    <a href="#">Contact Us</a>
-                                </li>
-                                <li id="menu-item-86"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-86">
-                                    <a href="#">Sitemap</a>
-                                </li>
-                                <li id="menu-item-87"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-87">
-                                    <a href="#">Stores</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="col-xl-2 col-md-6 wow fadeInUp d-flex justify-content-xl-center justify-content-start"
                     data-wow-delay="600ms" data-wow-duration="800ms">
                     <div id="nav_menu-8" class="footer-widget widget_nav_menu">
-                        <h3 class="footer-widget-title">Custom Links</h3>
+                        <h3 class="footer-widget-title">{{$lang['links']}}</h3>
                         <div class="menu-custom-links-container">
                             <ul id="menu-custom-links" class="menu">
-                                <li id="menu-item-88"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-88">
-                                    <a href="#">Legal Notice</a>
+
+                                <li id="menu-item-459"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+                                    <a href="{{url('/')}}">{{$lang['home']}}</a>
                                 </li>
-                                <li id="menu-item-89"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-89">
-                                    <a href="#">Prices Drop</a>
+
+                                <li id="menu-item-459"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+                                    <a href="{{url('/about')}}">{{$lang['about']}}</a>
                                 </li>
-                                <li id="menu-item-90"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-90">
-                                    <a href="#">New Products</a>
+
+                                <li id="menu-item-459"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+                                    <a href="shop2.html">{{$lang['products']}}</a>
                                 </li>
-                                <li id="menu-item-91"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-91">
-                                    <a href="#">Best Sales</a>
+
+                                <li id="menu-item-459"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+                                    <a href="service.html">{{$lang['services']}}</a>
                                 </li>
-                                <li id="menu-item-92"
-                                    class="menu-item menu-item-type-custom menu-item-object-custom menu-item-92">
-                                    <a href="#">Login</a>
+
+                                <li id="menu-item-459"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+                                    <a href="blog.html">{{$lang['blogs']}}</a>
                                 </li>
-                                <li id="menu-item-93"
-                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-93">
-                                    <a href="my-account/index.html">My account</a>
+
+
+
+
+                                <li id="menu-item-490"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-490">
+                                    <a href="{{url('/contact')}}">{{$lang['contact']}}</a>
                                 </li>
+                                <li id="menu-item-459"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+
+                                </li>
+
+
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6 wow fadeInUp" data-wow-delay="800ms" data-wow-duration="800ms">
+                <div class="offset-xl-1 col-xl-1 col-md-6 wow fadeInUp d-flex justify-content-xl-center justify-content-start"
+                    data-wow-delay="400ms" data-wow-duration="800ms">
+
+                </div>
+                <div class="col-xl-4 col-md-6 wow fadeInUp" data-wow-delay="800ms" data-wow-duration="800ms">
                     <div id="text-4" class="footer-widget widget_text">
-                        <h3 class="footer-widget-title">Newsletter</h3>
+                        <h3 class="footer-widget-title">{{$lang['newsletter']}}</h3>
                         <div class="textwidget">
-                            <p>You may unsubscribe at any moment. For that purpose, please find our contact.</p>
+                            <p>{{$lang['info_desc']}}</p>
                         </div>
                     </div>
                     <div id="text-5" class="footer-widget widget_text">
                         <div class="textwidget">
                             <div class='fluentform fluentform_wrapper_2'>
-                                <form data-form_id="2" id="fluentform_2"
+                                <form
                                     class="frm-fluent-form fluent_form_2 ff-el-form-top ff_form_instance_2_1 ff-form-loading"
-                                    data-form_instance="ff_form_instance_2_1" method="POST">
+                                    data-form_instance="ff_form_instance_2_1" action="{{url('/subscription')}}"
+                                    method="POST" id="form_sub">
+                                    @csrf
                                     <fieldset style="border: none!important;margin: 0!important;padding: 0!important;background-color: transparent!important;
                          box-shadow: none!important;outline: none!important;">
-                                        <legend class="ff_screen_reader_title"
-                                            style="margin: 0!important;padding: 0!important;height: 0!important;text-indent: -999999px;width: 0!important;">
-                                            Footer Newsletter</legend><input type='hidden'
-                                            name='__fluent_form_embded_post_id' value='63' /><input type="hidden"
-                                            id="_fluentform_2_fluentformnonce" name="_fluentform_2_fluentformnonce"
-                                            value="c7625a62ad" /><input type="hidden" name="_wp_http_referer"
-                                            value="/demo/wordpress/themes/medimall/" />
-                                        <div data-name="ff_cn_id_1"
-                                            class='ff-t-container ff-column-container ff_columns_total_2  '>
-                                            <div class='ff-t-cell ff-t-column-1' style='flex-basis: 50%;'></div>
-                                            <div class='ff-t-cell ff-t-column-2' style='flex-basis: 50%;'></div>
-                                        </div>
+
                                         <div data-name="ff_cn_id_2"
                                             class='ff-t-container ff-column-container ff_columns_total_1  '>
                                             <div class='ff-t-cell ff-t-column-1' style='flex-basis: 100%;'>
                                                 <div class='ff-el-group rt-subs-group'>
-                                                    <div class='ff-el-input--content'><input type="email" name="email"
-                                                            id="ff_2_email" class="ff-el-form-control rt-form-control"
+                                                    <div class='ff-el-input--content'>
+                                                        <input type="email" name="email" id="ff_2_email"
+                                                            class="ff-el-form-control rt-form-control"
                                                             placeholder="Enter your mail" data-name="email"
-                                                            aria-invalid="false" aria-required=true></div>
+                                                            aria-invalid="false" aria-required=true>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +178,7 @@
                                                     <button
                                                         class="ff-btn ff-btn-submit ff-btn-md rt-submit-btn-1 ff_btn_style wpf_has_custom_css"
                                                         type="submit" name="custom_submit_button-2_1"
-                                                        data-name="custom_submit_button-2_1">Submit Now</button>
+                                                        data-name="custom_submit_button-2_1">{{$lang['submit']}}</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -173,14 +205,11 @@
                     <div class="row gutter-15">
                         <div class="col-md-6 wow fadeInUp text-center" data-wow-delay="200ms" data-wow-duration="800ms">
                             <p class="copy-text mb-0">2023 &copy; all right reserved by <a target="_blank"
-                                    rel="nofollow" href="#">RadiusTheme</a></p>
+                                    rel="nofollow" href="#">New Space Technology</a></p>
                         </div>
                         <div class="col-md-6 wow fadeInUp text-center text-xl-end" data-wow-delay="400ms"
                             data-wow-duration="800ms">
-                            <div class="payments">
-                                <img width='286' height='23' src='wp-content/themes/medimall/assets/img/payments.png'
-                                    alt='Medimall'>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -188,3 +217,5 @@
         </div>
     </div>
 </footer>
+
+

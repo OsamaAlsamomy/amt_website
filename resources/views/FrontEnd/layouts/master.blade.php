@@ -14,7 +14,7 @@
     @php
     $company = DB::table('company')->first();
     $setting = DB::table('sittings')->first();
-    
+
     @endphp
 
     @if($setting->view_lang == 'ar')
@@ -49,7 +49,35 @@
             font-family: changa;
         }
     </style>
+    @php
+    $lang = [
+        'home' =>'الرئيسية',
+        'about' => 'عن الشركة',
+        'products' => 'منتجاتنا',
+        'services' => 'خدماتنا',
+        'blogs' => 'المدونة',
+        'contact' => 'تواصل معنا',
+        'fallow' => 'تابعنا على',
+        'serch_product' => '... البحث عن منتجات',
+        'all' => 'كل الأقسام',
+    ];
+    @endphp
+    @else
+    @php
+    $lang = [
+        'home' =>'Home',
+        'about' => 'ABOUT US',
+        'products' => 'OUR PRODUCTS',
+        'services' => 'SERVICES',
+        'blogs' => 'BLOGS',
+        'contact' => 'CONTACT',
+        'fallow' => 'Follow Us On',
+        'serch_product' => 'Search For Products ...',
+        'all' => 'All Sections',
+    ];
+    @endphp
     @endif
+    <title>{{$company->name}} - @yield('title')</title>
     @include('FrontEnd.layouts.header')
 
 </head>

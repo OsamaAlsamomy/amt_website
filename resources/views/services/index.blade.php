@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('css')
-    <link rel="stylesheet" href="{{ URL(asset('build/assets/sweetalert2/sweetalert2.min.css')) }}" />
+<link rel="stylesheet" href="{{ URL(asset('build/assets/sweetalert2/sweetalert2.min.css')) }}" />
 
 @section('title')
 {{ trans('main_trans.services') }}
@@ -18,8 +18,8 @@ bg-success
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb pt-0 pr-0 float-left float-sm-right ">
-                <li class="breadcrumb-item"><a href="#"
-                        class="default-color">{{ trans('main_trans.website_manage') }}</a>
+                <li class="breadcrumb-item"><a href="#" class="default-color">{{ trans('main_trans.website_manage')
+                        }}</a>
                 </li>
                 <li class="breadcrumb-item active">{{ trans('main_trans.services') }}</li>
             </ol>
@@ -56,40 +56,39 @@ bg-success
 
                             @php $i = 1 @endphp
                             @foreach ($data as $key)
-                                <tr>
-                                    <td>{{ $i++ }}</td>
-                                    <td>{{ $key->name }}</td>
+                            <tr>
+                                <td>{{ $i++ }}</td>
+                                <td>{{ $key->name }}</td>
 
 
-                                    <td>
-                                        <label class="switch">
-                                            <input type="checkbox" id="state_check" name="state_check"
-                                                value="{{ $key->id }}"
-                                                @if ($key->state == 1) checked @endif
-                                                onclick="change_state('{{ url(App::getLocale() . '/admin/services/state/' . $key->id) }}' , {{ $key->id }})">
-                                            <span class="slider round"></span>
-                                        </label>
+                                <td>
+                                    <label class="switch">
+                                        <input type="checkbox" id="state_check" name="state_check"
+                                            value="{{ $key->id }}" @if ($key->state == 1) checked @endif
+                                        onclick="change_state('{{ url(App::getLocale() . '/admin/services/state/' .
+                                        $key->id) }}' , {{ $key->id }})">
+                                        <span class="slider round"></span>
+                                    </label>
 
-                                    </td>
-                                    <td>{{ $key->views }}</td>
-                                    <td>{{ $key->created_at }}</td>
-                                    <td>{{ $key->created }}</td>
-                                    <td>
-                                        <button class="btn btn-danger btn-sm pt-2 bx-1"
-                                            title="{{ trans('main_trans.delete') }}" data-toggle="modal"
-                                            data-target="#delete_modal" data-id="{{ $key->id }}"
-                                            data-name="{{ $key->name }}">
-                                            <i class="ti-trash"></i>
-                                        </button>
-                                        <button class="btn btn-info btn-sm pt-2 bx-1"
-                                            title="{{ trans('main_trans.edit') }}" data-toggle="modal"
-                                            data-target="#edit_modal" data-id="{{ $key->id }}"
-                                            data-name="{{ $key->name }}" data-desc="{{ $key->desc }}"
-                                            data-image="{{ url(asset( $key->img)) }}">
-                                            <i class="ti-pencil-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                </td>
+                                <td>{{ $key->views }}</td>
+                                <td>{{ $key->created_at }}</td>
+                                <td>{{ $key->created }}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm pt-2 bx-1"
+                                        title="{{ trans('main_trans.delete') }}" data-toggle="modal"
+                                        data-target="#delete_modal" data-id="{{ $key->id }}"
+                                        data-name="{{ $key->name }}">
+                                        <i class="ti-trash"></i>
+                                    </button>
+                                    <button class="btn btn-info btn-sm pt-2 bx-1" title="{{ trans('main_trans.edit') }}"
+                                        data-toggle="modal" data-target="#edit_modal" data-id="{{ $key->id }}"
+                                        data-name="{{ $key->name }}" data-desc="{{ $key->desc }}"
+                                        data-image="{{ url(asset( $key->img)) }}">
+                                        <i class="ti-pencil-alt"></i>
+                                    </button>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>
                     </table>
@@ -135,7 +134,8 @@ bg-success
                         <div class="col-md-6">
                             <label for="password" class="mr-sm-2">{{ trans('service_trans.serv_img') }}
                                 :</label>
-                            <input id="image" type="file" name="image" class="form-control input_img" accept=".png, .jpg, .jpeg , .svg , .gif" required>
+                            <input id="image" type="file" name="image" class="form-control input_img"
+                                accept=".png, .jpg, .jpeg , .svg , .gif" required>
                             <span class="image-error text-danger"></span>
 
                         </div>
@@ -144,12 +144,13 @@ bg-success
 
                         </div>
                     </div>
-<br>
+                    <br>
                     <div class="row">
                         <div class="col-md-12">
                             <label for="desc" class="mr-sm-2">{{ trans('service_trans.serv_desc') }}
                                 :</label>
-                            <textarea name="desc" id="ck-blog_content" cols="30" rows="10" class=" form-control" required>
+                            <textarea name="desc" id="ck-blog_content" cols="30" rows="10" class=" form-control"
+                                required>
 
                            </textarea>
                             <span class="desc-error text-danger"></span>
@@ -162,8 +163,8 @@ bg-success
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn_close"
-                        data-dismiss="modal">{{ trans('main_trans.cancel') }}</button>
+                    <button type="button" class="btn btn-secondary btn_close" data-dismiss="modal">{{
+                        trans('main_trans.cancel') }}</button>
                     <button type="submit" class="btn btn-success">{{ trans('main_trans.save') }}</button>
                 </div>
             </form>
@@ -173,8 +174,8 @@ bg-success
 </div>
 
 {{-- Edit user Modale --}}
-<div class="modal fade bd-example-modal-lg" id="edit_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    data-keyboard="false" data-backdrop="static" aria-hidden="false">
+<div class="modal fade bd-example-modal-lg" id="edit_modal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" data-keyboard="false" data-backdrop="static" aria-hidden="false">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -191,7 +192,7 @@ bg-success
                 <div class="modal-body">
 
                     @csrf
-                    <input type="hidden" name="id" id="ed_id" required readonly >
+                    <input type="hidden" name="id" id="ed_id" required readonly>
                     <span class="id-error text-danger"></span>
 
                     <div class="row">
@@ -208,7 +209,8 @@ bg-success
                         <div class="col-md-6">
                             <label for="image" class="mr-sm-2">{{ trans('service_trans.serv_img') }}
                                 :</label>
-                            <input id="ed_image" type="file" name="image" class="form-control ed_input_img" accept=".png, .jpg, .jpeg , .svg , .gif" >
+                            <input id="ed_image" type="file" name="image" class="form-control ed_input_img"
+                                accept=".png, .jpg, .jpeg , .svg , .gif">
                             <span class="image-error text-danger"></span>
 
                         </div>
@@ -235,8 +237,8 @@ bg-success
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn_close"
-                        data-dismiss="modal">{{ trans('main_trans.cancel') }}</button>
+                    <button type="button" class="btn btn-secondary btn_close" data-dismiss="modal">{{
+                        trans('main_trans.cancel') }}</button>
                     <button type="submit" class="btn btn-success">{{ trans('main_trans.save') }}</button>
                 </div>
             </form>
@@ -269,8 +271,8 @@ bg-success
                     <h2 id="de_title"></h2>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary"
-                    data-dismiss="modal">{{ trans('main_trans.cancel') }}</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ trans('main_trans.cancel')
+                    }}</button>
                 <button type="submit" class="btn btn-danger">{{ trans('main_trans.delete') }}</button>
             </div>
             </form>

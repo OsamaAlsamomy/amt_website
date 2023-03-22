@@ -1,4 +1,5 @@
-<title>@yield('title')</title>
+
+<title>{{$company->name}} - @yield('title')</title>
 
 <link rel='stylesheet' id='elementor-frontend-css'
     href='{{url(asset('build/wp-content/plugins/elementor/assets/css/frontend.minf416.css?ver=3.11.0'))}}' media='all' />
@@ -76,3 +77,4 @@
 <link rel="icon" href="{{url(asset($company->icon))}}" sizes="32x32" />
 <link rel="icon" href="{{url(asset($company->icon))}}" sizes="192x192" />
 <link rel="apple-touch-icon" href="{{url(asset($company->icon))}}" />
+<link rel="stylesheet" href="{{ URL(asset('build/assets/sweetalert2/sweetalert2.min.css')) }}" />

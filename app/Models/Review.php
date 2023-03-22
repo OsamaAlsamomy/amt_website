@@ -11,7 +11,8 @@ class Review extends Model
     protected $table = 'customer_review';
     protected $fillable = [
         'name',
-        'Adjective',
+        'logo',
+        'adjective',
         'review',
         'state',
         'created_by',

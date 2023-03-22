@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-6 align-self-end">
                     <ul class="rt-social style-1 d-flex  align-items-center justify-content-end flex-wrap">
-                        <li class="social-title">Follow Us On</li>
+                        <li class="social-title">{{$lang['fallow']}}</li>
 
                         @php
                         $social = DB::table('socialmedia')->where('state',1)->get();
@@ -61,7 +61,7 @@
 
                         <div class="logo">
                             <a href="index.html" class="logo logo-dark">
-                                <img width='227' height='51' src='{{url(asset($company->logo))}}' alt='Medimall'>
+                                <img width='227' height='51' src='{{url(asset($company->logo))}}' alt='{{$company->name}}'>
                             </a>
                         </div>
                     </div>
@@ -76,30 +76,19 @@
                                             <div class="dropdown">
                                                 <input type="hidden" name="product_cat" value="">
                                                 <div class="cat-btn-wrap">
+
                                                     <button class="rt-btn-3 w-100 cat-toggle" type="button"
                                                         id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
-                                                        <span class="cat-label">Categories</span>
+                                                        <span class="cat-label">{{$lang['all']}}</span>
                                                         <span class="icon"><i class="fas fa-angle-down"></i></span>
                                                     </button>
                                                     <ul class="dropdown-menu rt-drop-menu style-1"
                                                         aria-labelledby="dropdownMenuButton1">
-                                                        <li data-slug="">Categories</li>
-                                                        <li data-slug="accessories"><span>Accessories</span>
-                                                        </li>
-                                                        <li data-slug="blood-pressure"><span>Blood
-                                                                Pressure</span></li>
-                                                        <li data-slug="equipments"><span>Equipments</span></li>
-                                                        <li data-slug="hand-gloves"><span>Hand Gloves</span>
-                                                        </li>
-                                                        <li data-slug="medicine"><span>Medicine</span></li>
-                                                        <li data-slug="medkits"><span>Medkits</span></li>
-                                                        <li data-slug="nutritions"><span>Nutritions</span></li>
-                                                        <li data-slug="pharmacy"><span>Pharmacy</span></li>
-                                                        <li data-slug="safety-guard"><span>Safety Guard</span>
-                                                        </li>
-                                                        <li data-slug="surgical-mask"><span>Surgical Mask</span>
-                                                        </li>
+                                                        @foreach ( DB::table('sections')->select(['id','name'])->get() as $key )
+                                                        <li data-slug="">{{$key->name}}</li>
+                                                        @endforeach
+
                                                     </ul>
                                                 </div>
                                             </div>
@@ -107,8 +96,8 @@
                                         <li class="item rt-advanced-search-1 flex-grow-1">
                                             <div class="rt-input-group">
                                                 <input type="text" autocomplete="off" name="s"
-                                                    class="form-control search-form product-search-input product-autocomplete-js search_input"
-                                                    placeholder="Search For Products ..." value="">
+                                                    class="form-control search-form product-search-input product-autocomplete-js search_input "
+                                                    placeholder="{{$lang['serch_product']}}" value="">
                                                 <div class="input-group-append">
                                                     <button class="search-btn"><i class="fas fa-search"></i></button>
                                                 </div>
@@ -138,27 +127,27 @@
 
                                     <li id="menu-item-459"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                        <a href="{{url('/')}}">Home</a>
+                                        <a href="{{url('/')}}">{{$lang['home']}}</a>
                                     </li>
 
                                     <li id="menu-item-459"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                        <a href="{{url('/about')}}">About Us</a>
+                                        <a href="{{url('/about')}}">{{$lang['about']}}</a>
                                     </li>
 
                                     <li id="menu-item-459"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                        <a href="shop2.html">Our Products</a>
+                                        <a href="{{url('/products')}}">{{$lang['products']}}</a>
                                     </li>
 
                                     <li id="menu-item-459"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                        <a href="service.html">Services</a>
+                                        <a href="service.html">{{$lang['services']}}</a>
                                     </li>
 
                                     <li id="menu-item-459"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                        <a href="blog.html">Blogs</a>
+                                        <a href="blog.html">{{$lang['blogs']}}</a>
                                     </li>
 
 
@@ -166,8 +155,12 @@
 
                                     <li id="menu-item-490"
                                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-490">
-                                        <a href="{{url('/contact')}}">Contact</a>
+                                        <a href="{{url('/contact')}}">{{$lang['contact']}}</a>
                                     </li>
+                                    <li id="menu-item-459"
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+
+                                </li>
                                 </ul>
                             </nav>
                         </div>
@@ -186,7 +179,7 @@
 
                         <div class="logo">
                             <a href="index.html" class="logo logo-light">
-                                <img width='227' height='51' src='{{url(asset($company->icon))}}' alt='Medimall'
+                                <img width='227' height='51' src='{{url(asset($company->icon))}}' alt='{{$company->name}}'
                                     class="p-1">
                             </a>
                         </div>
@@ -196,27 +189,27 @@
                             <ul id="menu-main-menu-1" class="menu">
                                 <li id="menu-item-459"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="index.html">Home</a>
+                                    <a href="{{url('/')}}">{{$lang['home']}}</a>
                                 </li>
 
                                 <li id="menu-item-459"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="about.html">About Us</a>
+                                    <a href="{{url('/about')}}">{{$lang['about']}}</a>
                                 </li>
 
                                 <li id="menu-item-459"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="shop2.html">Our Products</a>
+                                    <a href="{{url('/products')}}">{{$lang['products']}}</a>
                                 </li>
 
                                 <li id="menu-item-459"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="service.html">Services</a>
+                                    <a href="service.html">{{$lang['services']}}</a>
                                 </li>
 
                                 <li id="menu-item-459"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="blog.html">Blogs</a>
+                                    <a href="blog.html">{{$lang['blogs']}}</a>
                                 </li>
 
 
@@ -224,7 +217,7 @@
 
                                 <li id="menu-item-490"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-490">
-                                    <a href="contact.html">Contact</a>
+                                    <a href="{{url('/contact')}}">{{$lang['contact']}}</a>
                                 </li>
                             </ul>
                         </nav>
@@ -263,7 +256,7 @@
         <div class="mean-bar">
             <div class="logo">
                 <a href="index.html">
-                    <img width='227' height='51' src='{{url(asset($company->logo))}}' alt='Medimall'> </a>
+                    <img width='227' height='51' src='{{url(asset($company->logo))}}' alt='{{$company->name}}'> </a>
             </div>
 
             <span class="sidebarBtn">
@@ -278,27 +271,27 @@
                 <ul id="menu-main-menu-2" class="menu">
                     <li id="menu-item-459"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="index.html">Home</a>
+                        <a href="{{url('/')}}">{{$lang['home']}}</a>
                     </li>
 
                     <li id="menu-item-459"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="about.html">About Us</a>
+                        <a href="{{url('/about')}}">{{$lang['about']}}</a>
                     </li>
 
                     <li id="menu-item-459"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="shop2.html">Our Products</a>
+                        <a href="{{url('/products')}}">{{$lang['products']}}</a>
                     </li>
 
                     <li id="menu-item-459"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="service.html">Services</a>
+                        <a href="service.html">{{$lang['services']}}</a>
                     </li>
 
                     <li id="menu-item-459"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="blog.html">Blogs</a>
+                        <a href="blog.html">{{$lang['blogs']}}</a>
                     </li>
 
 
@@ -306,7 +299,7 @@
 
                     <li id="menu-item-490"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-490">
-                        <a href="contact.html">Contact</a>
+                        <a href="{{url('/contact')}}">{{$lang['contact']}}</a>
                     </li>
                 </ul>
             </div>

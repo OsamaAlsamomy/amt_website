@@ -13,6 +13,10 @@ class PhnemailController extends Controller
 {
     public function index()
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         $data = Phnemail::all();
         foreach ($data as $key) {
             if ($key->created_by != null) {
@@ -29,6 +33,10 @@ class PhnemailController extends Controller
     // Change phone or email state
     public function change_state(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         try {
             $exist = Phnemail::find($req->id);
             if($exist){
@@ -58,6 +66,10 @@ class PhnemailController extends Controller
     // Edite phone or email data
     public function update(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         $validator = Validator::make($req->all(), [
             'name' => 'required',
             'id' => 'required|integer',

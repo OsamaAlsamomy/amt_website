@@ -11,64 +11,80 @@ use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
+
+    public function permations()
+    {
+    }
+
+
     // show all users
     public function index()
     {
+        if (Auth::user()->type != 'S') {
+            return redirect()->back();
+        }
+
         $data = User::all();
-        foreach($data as $key){
-            if($key->created_by != null){
+        foreach ($data as $key) {
+            if ($key->created_by != null) {
                 $user = User::select('name')->find($key->created_by);
                 $key->created =  $user->name;
-            }else{
+            } else {
                 $key->created = '';
             }
-
         }
         return view('users.index', compact('data'));
     }
 
     public function show()
     {
+        if (Auth::user()->type != 'S') {
+            return redirect()->back();
+        }
+
+
         $data = User::all();
-        foreach($data as $key){
-            if($key->created_by != null){
+        foreach ($data as $key) {
+            if ($key->created_by != null) {
                 $user = User::select('name')->find($key->created_by);
                 $key->created =  $user->name;
-            }else{
+            } else {
                 $key->created = '';
             }
-
         }
         return $data;
     }
 
-    
+
 
 
     // Change user state
     public function change_state(Request $req)
     {
+        if (Auth::user()->type != 'S') {
+            return redirect()->back();
+        }
+
         try {
             $exist = User::find($req->id);
-            if($exist){
-                if($exist->state == 1){
+            if ($exist) {
+                if ($exist->state == 1) {
                     $state = 0;
-                }else{
+                } else {
                     $state = 1;
                 }
                 $done = User::find($req->id)->update([
                     'state' => $state
                 ]);
-                if($done){
+                if ($done) {
                     $data = $this->show();
-                    return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success'),'data' => $data]);
-                }else{
+                    return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success'), 'data' => $data]);
+                } else {
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
                 }
-            }else{
+            } else {
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
             }
-
         } catch (Exception $ex) {
             return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
         }
@@ -78,6 +94,10 @@ class UsersController extends Controller
     // Create new user
     public function store(Request $req)
     {
+        if (Auth::user()->type != 'S') {
+            return redirect()->back();
+        }
+
         $validator = Validator::make($req->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -113,11 +133,11 @@ class UsersController extends Controller
                 'password' => Hash::make($req->password),
                 'type' => $req->roll,
                 'created_by' => Auth::user()->id,
-                'updated_by' =>Auth::user()->id
+                'updated_by' => Auth::user()->id
             ]);
-            if($done){
-                return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success'),'text' => trans('err_msg_trans.refresh_update')]);
-            }else{
+            if ($done) {
+                return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success'), 'text' => trans('err_msg_trans.refresh_update')]);
+            } else {
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
             }
         } catch (Exception $ex) {
@@ -129,10 +149,14 @@ class UsersController extends Controller
     // Edite user data
     public function update(Request $req)
     {
+        if (Auth::user()->type != 'S') {
+            return redirect()->back();
+        }
+
         $validator = Validator::make($req->all(), [
             'id' => 'required|integer',
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$req->id,
+            'email' => 'required|email|unique:users,email,' . $req->id,
             'password' => 'confirmed',
             'roll' => 'required|min:1|max:1'
         ], [
@@ -161,10 +185,10 @@ class UsersController extends Controller
 
         try {
             $exist = User::find($req->id);
-            if($exist){
-                if($req->password == null){
+            if ($exist) {
+                if ($req->password == null) {
                     $pass = $exist->password;
-                }else{
+                } else {
                     $pass = Hash::make($req->password);
                 }
                 $done = User::find($req->id)->update([
@@ -172,27 +196,29 @@ class UsersController extends Controller
                     'email' => $req->email,
                     'password' => $pass,
                     'type' => $req->roll,
-                    'updated_by' =>Auth::user()->id
+                    'updated_by' => Auth::user()->id
                 ]);
-                if($done){
+                if ($done) {
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
-                }else{
+                } else {
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
                 }
-            }else{
+            } else {
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
             }
-
         } catch (Exception $ex) {
             return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
         }
-
     }
 
 
     // Delete user
     public function destroy(Request $req)
     {
+        if (Auth::user()->type != 'S') {
+            return redirect()->back();
+        }
+
         $validator = Validator::make($req->all(), [
             'id' => 'required|integer',
         ], [
@@ -206,20 +232,59 @@ class UsersController extends Controller
 
         try {
             $exist = User::find($req->id);
-            if($exist){
+            if ($exist) {
                 $done = User::find($req->id)->delete();
-                if($done){
+                if ($done) {
                     return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
-                }else{
+                } else {
                     return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
                 }
-            }else{
+            } else {
                 return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
             }
+        } catch (Exception $ex) {
+            return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
+        }
+    }
 
+    public function change_password(Request $req)
+    {
+
+        $validator = Validator::make($req->all(), [
+            'old_pass' => 'required',
+            'password' => 'required|confirmed|min:6',
+            'password_confirmation' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
+        }
+
+        try {
+            $exist = User::find(Auth::user()->id);
+            $check = Hash::check($req->old_pass, Auth::user()->password);
+            $check_new = Hash::check($req->password, Auth::user()->password);
+
+            if (!$check) {
+                return response()->json(['status' => 2, 'error' => trans('err_msg_trans.old_pass')]);
+            }
+            if($check_new){
+                return response()->json(['status' => 2, 'error' => trans('err_msg_trans.new_pass')]);
+            }
+            if ($exist) {
+                $done = User::find(Auth::user()->id)->update([
+                    'password' => Hash::make($req->password)
+                ]);
+                if ($done) {
+                    return response()->json(['status' => 1, 'success' => trans('err_msg_trans.global_success')]);
+                } else {
+                    return response()->json(['status' => 2, 'error' => trans('err_msg_trans.global_error')]);
+                }
+            } else {
+                return response()->json(['status' => 2, 'error' => trans('err_msg_trans.id_req')]);
+            }
         } catch (Exception $ex) {
             return response()->json(['status' => 2, 'error' => $ex->getMessage()]);
         }
     }
 }
-

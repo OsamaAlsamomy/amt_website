@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('email');
             $table->string('name');
+            $table->string('phone');
             $table->string('subject');
             $table->text('message');
             $table->boolean('read')->default(0);
@@ -28,6 +29,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('messages');
-        
+
     }
 };

@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('customer_review', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('Adjective')->nullable();
+            $table->string('name');
+            $table->string('logo')->nullable();
+            $table->string('adjective')->nullable();
             $table->text('review');
             $table->boolean('state')->default(1);
             $table->unsignedBigInteger('created_by');

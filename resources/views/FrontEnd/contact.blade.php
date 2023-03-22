@@ -1,4 +1,63 @@
 @extends('FrontEnd.layouts.master')
+@php
+$company = DB::table('company')->first();
+$setting = DB::table('sittings')->first();
+$add = DB::table('adds')->first();
+
+@endphp
+
+@if($setting->view_lang == 'ar')
+
+@php
+$lang = [
+    'home' =>'الرئيسية',
+    'about' => 'عن الشركة',
+    'products' => 'منتجاتنا',
+    'services' => 'خدماتنا',
+    'blogs' => 'المدونة',
+    'contact' => 'تواصل معنا',
+    'fallow' => 'تابعنا على',
+    'serch_product' => '... البحث عن منتجات',
+    'all' => 'كل الأقسام',
+    'info' => 'معلومات الاتصال',
+    'info_con' => 'يمكنك التواصل معنا عبر وسائل التواصل المتاحة في الأسفل او قم بإرسال رسالة لنا عبر الفورم في الأسفل وسيتم الرد عليك فيما لايقل عن 24 ساعة',
+    'address' => 'العنوان',
+    'have' => 'هل لديك أي اقتراح أو استفسارات؟',
+    'sure' => 'تأكد من كتابة بياناتك بشكل صحيح لكي نستطيع الرد عليك بأسرع وقت',
+    'submit' => 'أرسل الآن',
+];
+@endphp
+@else
+@php
+$lang = [
+    'home' =>'Home',
+    'about' => 'ABOUT US',
+    'products' => 'OUR PRODUCTS',
+    'services' => 'SERVICES',
+    'blogs' => 'BLOGS',
+    'contact' => 'CONTACT',
+    'fallow' => 'Follow Us On',
+    'serch_product' => 'Search For Products ...',
+    'all' => 'All Sections',
+    'info' => 'Contact Information',
+    'info_con' => 'You can contact us via the means of communication available below, or send us a message via the form below, and we will respond to you within no less than 24 hours',
+    'address' => 'Address',
+    'have' => 'Have You any Suggestion or Queries?',
+    'sure' => 'Make sure to enter your information correctly so that we can respond to you as soon as possible',
+    'submit' => 'Submit Now',
+
+
+
+];
+@endphp
+@endif
+
+
+@section('title')
+{{$lang['contact']}}
+@endsection
+
+
 
 @section('content')
 
@@ -20,15 +79,15 @@ $setting = DB::table('sittings')->first();
 
         </ul>
         <div class="container">
-            <h2 class="banner-title">Contact</h2>
+            <h2 class="banner-title">{{$lang['contact']}}</h2>
             <div class="main-breadcrumb">
                 <!-- Breadcrumb NavXT 7.2.0 -->
                 <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage"
-                        title="Go to Medimall." href="https://radiustheme.com/demo/wordpress/themes/medimall"
-                        class="home"><span property="name">Home</span></a>
+                        title="Go to Medimall." href="{{url('/')}}"
+                        class="home"><span property="name">{{$lang['home']}}</span></a>
                     <meta property="position" content="1">
-                </span><span class="dvdr"> - </span><span property="itemListElement" typeof="ListItem"><span
-                        property="name" class="post post-page current-item">Contact</span>
+                </span><span class="dvdr">  <i class="fas fa-angle-left"></i> </span><span property="itemListElement" typeof="ListItem"><span
+                        property="name" class="post post-page current-item">{{$lang['contact']}}</span>
                     <meta property="url" content="https://radiustheme.com/demo/wordpress/themes/medimall/contact/">
                     <meta property="position" content="2">
                 </span>
@@ -73,7 +132,7 @@ $setting = DB::table('sittings')->first();
                                             data-widget_type="heading.default">
                                             <div class="elementor-widget-container">
                                                 <h2 class="elementor-heading-title elementor-size-default">
-                                                    Contact Information</h2>
+                                                    {{$lang['info']}}</h2>
                                             </div>
                                         </div>
                                         <div class="elementor-element elementor-element-6e60f6df elementor-widget elementor-widget-text-editor"
@@ -81,9 +140,7 @@ $setting = DB::table('sittings')->first();
                                             data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-text-editor elementor-clearfix">
-                                                    <p>Mestibulum libero nisl, porta vel, scelerisque eget,
-                                                        malesuada at neque. wivamus eget nibhm cursleo vel
-                                                        metus.</p>
+                                                    <p>{{$lang['info_con']}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -95,18 +152,17 @@ $setting = DB::table('sittings')->first();
 
                                                 <div class="contact-list style-1">
                                                     <div class="single-item">
-                                                        <h4 class="title">New York City</h4>
+                                                        <h4 class="title">{{$lang['address']}}</h4>
                                                         <div
                                                             class="between-box d-flex align-items-center justify-content-between gap-2 gap-md-5 flex-wrap">
                                                             <div class="con-info-1">
                                                                 <span>{{$company->address}}</span>
                                                             </div>
                                                             <div class="con-info-2">
-                                                                <span>
-                                                                    <a class="d-block"
-                                                                        href="mailto:{{$setting->contact_mail}}">{{$setting->contact_mail}}</a>
-                                                                    <a class="d-block" href="tel:{{$setting->contact_phone}}">{{$setting->contact_phone}}</a>
-                                                                </span>
+
+                                                                    <a style="width: 100%" href="mailto:{{$setting->contact_mail}}" class="rt-btn-7 mb-2">{{$setting->contact_mail}}<i class="fas fa-at icon"></i></a>
+                                                                    <a style="width: 100%" href="tel:{{$setting->contact_phone}}" class="rt-btn-4">{{$setting->contact_phone}}<i class="fas fa-phone icon"></i></a>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -120,11 +176,9 @@ $setting = DB::table('sittings')->first();
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-image">
                                                     <img decoding="async" width="265" height="265"
-                                                        src="wp-content/uploads/2022/06/element_26.png"
+                                                        src="{{url(asset($add->add5))}}"
                                                         class="attachment-full size-full wp-image-494 wp-post-image"
-                                                        alt="" loading="lazy"
-                                                        srcset="https://radiustheme.com/demo/wordpress/themes/medimall/wp-content/uploads/2022/06/element_26.png 265w, https://radiustheme.com/demo/wordpress/themes/medimall/wp-content/uploads/2022/06/element_26-150x150.png 150w"
-                                                        sizes="(max-width: 265px) 100vw, 265px" />
+                                                        alt=""  />
                                                 </div>
                                             </div>
                                         </div>
@@ -148,8 +202,7 @@ $setting = DB::table('sittings')->first();
                                             data-id="2b316716" data-element_type="widget"
                                             data-widget_type="heading.default">
                                             <div class="elementor-widget-container">
-                                                <h2 class="elementor-heading-title elementor-size-default">Have
-                                                    You any Suggestion or Queries?</h2>
+                                                <h2 class="elementor-heading-title elementor-size-default">{{$lang['have']}}</h2>
                                             </div>
                                         </div>
                                         <div class="elementor-element elementor-element-cc07394 elementor-widget elementor-widget-text-editor"
@@ -157,9 +210,7 @@ $setting = DB::table('sittings')->first();
                                             data-widget_type="text-editor.default">
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-text-editor elementor-clearfix">
-                                                    <p>Mestibulum libero nisl, porta vel, scelerisque eget,
-                                                        malesuada at neque wivamus eget nibhm cursleo vel metus.
-                                                    </p>
+                                                    <p>{{$lang['sure']}}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -173,32 +224,26 @@ $setting = DB::table('sittings')->first();
 
 
                                                     <div class='fluentform fluentform_wrapper_1'>
-                                                        <form data-form_id="1" id="fluentform_1"
+
+
+
+                                                        <form data-form_id="1" id="form_message" style="z-index: 1000"
                                                             class="frm-fluent-form fluent_form_1 ff-el-form-top ff_form_instance_1_1 ff-form-loading"
-                                                            data-form_instance="ff_form_instance_1_1" method="POST">
+                                                            action="{{url('send/message')}}" method="POST">
                                                             <fieldset style="border: none!important;margin: 0!important;padding: 0!important;background-color: transparent!important;
-                             box-shadow: none!important;outline: none!important;">
-                                                                <legend class="ff_screen_reader_title"
-                                                                    style="margin: 0!important;padding: 0!important;height: 0!important;text-indent: -999999px;width: 0!important;">
-                                                                    Contact Form</legend><input type='hidden'
-                                                                    name='__fluent_form_embded_post_id'
-                                                                    value='486' /><input type="hidden"
-                                                                    id="_fluentform_1_fluentformnonce"
-                                                                    name="_fluentform_1_fluentformnonce"
-                                                                    value="c7625a62ad" /><input type="hidden"
-                                                                    name="_wp_http_referer"
-                                                                    value="/demo/wordpress/themes/medimall/contact/" />
+                                                                            box-shadow: none!important;outline: none!important;">
+
                                                                 <div data-name="ff_cn_id_1"
                                                                     class='ff-t-container ff-column-container ff_columns_total_2  '>
+                                                                    @csrf
                                                                     <div class='ff-t-cell ff-t-column-1'
                                                                         style='flex-basis: 50%;'>
                                                                         <div class='ff-el-group form-group'>
                                                                             <div class='ff-el-input--content'>
                                                                                 <input type="text" name="name"
                                                                                     class="ff-el-form-control form-control rt-form-control"
-                                                                                    placeholder="Name" data-name="name"
-                                                                                    id="ff_1_name" aria-invalid="false"
-                                                                                    aria-required=true>
+                                                                                    placeholder="Name" required>
+                                                                                <span id="error-name" class="text-danger"></span>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -210,9 +255,9 @@ $setting = DB::table('sittings')->first();
                                                                                     id="ff_1_email"
                                                                                     class="ff-el-form-control form-control rt-form-control"
                                                                                     placeholder="E-mail"
-                                                                                    data-name="email"
-                                                                                    aria-invalid="false"
-                                                                                    aria-required=true>
+                                                                                   required>
+                                                                                <span id="error-email" class="text-danger"></span>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -226,9 +271,9 @@ $setting = DB::table('sittings')->first();
                                                                                 <input type="text" name="phone"
                                                                                     class="ff-el-form-control form-control rt-form-control"
                                                                                     placeholder="Phone"
-                                                                                    data-name="phone" id="ff_1_phone"
-                                                                                    aria-invalid="false"
-                                                                                    aria-required=true>
+                                                                                   required>
+                                                                                <span id="error-phone" class="text-danger"></span>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -239,31 +284,34 @@ $setting = DB::table('sittings')->first();
                                                                                 <input type="text" name="subject"
                                                                                     class="ff-el-form-control form-control rt-form-control"
                                                                                     placeholder="Subject"
-                                                                                    data-name="subject"
-                                                                                    id="ff_1_subject"
-                                                                                    aria-invalid="false"
-                                                                                    aria-required=true>
+                                                                                    required>
+                                                                                <span id="error-subject" class="text-danger"></span>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class='ff-el-group form-group'>
-                                                                    <div class='ff-el-input--content'><textarea
-                                                                            aria-invalid="false" aria-required=true
-                                                                            name="message" id="ff_1_message"
+                                                                    <div class='ff-el-input--content'>
+                                                                        <textarea name="message" id="ff_1_message"
                                                                             class="ff-el-form-control form-control rt-form-control rt-textarea"
                                                                             placeholder="Comment" rows="4" cols="2"
-                                                                            data-name="message"></textarea>
+                                                                            ></textarea>
+                                                                        <span id="error-message" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
                                                                 <div
                                                                     class='ff-el-group ff-text-left ff_submit_btn_wrapper'>
                                                                     <button type="submit"
-                                                                        class="ff-btn ff-btn-submit ff-btn-md submit-btn ff_btn_style wpf_has_custom_css">Submit
-                                                                        Now</button>
+                                                                        class="ff-btn ff-btn-submit ff-btn-md submit-btn ff_btn_style wpf_has_custom_css">{{$lang['submit']}}</button>
                                                                 </div>
                                                             </fieldset>
                                                         </form>
+
+
+
+
+
                                                         <div id='fluentform_1_errors'
                                                             class='ff-errors-in-stack ff_form_instance_1_1 ff-form-loading_errors ff_form_instance_1_1_errors'>
                                                         </div>
@@ -275,21 +323,7 @@ $setting = DB::table('sittings')->first();
 
                                             </div>
                                         </div>
-                                        <div class="elementor-element elementor-element-76d17067 elementor-absolute elementor-hidden-tablet elementor-hidden-mobile elementor-widget elementor-widget-image"
-                                            data-id="76d17067" data-element_type="widget"
-                                            data-settings="{&quot;_position&quot;:&quot;absolute&quot;}"
-                                            data-widget_type="image.default">
-                                            <div class="elementor-widget-container">
-                                                <div class="elementor-image">
-                                                    <img decoding="async" width="380" height="242"
-                                                        src="wp-content/uploads/2022/06/element_27.png"
-                                                        class="attachment-full size-full wp-image-495 wp-post-image"
-                                                        alt="" loading="lazy"
-                                                        srcset="https://radiustheme.com/demo/wordpress/themes/medimall/wp-content/uploads/2022/06/element_27.png 380w, https://radiustheme.com/demo/wordpress/themes/medimall/wp-content/uploads/2022/06/element_27-300x191.png 300w"
-                                                        sizes="(max-width: 380px) 100vw, 380px" />
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -303,11 +337,10 @@ $setting = DB::table('sittings')->first();
                                             <div class="elementor-widget-container">
                                                 <div class="elementor-image">
                                                     <img decoding="async" width="426" height="673"
-                                                        src="wp-content/uploads/2022/06/contact-img_1.png"
+                                                        src="{{url(asset($add->add5))}}"
                                                         class="attachment-full size-full wp-image-497 wp-post-image"
                                                         alt="" loading="lazy"
-                                                        srcset="https://radiustheme.com/demo/wordpress/themes/medimall/wp-content/uploads/2022/06/contact-img_1.png 426w, https://radiustheme.com/demo/wordpress/themes/medimall/wp-content/uploads/2022/06/contact-img_1-190x300.png 190w"
-                                                        sizes="(max-width: 426px) 100vw, 426px" />
+                                                      />
                                                 </div>
                                             </div>
                                         </div>

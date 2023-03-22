@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use Exception;
 use App\Models\Sitting;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class SittingController extends Controller
 {
     public function index()
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         $data = Sitting::first();
         return view('sittings.index', compact('data'));
     }
@@ -18,6 +23,10 @@ class SittingController extends Controller
 
     public function change_site(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         try {
             if($req->val == 1){
                 $val = 0;
@@ -40,6 +49,10 @@ class SittingController extends Controller
 
     public function change_commint(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         try {
             if($req->val == 1){
                 $val = 0;
@@ -62,6 +75,10 @@ class SittingController extends Controller
 
     public function change_email(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         $validator = Validator::make($req->all(), [
             'email' => 'required|email',
 
@@ -92,6 +109,10 @@ class SittingController extends Controller
 
     public function change_phpne(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         $validator = Validator::make($req->all(), [
             'phone' => 'required',
 
@@ -122,6 +143,10 @@ class SittingController extends Controller
 
     public function change_lang(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         try {
             if($req->val == 'ar'){
                 $val = 'en';

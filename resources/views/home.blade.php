@@ -52,17 +52,16 @@
                             <div class="clearfix">
                                 <div class="float-left">
                                     <span class="text-danger">
-                                        <i class="fa fa-bar-chart-o highlight-icon" aria-hidden="true"></i>
+                                        <i class="ti-bag highlight-icon" aria-hidden="true"></i>
                                     </span>
                                 </div>
                                 <div class="float-right text-right">
-                                    <p class="card-text text-dark">Visitors</p>
-                                    <h4>65,650</h4>
+                                    <p class="card-text text-dark">{{trans('main_trans.services')}}</p>
+                                    <h4>{{DB::table('services')->count()}}</h4>
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
-                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> 81% lower
-                                growth
+                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i>{{trans('main_trans.unactiv')}}  {{DB::table('services')->where('state',0)->count()}}
                             </p>
                         </div>
                     </div>
@@ -73,19 +72,109 @@
                             <div class="clearfix">
                                 <div class="float-left">
                                     <span class="text-warning">
-                                        <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
+                                        <i class="ti-menu-alt highlight-icon" aria-hidden="true"></i>
                                     </span>
                                 </div>
                                 <div class="float-right text-right">
-                                    <p class="card-text text-dark">Orders</p>
-                                    <h4>656</h4>
+                                    <p class="card-text text-dark">{{trans('main_trans.section')}}</p>
+                                    <h4>{{DB::table('sections')->count()}}</h4>
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
-                                <i class="fa fa-bookmark-o mr-1" aria-hidden="true"></i> Total sales
+                                <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{trans('main_trans.unactiv')}}  {{DB::table('sections')->where('state',0)->count()}}
                             </p>
                         </div>
                     </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                <div class="card card-statistics h-100">
+                    <div class="card-body">
+                        <div class="clearfix">
+                            <div class="float-left">
+                                <span class="text-warning">
+                                    <i class="fa fa-shopping-cart highlight-icon" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                            <div class="float-right text-right">
+                                <p class="card-text text-dark">{{trans('main_trans.product')}}</p>
+                                <h4>{{DB::table('products')->count()}}</h4>
+                            </div>
+                        </div>
+                        <p class="text-muted pt-3 mb-0 mt-2 border-top">
+                            <i class="fa fa-exclamation-circle" aria-hidden="true"></i> {{trans('main_trans.unactiv')}}  {{DB::table('products')->where('state',0)->count()}}
+                        </p>
+                    </div>
+                </div>
+                </div>
+
+                <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                        <div class="card-body">
+                            <div class="clearfix">
+                                <div class="float-left">
+                                    <span class="text-success">
+                                        <i class="fa fa-tags highlight-icon" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="float-right text-right">
+                                    <p class="card-text text-dark">{{trans('main_trans.brands')}}</p>
+                                    <h4>{{DB::table('brands')->count()}}</h4>
+                                </div>
+                            </div>
+                            <p class="text-muted pt-3 mb-0 mt-2 border-top">
+                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i>  {{trans('main_trans.unactiv')}}  {{DB::table('brands')->where('state',0)->count()}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+                    <div class="card card-statistics h-100">
+                        <div class="card-body">
+                            <div class="clearfix">
+                                <div class="float-left">
+                                    <span class="text-danger">
+                                        <i class="ti-bag highlight-icon" aria-hidden="true"></i>
+                                    </span>
+                                </div>
+                                <div class="float-right text-right">
+                                    <p class="card-text text-dark">{{trans('main_trans.mail')}}</p>
+                                    <h4>{{DB::table('messages')->count()}}</h4>
+                                </div>
+                            </div>
+                            <p class="text-muted pt-3 mb-0 mt-2 border-top">
+                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i>{{trans('main_trans.read_msg')}}  {{DB::table('messages')->where('read',0)->count()}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
+
+
+                        <div class="card card-statistics h-100">
+                            <div class="card-body">
+                                <div class="clearfix">
+                                    <div class="float-left">
+                                        <span class="text-primary">
+                                            <i class="fa  fa-user-circle highlight-icon" aria-hidden="true"></i>
+                                        </span>
+                                    </div>
+                                    <div class="float-right text-right">
+                                        <p class="card-text text-dark">{{trans('main_trans.customer_o')}}</p>
+                                        <h4>{{DB::table('customer_review')->count()}}</h4>
+                                    </div>
+                                </div>
+                                <p class="text-muted pt-3 mb-0 mt-2 border-top">
+                                    <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> {{trans('main_trans.unactiv')}}  {{DB::table('customer_review')->where('state',0)->count()}}
+                                </p>
+                            </div>
+                        </div>
+
+
+
+
                 </div>
                 <div class="col-xl-3 col-lg-6 col-md-6 mb-30">
                     <div class="card card-statistics h-100">
@@ -93,16 +182,16 @@
                             <div class="clearfix">
                                 <div class="float-left">
                                     <span class="text-success">
-                                        <i class="fa fa-dollar highlight-icon" aria-hidden="true"></i>
+                                        <i class="fa fa-users highlight-icon" aria-hidden="true"></i>
                                     </span>
                                 </div>
                                 <div class="float-right text-right">
-                                    <p class="card-text text-dark">Revenue</p>
-                                    <h4>$65656</h4>
+                                    <p class="card-text text-dark">{{trans('main_trans.subscriptions')}}</p>
+                                    <h4>{{DB::table('subscriptions')->count()}}</h4>
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
-                                <i class="fa fa-calendar mr-1" aria-hidden="true"></i> Sales Per Week
+                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i>  {{trans('main_trans.unactiv')}}  {{DB::table('subscriptions')->where('state',0)->count()}}
                             </p>
                         </div>
                     </div>
@@ -113,16 +202,16 @@
                             <div class="clearfix">
                                 <div class="float-left">
                                     <span class="text-primary">
-                                        <i class="fa fa-twitter highlight-icon" aria-hidden="true"></i>
+                                        <i class="fa fa-pencil-square highlight-icon" aria-hidden="true"></i>
                                     </span>
                                 </div>
                                 <div class="float-right text-right">
-                                    <p class="card-text text-dark">Followers</p>
-                                    <h4>62,500+</h4>
+                                    <p class="card-text text-dark">{{trans('main_trans.blog')}}</p>
+                                    <h4>{{DB::table('blogs')->count()}}</h4>
                                 </div>
                             </div>
                             <p class="text-muted pt-3 mb-0 mt-2 border-top">
-                                <i class="fa fa-repeat mr-1" aria-hidden="true"></i> Just Updated
+                                <i class="fa fa-exclamation-circle mr-1" aria-hidden="true"></i> {{trans('main_trans.unactiv')}}  {{DB::table('blogs')->where('state',0)->count()}}
                             </p>
                         </div>
                     </div>

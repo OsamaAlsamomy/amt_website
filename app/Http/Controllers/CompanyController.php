@@ -13,12 +13,20 @@ class CompanyController extends Controller
 {
     public function index()
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         $data = Company::first();
         return view('company.index', compact('data'));
     }
 
     public function update(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         $validator = Validator::make($req->all(), [
             'name' => 'required',
             'logo' => 'image',

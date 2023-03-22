@@ -1,4 +1,6 @@
 
+<script src="{{ URL::asset('build/assets/js/jquery-3.3.1.min.js') }}"></script>
+<!-- plugins-jquery -->
 
 <script src='{{url(asset('build/wp-includes/js/wp-util.min6a4d.js?ver=6.1.1' ))}}' id='wp-util-js'></script>
 <script src='{{url(asset('build/wp-includes/js/imagesloaded.mineda1.js?ver=4.1.4' ))}}' id='imagesloaded-js'></script>
@@ -62,3 +64,129 @@
     id='elementor-frontend-js'></script>
 <script src='{{url(asset('build/wp-content/plugins/elementor/assets/js/preloaded-modules.minf416.js?ver=3.11.0'))}}'
     id='preloaded-modules-js'></script>
+
+    <script src="{{ URL(asset('build/assets/sweetalert2/sweetalert2.min.js')) }}"></script>
+    <script>
+
+        $("#form_sub").on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: new FormData(this),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (data) {
+                if (data.status == 0) {
+                    var error = '';
+                    $.each(data.error, function (prefix, val) {
+                        error += val[0];
+
+                    });
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: error,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                } else if (data.status == 1) {
+
+
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: data.success,
+
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    document.getElementById("form_sub").reset();
+
+
+
+
+                } else if (data.status == 2) {
+
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: data.error,
+                        text: data.error,
+                        showConfirmButton: true,
+
+                    })
+
+
+                }
+            }
+
+        })
+    });
+
+
+    $("#form_message").on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: new FormData(this),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (data) {
+                if (data.status == 0) {
+                    var error = '';
+                    $.each(data.error, function (prefix, val) {
+                        error += val[0];
+
+                    });
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: error,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                } else if (data.status == 1) {
+
+
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: data.success,
+
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    document.getElementById("form_message").reset();
+
+
+
+
+                } else if (data.status == 2) {
+
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: data.error,
+                        text: data.error,
+                        showConfirmButton: true,
+
+                    })
+
+
+                }
+            }
+
+        })
+    });
+    </script>
+

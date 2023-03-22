@@ -29,3 +29,56 @@
 <script src="{{ URL::asset('build/assets/js/lobilist.js') }}"></script>
 <!-- custom -->
 <script src="{{ URL::asset('build/assets/js/custom.js') }}"></script>
+<script>
+
+$("#form_password").on('submit', function (e) {
+    e.preventDefault();
+
+    $.ajax({
+        url: $(this).attr('action'),
+        method: $(this).attr('method'),
+        data: new FormData(this),
+        processData: false,
+        dataType: 'json',
+        contentType: false,
+        success: function (data) {
+            if (data.status == 0) {
+                $.each(data.error, function (prefix, val) {
+                    $('span.' + prefix + '-error').text('');
+                    $('span.' + prefix + '-error').text(val[0]);
+                });
+            } else if (data.status == 1) {
+                $('span.password-error').text('');
+                $('span.old_pass-error').text('');
+                $('span.password_confirmation-error').text('');
+                document.getElementById("form_password").reset();
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: data.success,
+
+                    showConfirmButton: false,
+                    timer: 2000
+                })
+            } else if (data.status == 2) {
+                $('span.password-error').text('');
+                $('span.old_pass-error').text('');
+                $('span.password_confirmation-error').text('');
+
+
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: data.error,
+                    text: data.error,
+                    showConfirmButton: true,
+
+                })
+
+
+            }
+        }
+
+    })
+});
+</script>

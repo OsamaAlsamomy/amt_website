@@ -13,6 +13,10 @@ class SocialmediaController extends Controller
 {
     public function index()
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         $data = Socialmedia::all();
         foreach ($data as $key) {
             if ($key->created_by != null) {
@@ -29,6 +33,10 @@ class SocialmediaController extends Controller
     // Change phone or email state
     public function change_state(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         try {
             $exist = Socialmedia::find($req->id);
             if($exist){
@@ -58,6 +66,10 @@ class SocialmediaController extends Controller
     // Edite phone or email data
     public function update(Request $req)
     {
+        if(Auth::user()->type != 'S' && Auth::user()->type != 'A' ){
+            return redirect()->back();
+        }
+
         $validator = Validator::make($req->all(), [
             'id' => 'required|integer',
 

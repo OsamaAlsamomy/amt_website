@@ -33,6 +33,11 @@ return [
 
     'refresh_update' => 'To update the data, close the form',
 
+    'slid_limt' => 'You have exceeded the maximum number of slides, which is 10',
+    'adds' => 'Advertising Spaces',
+
+    'old_pass' => 'The old password is incorrect',
+    'new_pass' => 'You must use a different password',
 
 
 

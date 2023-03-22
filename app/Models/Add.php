@@ -12,9 +12,9 @@ class Add extends Model
     protected $fillable = [
         'add1',
         'add2',
-        'add2',
+        'add3',
         'add4',
         'add5',
-        'updated_by' 
+        'updated_by'
     ];
 }
