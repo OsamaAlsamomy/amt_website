@@ -69,37 +69,39 @@
 
 
                         <div class="search-box-wrap-1 flex-grow-1 product-search">
-                            <form method="get" action="https://radiustheme.com/demo/wordpress/themes/medimall/">
+                            <form method="get" action="{{url('/products/serch/')}}">
                                 <div class="category-search-dropdown-js">
                                     <ul class="action-list-styl-1 d-flex align-items-center">
                                         <li class="item rt-cat-drop-1 cat-drop">
                                             <div class="dropdown">
-                                                <input type="hidden" name="product_cat" value="">
+
                                                 <div class="cat-btn-wrap">
 
-                                                    <button class="rt-btn-3 w-100 cat-toggle" type="button"
+                                                    {{-- <button class="rt-btn-3 w-100 cat-toggle" type="button"
                                                         id="dropdownMenuButton1" data-bs-toggle="dropdown"
                                                         aria-expanded="false">
                                                         <span class="cat-label">{{$lang['all']}}</span>
                                                         <span class="icon"><i class="fas fa-angle-down"></i></span>
-                                                    </button>
-                                                    <ul class="dropdown-menu rt-drop-menu style-1"
-                                                        aria-labelledby="dropdownMenuButton1">
+                                                    </button> --}}
+                                                    <select class="rt-btn-3 w-100 cat-toggle"
+                                                        aria-labelledby="dropdownMenuButton1" name="section">
+                                                        <option value="0">{{$lang['all']}}</option>
+
                                                         @foreach ( DB::table('sections')->select(['id','name'])->get() as $key )
-                                                        <li data-slug="">{{$key->name}}</li>
+                                                        <option  value="{{$key->id}}">{{$key->name}}</option>
                                                         @endforeach
 
-                                                    </ul>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </li>
                                         <li class="item rt-advanced-search-1 flex-grow-1">
                                             <div class="rt-input-group">
-                                                <input type="text" autocomplete="off" name="s"
+                                                <input type="text" autocomplete="off" name="serch"
                                                     class="form-control search-form product-search-input product-autocomplete-js search_input "
-                                                    placeholder="{{$lang['serch_product']}}" value="">
+                                                    placeholder="{{$lang['serch_product']}}" value="" required>
                                                 <div class="input-group-append">
-                                                    <button class="search-btn"><i class="fas fa-search"></i></button>
+                                                    <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
                                                 </div>
                                             </div>
                                         </li>
@@ -126,35 +128,35 @@
 
 
                                     <li id="menu-item-459"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459 @yield('home') ">
                                         <a href="{{url('/')}}">{{$lang['home']}}</a>
                                     </li>
 
                                     <li id="menu-item-459"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459 @yield('about')">
                                         <a href="{{url('/about')}}">{{$lang['about']}}</a>
                                     </li>
 
                                     <li id="menu-item-459"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459  @yield('products')">
                                         <a href="{{url('/products')}}">{{$lang['products']}}</a>
                                     </li>
 
                                     <li id="menu-item-459"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                        <a href="service.html">{{$lang['services']}}</a>
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459  @yield('services')">
+                                        <a href="{{url('/services')}}">{{$lang['services']}}</a>
                                     </li>
 
                                     <li id="menu-item-459"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                        <a href="blog.html">{{$lang['blogs']}}</a>
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459  @yield('blogs')">
+                                        <a href="{{url('/blogs')}}">{{$lang['blogs']}}</a>
                                     </li>
 
 
 
 
                                     <li id="menu-item-490"
-                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-490">
+                                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-490  @yield('contact')">
                                         <a href="{{url('/contact')}}">{{$lang['contact']}}</a>
                                     </li>
                                     <li id="menu-item-459"
@@ -188,36 +190,36 @@
                         <nav class="rt-main-menu style-2">
                             <ul id="menu-main-menu-1" class="menu">
                                 <li id="menu-item-459"
-                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="{{url('/')}}">{{$lang['home']}}</a>
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459 ">
+                                    <a  style="color:@yield('home_')" href="{{url('/')}}">{{$lang['home']}}</a>
                                 </li>
 
                                 <li id="menu-item-459"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="{{url('/about')}}">{{$lang['about']}}</a>
+                                    <a  style="color:@yield('about_')" href="{{url('/about')}}">{{$lang['about']}}</a>
                                 </li>
 
                                 <li id="menu-item-459"
-                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="{{url('/products')}}">{{$lang['products']}}</a>
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459"  >
+                                    <a style="color:@yield('products_')" href="{{url('/products')}}">{{$lang['products']}}</a>
                                 </li>
 
                                 <li id="menu-item-459"
-                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="service.html">{{$lang['services']}}</a>
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459" >
+                                    <a style="color:@yield('services_')" href="{{url('/services')}}">{{$lang['services']}}</a>
                                 </li>
 
                                 <li id="menu-item-459"
-                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                                    <a href="blog.html">{{$lang['blogs']}}</a>
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459" >
+                                    <a  style="color:@yield('blogs_')" href="{{url('/blogs')}}">{{$lang['blogs']}}</a>
                                 </li>
 
 
 
 
                                 <li id="menu-item-490"
-                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-490">
-                                    <a href="{{url('/contact')}}">{{$lang['contact']}}</a>
+                                    class="menu-item menu-item-type-post_type menu-item-object-page menu-item-490" >
+                                    <a  style="color:@yield('contact_')" href="{{url('/contact')}}">{{$lang['contact']}}</a>
                                 </li>
                             </ul>
                         </nav>
@@ -270,28 +272,28 @@
             <div class="offscreen-navigation">
                 <ul id="menu-main-menu-2" class="menu">
                     <li id="menu-item-459"
-                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="{{url('/')}}">{{$lang['home']}}</a>
+                        class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459 ">
+                        <a class=" @yield('home')" href="{{url('/')}}">{{$lang['home']}}</a>
                     </li>
 
                     <li id="menu-item-459"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="{{url('/about')}}">{{$lang['about']}}</a>
+                        <a class=" @yield('about')" href="{{url('/about')}}">{{$lang['about']}}</a>
                     </li>
 
                     <li id="menu-item-459"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="{{url('/products')}}">{{$lang['products']}}</a>
+                        <a class=" @yield('products')" href="{{url('/products')}}">{{$lang['products']}}</a>
                     </li>
 
                     <li id="menu-item-459"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="service.html">{{$lang['services']}}</a>
+                        <a class=" @yield('services')" href="{{url('/services')}}">{{$lang['services']}}</a>
                     </li>
 
                     <li id="menu-item-459"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-459">
-                        <a href="blog.html">{{$lang['blogs']}}</a>
+                        <a class=" @yield('blogs')" href="{{url('/blogs')}}">{{$lang['blogs']}}</a>
                     </li>
 
 
@@ -299,7 +301,7 @@
 
                     <li id="menu-item-490"
                         class="menu-item menu-item-type-post_type menu-item-object-page menu-item-490">
-                        <a href="{{url('/contact')}}">{{$lang['contact']}}</a>
+                        <a class=" @yield('contact')" href="{{url('/contact')}}">{{$lang['contact']}}</a>
                     </li>
                 </ul>
             </div>

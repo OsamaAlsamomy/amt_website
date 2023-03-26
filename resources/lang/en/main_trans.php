@@ -102,6 +102,13 @@ return [
 
     'activ' => 'Activ',
     'unactiv' => 'Unactiv',
-    'change_password' => 'Change Password'
+    'change_password' => 'Change Password',
+
+    'welcome' => 'Welcome',
+    'login' => 'Login',
+    'email' => 'Email',
+    'password' => 'Password',
+    'enter' => 'Enter'
+
 
 ];

@@ -128,7 +128,6 @@
         })
     });
 
-
     $("#form_message").on('submit', function (e) {
         e.preventDefault();
 
@@ -188,5 +187,73 @@
 
         })
     });
+
+
+    $("#form_comment").on('submit', function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: new FormData(this),
+            processData: false,
+            dataType: 'json',
+            contentType: false,
+            success: function (data) {
+                if (data.status == 0) {
+                    var error = '';
+                    $.each(data.error, function (prefix, val) {
+                        error += val[0];
+
+                    });
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: error,
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                } else if (data.status == 1) {
+
+setTimeout(function () {
+
+                    location.reload(true);
+                }, 2000);
+
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'success',
+                        title: data.success,
+
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    document.getElementById("form_message").reset();
+
+
+
+
+                } else if (data.status == 2) {
+
+
+                    Swal.fire({
+                        position: 'center',
+                        icon: 'error',
+                        title: data.error,
+                        text: data.error,
+                        showConfirmButton: true,
+
+                    })
+
+
+                }
+            }
+
+        })
+    });
+
+
+
     </script>
 

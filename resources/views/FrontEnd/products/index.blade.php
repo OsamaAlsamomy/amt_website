@@ -11,6 +11,11 @@ $setting = DB::table('sittings')->first();
 $lang = [
 'home' => 'الرئيسية',
 'products' => 'منتجاتنا',
+'quik_view' => 'نظرة سريعة',
+'mor_info' => 'مزيد من المعلومات',
+'no_content' => 'ليس هناك منتجات لعرضها',
+
+
 
 
 ];
@@ -20,6 +25,12 @@ $lang = [
 $lang = [
 'home' => 'Home',
 'products' => 'Our Products',
+'quik_view' => 'Quick View',
+'mor_info' => 'More Informations',
+'no_content' => 'There are no products to display',
+
+
+
 
 
 
@@ -35,7 +46,13 @@ $lang = [
 
 
 @section('title')
-{{$lang['home']}}
+{{$lang['products']}}
+@endsection
+@section('products')
+bg-info px-4
+@endsection
+@section('products_')
+#6dc7b2
 @endsection
 @section('content')
 
@@ -46,9 +63,11 @@ $lang = [
 <div id="content" class="site-content">
     <div class="section_heade inner-page-banner overflow-hidden">
         <ul class="element-list d-none d-lg-block">
-            <li><img width='458' height='150' src='{{url(asset('build/wp-content/themes/medimall/assets/img/element_13.png'))}}' alt='Medimall'>
+            <li><img width='458' height='150'
+                src='{{url(asset('build/wp-content/themes/medimall/assets/img/element_13.png'))}}' alt='Medimall'>
             </li>
-            <li><img width='653' height='150' src='{{url(asset('build/wp-content/themes/medimall/assets/img/element_14.png'))}}' alt='Medimall'>
+            <li><img width='653' height='150'
+                src='{{url(asset('build/wp-content/themes/medimall/assets/img/element_14.png'))}}' alt='Medimall'>
             </li>
 
         </ul>
@@ -57,14 +76,33 @@ $lang = [
             <div class="main-breadcrumb">
                 <!-- Breadcrumb NavXT 7.2.0 -->
                 <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage"
-                        title="Go to Medimall." href="{{url('/')}}"
-                        class="home"><span property="name">{{$lang['home']}}</span></a>
-                    <meta property="position" content="1">
-                </span><span class="dvdr">  <i class="fas fa-angle-left"></i> </span><span property="itemListElement" typeof="ListItem"><span
-                        property="name" class="post post-page current-item">{{$lang['products']}}</span>
-                    <meta property="url" content="https://radiustheme.com/demo/wordpress/themes/medimall/contact/">
-                    <meta property="position" content="2">
+                        title="Go to Medimall." href="{{url('/')}}" class="home"><span
+                            property="name">{{$lang['home']}}</span></a>
+
                 </span>
+                <span class="dvdr"> <i class="fas fa-angle-left"></i> </span>
+                <span property="itemListElement"
+                    typeof="ListItem"><span property="name"
+                        class="post post-page current-item">{{$lang['products']}}</span>
+
+                </span>
+               @isset($section)
+               <span class="dvdr"> <i class="fas fa-angle-left"></i> </span>
+               <span property="itemListElement"
+                   typeof="ListItem"><span property="name"
+                       class="post post-page current-item">{{$section}}</span>
+
+               </span>
+                @endisset
+                @isset($serch)
+               <span class="dvdr"> <i class="fas fa-angle-left"></i> </span>
+               <span property="itemListElement"
+                   typeof="ListItem"><span property="name"
+                       class="post post-page current-item">{{$serch}}</span>
+
+               </span>
+                @endisset
+
             </div>
         </div>
     </div>
@@ -73,6 +111,12 @@ $lang = [
         <div class="container">
             <div class="row sticky-coloum-wrap">
                 <div class="col-sm-12 col-12">
+                    @if($products->count() <= 0 )
+                        <p class="section_heade text-center">
+                            <i class="fa fa-info"></i>
+                            {{$lang['no_content']}}
+                        </p>
+                    @else
                     <div class="rt-main-content-2">
                         <header class="woocommerce-products-header">
 
@@ -80,69 +124,70 @@ $lang = [
 
 
 
-                        <div class="products rdtheme-archive-products row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 gutter-24">
+                        <div
+                            class="section_heade products rdtheme-archive-products row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5 gutter-24">
 
 
                             @foreach ($products as $key)
-                            <div  class="section_heade col rtwpvg-product rtwpvs-product product type-product post-116 status-publish first instock product_cat-equipments has-post-thumbnail shipping-taxable purchasable product-type-variable">
-                                <div class="rt-product-box layout-1 style-4 position-relative overflow-hidden">
-
-                                    <div class="item-img mx-auto position-relative overflow-hidden">
-                                        <a href="product/digital-thermometer/index.html">
-                                            <img width="360" height="300"
-                                                src="{{url(asset($key->img))}}"
-                                                class="attachment-woocommerce_thumbnail size-woocommerce_thumbnail wp-post-image"
-                                                alt="" decoding="async" loading="lazy" />
-                                            </a>
-                                        <div class="hover-content-2 position-absolute">
-
+                            <div style="height:430px"
+                                class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 167814963848-{{$key->sec_id}}  product type-product post-136 status-publish first instock product_cat-accessories product_cat-equipments has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
+                                <div style="height: 100%" class="rt-product-box layout-1 layout-2 position-relative overflow-hidden">
+                                    <div style="height: 60%" class="item-img mx-auto position-relative overflow-hidden">
+                                        <a href="product/equipment-product/index.html"><img width="400" height="300"
+                                                src="{{url(asset($key->img))}}" class="attachment- size- wp-post-image"
+                                                alt="" decoding="async" loading="lazy" {{--
+                                                srcset="https://radiustheme.com/demo/wordpress/themes/medimall/wp-content/uploads/2022/06/product_2.png 400w, https://radiustheme.com/demo/wordpress/themes/medimall/wp-content/uploads/2022/06/product_2-300x225.png 300w"
+                                                --}} sizes="(max-width: 400px) 100vw, 400px" />
+                                        </a>
+                                        <ul class="badge-list d-flex align-items-center">
+                                            <li>
+                                                @if($key->discount > 0)
+                                                <span class="rt-prodcut-badge-1">{{$key->discount
+                                                    . '-%'}}</span>
+                                                @endif
+                                            </li>
+                                        </ul>
+                                        <div class="hover-content-1 position-absolute">
                                             <ul class="action-btn-area">
-                                                <li class="text"><a rel="nofollow" title="Select options"
-                                                        href="product/digital-thermometer/index.html" data-quantity="1"
-                                                        data-product_id="116" data-product_sku="LN95FM4"
-                                                        class="cart-icon action-cart button product_type_variable rtwpvs_add_to_cart rtwpvs_ajax_add_to_cart  product_type_variable add_to_cart_button"
-                                                        data-bs-toggle="tooltip-none"
-                                                        data-bs-placement="top"><span>Select options</span></a>
+                                                <li> <a href="#" class="yith-wcqv-button" data-product_id="136"
+                                                        title="{{$lang['quik_view']}}"><i class="fas fa-search"></i></a>
                                                 </li>
-                                                <li class="icon"> <a href="#" class="yith-wcqv-button"
-                                                        data-product_id="116" title="QuickView"><i
-                                                            class="fas fa-search"></i></a>
-                                                </li>
-                                                <li class="icon">
-                                                    <a href="https://radiustheme.com/demo/wordpress/themes/medimall?action=yith-woocompare-add-product&amp;id=116"
-                                                        class="compare" data-product_id="116" title="Add To Compare"><i
-                                                            class="fas fa-random" aria-hidden="true"></i></a>
-                                                </li>
-                                                <li class="icon"><a href="wishlist/index.html" title="Add to Wishlist"
-                                                        rel="nofollow" data-product-id="116"
-                                                        data-title-after="Aleady exists in Wishlist! Click here to view Wishlist"
-                                                        class="rdtheme-wishlist-icon rdtheme-add-to-wishlist"
-                                                        data-nonce="9dd405e793">
-                                                        <i class="wishlist-icon far fa-heart"></i><i
-                                                            class="ajax-loading fa fa-spinner fa-spin"></i></a>
-                                                </li>
+
                                             </ul>
                                         </div>
                                     </div>
                                     <div class="item-content">
-                                        <div
-                                            class="between-box d-flex align-items-center justify-content-between flex-wrap gutter-15">
-                                            <div class="cat-area"><span class='product-cat'>{{$key->section}}</span>
-                                            </div>
-
-                                        </div>
+                                        <span class='product-cat'>{{$key->section}}</span>
                                         <h4 class="product-name"><a
-                                                href="product/digital-thermometer/index.html">{{$key->name}}</a></h4>
+                                                href="product/equipment-product/index.html">{{$key->name}}</a>
+                                        </h4>
+
                                         <div
                                             class="between-box d-flex align-items-center justify-content-between flex-wrap gutter-15">
-                                            <div class="price"> <span class="woocommerce-Price-amount amount"><span
-                                                        class="woocommerce-Price-currencySymbol">&#036;</span>45.00</span>
-                                                &ndash; <span class="woocommerce-Price-amount amount"><span
-                                                        class="woocommerce-Price-currencySymbol">&#036;</span>62.00</span>
+                                            <div class="price">
+                                                @if($key->discount > 0)
+                                                <del aria-hidden="true">
+                                                    <span class="woocommerce-Price-amount amount"><span
+                                                            class="woocommerce-Price-currencySymbol">&#036;</span>{{$key->price}}</span></del>
+                                                @endif
+
+                                                <ins> <span class="woocommerce-Price-amount amount"><span
+                                                            class="woocommerce-Price-currencySymbol">&#036;</span>{{$key->price
+                                                        - ($key->price *
+                                                        ($key->discount / 100))
+                                                        }}</span></ins>
+                                            </div>
+                                            <div class="cart-area anim-overflow">
+                                                <a rel="nofollow" title="{{$lang['mor_info']}}"
+                                                    href="{{url('/products/product/'.$key->id)}}"
+                                                    class="cart-icon action-cart button product_type_variable rtwpvs_add_to_cart rtwpvs_ajax_add_to_cart  product_type_simple add_to_cart_button ajax_add_to_cart"
+                                                    data-bs-toggle="tooltip" data-bs-placement="top"><i
+                                                        class="fas fa-eye"></i></a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                             @endforeach
 
@@ -150,17 +195,26 @@ $lang = [
 
 
                         </div>
-                        <div class="pagination-area text-center">
-                            <ul class="clearfix">
-                                <li class="pagi pagi-previous disabled"><span><i
-                                            class="fas fa-angle-double-left"></i></span></li>
-                                <li class="active"><span>1</span></li>
-                                <li><a href="page/2/index7a04.html?sidebar=full">2</a></li>
-                                <li class="pagi pagi-next"><a href="page/2/index7a04.html?sidebar=full"><i
-                                            class="fas fa-angle-double-right"></i></a></li>
-                            </ul>
+                        <div style="display: flex;
+                        justify-content: center;">
+                            {{ $products->links() }}
                         </div>
+
+                        <style>
+                            .pagination {
+                                margin-top: 30px;
+                                text-align: center;
+                            }
+
+                            .pagination li {
+                                display: flex;
+                            }
+                        </style>
+
                     </div>
+                    @endif
+
+
                 </div>
             </div><!-- .row -->
         </div><!-- container -->

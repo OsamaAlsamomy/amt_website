@@ -56,7 +56,12 @@ $lang = [
 @section('title')
 {{$lang['contact']}}
 @endsection
-
+@section('contact')
+bg-info px-4
+@endsection
+@section('contact_')
+#6dc7b2
+@endsection
 
 
 @section('content')
@@ -300,6 +305,8 @@ $setting = DB::table('sittings')->first();
                                                                         <span id="error-message" class="text-danger"></span>
                                                                     </div>
                                                                 </div>
+                                                                {!! NoCaptcha::renderJs() !!}
+                                                                {!! NoCaptcha::display() !!}
                                                                 <div
                                                                     class='ff-el-group ff-text-left ff_submit_btn_wrapper'>
                                                                     <button type="submit"

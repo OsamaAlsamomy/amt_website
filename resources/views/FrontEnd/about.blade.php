@@ -45,7 +45,12 @@ $lang = [
 @section('title')
 {{$lang['about']}}
 @endsection
-
+@section('about')
+bg-info px-4
+@endsection
+@section('about_')
+#6dc7b2
+@endsection
 
 
 @section('content')

@@ -64,6 +64,12 @@ $lang = [
 @section('title')
 {{$lang['home']}}
 @endsection
+@section('home')
+bg-info px-4
+@endsection
+@section('home_')
+#6dc7b2
+@endsection
 @section('content')
 
 
@@ -245,7 +251,7 @@ $lang = [
                                                         <div class="rt-category-box style-1">
                                                             <div
                                                                 class="item-img d-flex align-items-center justify-content-center mx-auto">
-                                                                <a href="product-category/surgical-mask/index.html">
+                                                                <a href="{{url('sections/section/'.$key->id)}}">
                                                                     <img decoding="async" width="400" height="300"
                                                                         src="{{url(asset($key->img))}}"
                                                                         class="attachment-full size-full wp-post-image"
@@ -254,7 +260,7 @@ $lang = [
                                                             <div class="item-content text-center">
                                                                 <h3 class="item-title text-capitalize">
                                                                     <a
-                                                                        href="product-category/surgical-mask/index.html">{{$key->name}}</a>
+                                                                        href={{url('sections/section/'.$key->id)}}">{{$key->name}}</a>
                                                                 </h3>
                                                             </div>
                                                         </div>
@@ -344,11 +350,11 @@ $lang = [
                                                         <div class="col-xl-9 order-1 order-xl-2">
                                                             <div class="row rt-gutter-20  rt-isotope-container-1">
                                                                 @foreach ( $products as $key)
-                                                                <div
+                                                                <div style="height: 430px"
                                                                     class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-12 167814963848-{{$key->sec_id}}  product type-product post-136 status-publish first instock product_cat-accessories product_cat-equipments has-post-thumbnail sale shipping-taxable purchasable product-type-simple">
-                                                                    <div
+                                                                    <div  style="height: 100%"
                                                                         class="rt-product-box layout-1 layout-2 position-relative overflow-hidden">
-                                                                        <div
+                                                                        <div style="height: 60%"
                                                                             class="item-img mx-auto position-relative overflow-hidden">
                                                                             <a
                                                                                 href="product/equipment-product/index.html"><img
@@ -411,7 +417,7 @@ $lang = [
                                                                                 <div class="cart-area anim-overflow">
                                                                                     <a rel="nofollow"
                                                                                         title="{{$lang['mor_info']}}"
-                                                                                        href="indexa763.html?add-to-cart=136"
+                                                                                        href="{{url('/products/product/'.$key->id)}}"
                                                                                         data-quantity="1"
                                                                                         data-product_id="136"
                                                                                         data-product_sku="LN95FM13"
@@ -486,13 +492,13 @@ $lang = [
 
                                                             <h3 class="title text-white">{{$key->name}}</h3>
                                                             <div class="btn-area">
-                                                                <a href="http://medishopdev.local/shop/"
+                                                                <a href="{{url('services/service/'.$key->id)}}"
                                                                     class="rt-btn-1">{{$lang['mor_learn']}}<i
                                                                         class="fas  fa-angle-right icon icon"></i></a>
                                                             </div>
                                                         </div>
                                                         <div class="col-6">
-                                                            <a href="http://medishopdev.local/shop/">
+                                                            <a href="{{url('services/service/'.$key->id)}}">
                                                                 <img width="269" height="249"
                                                                     src="{{url(asset($key->img))}}"
                                                                     class="attachment-full size-full wp-post-image"
@@ -514,82 +520,6 @@ $lang = [
 
 
 
-
-                            {{-- <div
-                                class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-36de68b4"
-                                data-id="36de68b4" data-element_type="column">
-                                <div class="elementor-column-wrap elementor-element-populated">
-                                    <div class="elementor-widget-wrap">
-                                        <div class="elementor-element elementor-element-5fb6fab8 elementor-invisible elementor-widget elementor-widget-rt-info-box-2"
-                                            data-id="5fb6fab8" data-element_type="widget"
-                                            data-widget_type="rt-info-box-2.default">
-                                            <div class="elementor-widget-container">
-
-                                                <div class="rt-post-banner-wrapper wow fadeInUp" data-wow-delay="400ms"
-                                                    data-wow-duration="800ms">
-                                                    <div
-                                                        class="motion-effects-wrap rt-post-banner layout-2 style-4 ex-img-2 position-relative overflow-hidden d-flex align-items-center justify-content-between">
-                                                        <div class="post-content">
-                                                            <div class="offer-2">Upto 25% Off</div>
-                                                            <h2 class="title">100% Pure <br>Hand Sanitizer</h2>
-                                                            <div class="btn-area">
-                                                                <a href="http://medishopdev.local/shop/"
-                                                                    class="rt-btn-1">Shop Now<i
-                                                                        class="fas  fa-angle-right icon icon"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="post-img">
-                                                            <a href="http://medishopdev.local/shop/">
-                                                                <img width="176" height="191"
-                                                                    src="wp-content/uploads/2022/06/product_27.png"
-                                                                    class="attachment-full size-full wp-post-image"
-                                                                    alt="" decoding="async" loading="lazy" />
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="elementor-column elementor-col-33 elementor-top-column elementor-element elementor-element-7575220a"
-                                data-id="7575220a" data-element_type="column">
-                                <div class="elementor-column-wrap elementor-element-populated">
-                                    <div class="elementor-widget-wrap">
-                                        <div class="elementor-element elementor-element-554e50e8 elementor-invisible elementor-widget elementor-widget-rt-info-box-2"
-                                            data-id="554e50e8" data-element_type="widget"
-                                            data-widget_type="rt-info-box-2.default">
-                                            <div class="elementor-widget-container">
-
-                                                <div class="rt-post-banner-wrapper wow fadeInUp" data-wow-delay="600ms"
-                                                    data-wow-duration="800ms">
-                                                    <div
-                                                        class="motion-effects-wrap rt-post-banner layout-2 style-4 ex-img-2 position-relative overflow-hidden d-flex align-items-center justify-content-between">
-                                                        <div class="post-content">
-                                                            <div class="offer-2">Upto 25% Off</div>
-                                                            <h2 class="title">100% Pure <br>Hand Sanitizer</h2>
-                                                            <div class="btn-area">
-                                                                <a href="http://medishopdev.local/shop/"
-                                                                    class="rt-btn-1">Shop Now<i
-                                                                        class="fas  fa-angle-right icon icon"></i></a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="post-img">
-                                                            <a href="http://medishopdev.local/shop/">
-                                                                <img width="183" height="240"
-                                                                    src="wp-content/uploads/2022/06/product_28.png"
-                                                                    class="attachment-full size-full wp-post-image"
-                                                                    alt="" decoding="async" loading="lazy" />
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </div>
                     </div>
                 </section>
@@ -661,9 +591,9 @@ $lang = [
                                                                                         @foreach ($top_products as $key)
 
                                                                                         <div class="swiper-slide">
-                                                                                            <div
+                                                                                            <div style="height: 430px"
                                                                                                 class="rt-product-box layout-1 layout-2 position-relative overflow-hidden">
-                                                                                                <div
+                                                                                                <div style="height: 60%"
                                                                                                     class="item-img mx-auto position-relative overflow-hidden">
                                                                                                     <a
                                                                                                         href="product/equipment-product/index.html"><img
@@ -743,7 +673,7 @@ $lang = [
                                                                                                             class="cart-area anim-overflow">
                                                                                                             <a rel="nofollow"
                                                                                                                 title="{{$lang['mor_info']}}"
-                                                                                                                href="indexa763.html?add-to-cart=136"
+                                                                                                                href="{{url('/products/product/'.$key->id)}}"
                                                                                                                 data-quantity="1"
                                                                                                                 data-product_id="136"
                                                                                                                 data-product_sku="LN95FM13"
@@ -1113,18 +1043,18 @@ $lang = [
                                                             data-carousel-options="{&quot;col_xl&quot;:&quot;4&quot;,&quot;autoplay&quot;:true,&quot;speed&quot;:&quot;5000&quot;,&quot;col_lg&quot;:&quot;3&quot;,&quot;col_md&quot;:&quot;2&quot;,&quot;col_sm&quot;:&quot;1&quot;,&quot;col_xs&quot;:&quot;1&quot;}">
                                                             @foreach ($blogs as $key)
                                                             <div class="swiper-slide">
-                                                                <div
+                                                                <div style="height: 500px"
                                                                     class="rt-blog-box layout-2 position-relative overflow-hidden">
-                                                                    <div
+                                                                    <div style="height: 50%"
                                                                         class="blog-img position-relative overflow-hidden">
-                                                                        <a
-                                                                            href="mirage-deep-dive-under-anding-timin-response-10/index.html">
-                                                                            <img width="571" height="370"
+                                                                        <a style="height: 100%" class="bg-white"
+                                                                            href="{{url('/blogs/blog/'.$key->id)}}">
+                                                                            <img width="571" height="100%"
                                                                                 src="{{url(asset($key->img))}}"
                                                                                 class="attachment-rdtheme-size2 "
                                                                                 alt="" /> </a>
                                                                     </div>
-                                                                    <div class="blog-content">
+                                                                    <div class="blog-content" style="height: 50%">
                                                                         <ul class="rt-post-meta-box">
                                                                             <li>
                                                                                 <span class="rt-meta">
@@ -1143,11 +1073,11 @@ $lang = [
                                                                             </li>
                                                                         </ul>
                                                                         <h3 class="blog-title"><a
-                                                                                href="mirage-deep-dive-under-anding-timin-response-10/index.html">{{$key->name}}</a>
+                                                                                href="{{url('/blogs/blog/'.$key->id)}}">{{$key->name}}</a>
                                                                         </h3>
                                                                         <div
                                                                             class="between-box d-flex align-items-center justify-content-between flex-wrap">
-                                                                            <a href="mirage-deep-dive-under-anding-timin-response-10/index.html"
+                                                                            <a href="{{url('/blogs/blog/'.$key->id)}}"
                                                                                 class=" btn btn-outline-primary btn-sm">{{$lang['read_more']}}
                                                                             </a>
                                                                         </div>

@@ -40,14 +40,32 @@ Route::get('/contact', [App\Http\Controllers\FrontEnd\HomeController::class, 'co
 Route::post('/subscription', [App\Http\Controllers\FrontEnd\HomeController::class, 'subscrip']);
 Route::post('/send/message', [App\Http\Controllers\FrontEnd\HomeController::class, 'message']);
 Route::get('/products', [App\Http\Controllers\FrontEnd\HomeController::class, 'products']);
+Route::get('/sections/section/{id}', [App\Http\Controllers\FrontEnd\HomeController::class, 'section']);
+Route::get('/products/product/{id}', [App\Http\Controllers\FrontEnd\HomeController::class, 'product']);
+Route::get('/products/serch/', [App\Http\Controllers\FrontEnd\HomeController::class, 'products_serch']);
+Route::get('/blogs', [App\Http\Controllers\FrontEnd\HomeController::class, 'blogs']);
+Route::get('/blogs/blog/{id}', [App\Http\Controllers\FrontEnd\HomeController::class, 'blog']);
+Route::get('/blogs/search', [App\Http\Controllers\FrontEnd\HomeController::class, 'blogs_serch']);
+Route::post('/send/comment', [App\Http\Controllers\FrontEnd\HomeController::class, 'comment']);
+Route::get('/services', [App\Http\Controllers\FrontEnd\HomeController::class, 'services']);
+Route::get('/services/service/{id}', [App\Http\Controllers\FrontEnd\HomeController::class, 'service']);
 
 
-Auth::routes([
-    'register' => false, // Registration Routes...
-    'reset' => false, // Password Reset Routes...
-    'verify' => false, // Email Verification Routes...
-  ]);
 
+
+
+  Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    ],
+    function () {
+        Auth::routes([
+            'register' => false, // Registration Routes...
+            'reset' => false, // Password Reset Routes...
+            'verify' => false, // Email Verification Routes...
+          ]);
+    });
 
 Route::group(
     [
